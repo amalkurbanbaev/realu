@@ -1,6 +1,29 @@
 {
-	"HomePage": {
-		"title": "Hello world!",
-		"description": "This is Description"
+	"home-page": {
+		"meta": {
+			"title": "Real U Mobile App",
+			"description": "Feel life — meditations and breathing from the sources of yoga"
+		},
+		"layout": {
+			"title": "If something is missing, it's probably you",
+			"description": "Feel life — meditations and breathing from the sources of yoga"
+		}
+	},
+	"header": {
+		"links": {
+			"app": "App",
+			"about": "About",
+			"help": "Help"
+		}
+	},
+	"footer": {
+		"links": {
+			"user-agreement": "User Agreement",
+			"privacy-policy": "Privacy Policy",
+			"email-subscription": "Email Subscription",
+			"cookies": "Cookies",
+			"about": "About",
+			"help": "Help"
+		}
 	}
 }
