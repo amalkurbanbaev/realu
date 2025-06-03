@@ -1,12 +1,12 @@
 {
 	"home-page": {
 		"meta": {
-			"title": "Real U Mobile App",
-			"description": "Feel life — meditations and breathing from the sources of yoga"
+			"title": "Real\u00A0U\u00A0Mobile\u00A0App",
+			"description": "Feel\u00A0life — meditations\u00A0and\u00A0breathing\u00A0from\u00A0the\u00A0sources\u00A0of\u00A0yoga"
 		},
 		"layout": {
-			"title": "If something is missing, it's probably you",
-			"description": "Feel life — meditations and breathing from the sources of yoga"
+			"title": "If\u00A0something\u00A0is\u00A0missing, it's\u00A0probably\u00A0you",
+			"description": "Feel life — meditations\u00A0and\u00A0breathing from\u00A0the\u00A0sources\u00A0of\u00A0yoga"
 		}
 	},
 	"header": {
@@ -18,9 +18,9 @@
 	},
 	"footer": {
 		"links": {
-			"user-agreement": "User Agreement",
-			"privacy-policy": "Privacy Policy",
-			"email-subscription": "Email Subscription",
+			"user-agreement": "User\u00A0Agreement",
+			"privacy-policy": "Privacy\u00A0Policy",
+			"email-subscription": "Email\u00A0Subscription",
 			"cookies": "Cookies",
 			"about": "About",
 			"help": "Help"
