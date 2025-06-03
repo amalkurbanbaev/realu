@@ -1,6 +1,6 @@
 {
   "name": "real-u",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -18,7 +18,10 @@
     "release": "standard-version"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": ["biome lint", "biome format --write"]
+    "*.{ts,tsx,js,jsx}": [
+      "biome lint",
+      "biome format --write"
+    ]
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
