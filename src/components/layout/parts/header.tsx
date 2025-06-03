@@ -1,5 +1,6 @@
 "use client"
 import { HEADER_LINKS } from "@/constants/links"
+import { useNormalizedPathname } from "@/hooks/use-normalized-pathname"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
@@ -7,10 +8,24 @@ import { usePathname } from "next/navigation"
 import { useLocale, useTranslations } from "use-intl"
 
 export const Header = () => {
+  const pathname = useNormalizedPathname()
+  const isHome = pathname === "/"
+
   return (
-    <header className="container flex justify-between py-6">
+    <header
+      className={cn(
+        "container inset-x-0 flex w-full justify-between py-6",
+        isHome ? "absolute top-0" : "",
+      )}
+    >
       <Link href="/">
-        <Image alt="Site logo" src="/logo.svg" width={119} height={40} />
+        <Image
+          alt="Site logo"
+          src="/logo.svg"
+          priority
+          width={119}
+          height={40}
+        />
       </Link>
 
       <nav>
@@ -35,7 +50,7 @@ const HeaderLinks = () => {
           <li
             key={link.translationKey}
             className={cn(
-              "px-4 py-2 opacity-50",
+              "py-2 opacity-50",
               isActive ? "opacity-50" : "opacity-100 hover:opacity-80",
             )}
           >
