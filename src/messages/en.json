@@ -1,18 +1,61 @@
 {
   "home-page": {
     "meta": {
-      "title": "Real\u00A0U\u00A0Mobile\u00A0App",
-      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathing\u00A0from\u00A0the\u00A0sources\u00A0of\u00A0yoga"
+      "title": "RealU\u00A0Mobile\u00A0App",
+      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
     },
     "layout": {
-      "title": "If\u00A0something\u00A0is\u00A0missing, it's\u00A0probably\u00A0you",
-      "description": "Feel life — meditations\u00A0and\u00A0breathing from\u00A0the\u00A0sources\u00A0of\u00A0yoga"
+      "title": "If\u00A0you\u00A0feel\u00A0something\u00A0is\u00A0missing, it\u00A0might\u00A0be\u00A0you",
+      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources",
+      "slides": [
+        {
+          "title": "Learn & Explore",
+          "description": "All courses are based on original texts and include both theory and practice. We provide systematic knowledge.",
+          "image": "learn"
+        },
+        {
+          "title": "Meditate",
+          "description": "Daily meditations, over 100 unique sessions, from 10 to 30 minutes and more.",
+          "image": "meditation"
+        },
+        {
+          "title": "Breathe",
+          "description": "Adjust your breathing practice to your current state and environment.",
+          "image": "breath"
+        },
+        {
+          "title": "Yoga Nidra",
+          "description": "An ancient yogic practice for deep relaxation and energy restoration. Ideal for sleep issues.",
+          "image": "yoga"
+        },
+        {
+          "title": "Tests",
+          "description": "Answer questions to find the practice that best suits you — right here and now.",
+          "image": "tests"
+        },
+        {
+          "title": "Observe",
+          "description": "All data is securely protected.",
+          "image": "watch"
+        },
+        {
+          "title": "Warm-Up",
+          "description": "Physical preparation for practice — accessible to everyone.",
+          "image": "warmup"
+        }
+      ]
+    }
+  },
+  "about-page": {
+    "meta": {
+      "title": "About Us",
+      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
     }
   },
   "header": {
     "links": {
       "app": "App",
-      "about": "About",
+      "about": "About\u00A0Us",
       "help": "Help"
     }
   },
@@ -20,9 +63,9 @@
     "links": {
       "user-agreement": "User\u00A0Agreement",
       "privacy-policy": "Privacy\u00A0Policy",
-      "email-subscription": "Email\u00A0Subscription",
-      "cookies": "Cookies",
-      "about": "About",
+      "email-subscription": "Email\u00A0Subscription\u00A0Consent",
+      "cookies": "Cookies\u00A0Policy",
+      "about": "About\u00A0Us",
       "help": "Help"
     }
   }
