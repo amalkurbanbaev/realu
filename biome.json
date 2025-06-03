@@ -1,103 +1,121 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"vcs": {
-		"enabled": false,
-		"clientKind": "git",
-		"useIgnoreFile": false
-	},
-	"files": {
-		"ignoreUnknown": false,
-		"ignore": [
-			"node_modules",
-			"dist",
-			"build",
-			"src/generated",
-			"src/vite-env.d.ts"
-		]
-	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
-	},
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"style": {
-				"useSelfClosingElements": {
-					"level": "warn",
-					"fix": "safe"
-				}
-			},
-			"suspicious": {
-				"noConsole": {
-					"level": "error",
-					"options": {
-						"allow": ["warn", "error", "info"]
-					}
-				}
-			},
-			"correctness": {
-				"noUnusedVariables": "error",
-				"noUnusedImports": {
-					"level": "error",
-					"fix": "safe"
-				}
-			},
-			"nursery": {
-				"useSortedClasses": {
-					"level": "warn",
-					"fix": "safe",
-					"options": {
-						"attributes": ["className"],
-						"functions": ["clsx", "cva", "tw"]
-					}
-				},
-				"useConsistentCurlyBraces": {
-					"level": "warn",
-					"fix": "safe"
-				},
-				"noIrregularWhitespace": {
-					"level": "warn"
-				}
-			}
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double",
-			"indentStyle": "space",
-			"indentWidth": 2,
-			"semicolons": "asNeeded"
-		}
-	},
-	"overrides": [
-		{
-			"include": ["./tsconfig.app.json", "./tsconfig.node.json"],
-			"json": {
-				"parser": {
-					"allowComments": true
-				}
-			}
-		}
-	],
-	"css": {
-		"parser": {
-			"allowWrongLineComments": true,
-			"cssModules": true
-		},
-		"formatter": {
-			"enabled": true,
-			"indentStyle": "tab"
-		},
-		"assists": {
-			"enabled": true
-		},
-		"linter": {
-			"enabled": true
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": [
+      "node_modules",
+      "src/generated",
+      "src/vite-env.d.ts",
+      "dist",
+      "build",
+      "**/.next/**",
+      "**/dist/**",
+      "**/public/**",
+      ".vercel/**",
+      "**/*.md",
+      "**/*.mdx",
+      "tailwind.css",
+      "root.css"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineEnding": "lf",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "useSelfClosingElements": {
+          "level": "warn",
+          "fix": "safe"
+        },
+        "noUnusedTemplateLiteral": "off"
+      },
+      "suspicious": {
+        "noConsole": {
+          "level": "error",
+          "options": {
+            "allow": ["warn", "error", "info"]
+          }
+        }
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "useExhaustiveDependencies": "warn"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {
+            "attributes": ["className"],
+            "functions": ["clsx", "cva", "tw"]
+          }
+        },
+        "useConsistentCurlyBraces": {
+          "level": "warn",
+          "fix": "safe"
+        },
+        "noIrregularWhitespace": {
+          "level": "warn"
+        }
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "warn",
+        "useValidAnchor": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "semicolons": "asNeeded"
+    }
+  },
+  "overrides": [
+    {
+      "include": ["./tsconfig.app.json", "./tsconfig.node.json"],
+      "json": {
+        "parser": {
+          "allowComments": true
+        }
+      }
+    }
+  ],
+  "css": {
+    "parser": {
+      "allowWrongLineComments": true,
+      "cssModules": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2
+    },
+    "assists": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    }
+  }
 }

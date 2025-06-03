@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "@/styles/globals.css"
+import "lenis/dist/lenis.css"
 import { PageLayout } from "@/components/layout"
 import { routing } from "@/i18n/routing"
 import { geistMono, geistSans } from "@/styles/fonts"

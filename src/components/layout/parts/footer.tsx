@@ -31,7 +31,7 @@ const FooterLinks = () => {
   const tFooter = useTranslations("footer.links")
   return (
     <nav>
-      <ul className="flex max-w-md flex-col flex-wrap items-start gap-x-4 gap-y-2 text-center text-muted-foreground text-xs md:flex-row">
+      <ul className="flex max-w-md flex-col flex-wrap items-start gap-x-4 gap-y-2 text-center text-muted-foreground text-xs md:flex-row md:items-center">
         {FOOTER_LINKS.map((link) => (
           <li key={link.translationKey} className="hover:underline">
             <Link href={link.href}>{tFooter(link.translationKey)}</Link>
