@@ -3,9 +3,9 @@ import { HEADER_LINKS } from "@/constants/links"
 import { useNormalizedPathname } from "@/hooks/use-normalized-pathname"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation"
-import { useLocale, useTranslations } from "use-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 export const Header = () => {
   const pathname = useNormalizedPathname()
