@@ -1,6 +1,6 @@
+import { AppleButton } from "@/components/modules/apple-button"
 import { VideoPlayer } from "@/components/modules/video-player"
 import { getTranslations } from "next-intl/server"
-import Image from "next/image"
 import { SlidesOverlay } from "./slides"
 
 export async function HomePageTemplate() {
@@ -16,26 +16,13 @@ export async function HomePageTemplate() {
         </section>
 
         <section className="container">
-          <div className=" flex items-end gap-4 py-6">
+          <div className="flex flex-col items-end gap-4 py-6 lg:flex-row">
             <h1 className="max-w-sm font-bold text-2xl">{t("title")}</h1>
             <h5 className="max-w-sm font-medium text-muted-foreground">
               {t("description")}
             </h5>
 
-            <a
-              className="ml-auto flex max-h-12 grow-0 items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm"
-              href="https://www.apple.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Image
-                src="/apple-logo.svg"
-                alt="apple logo"
-                width={20}
-                height={24}
-              />
-              <span className="font-bold text-black">App Store</span>
-            </a>
+            <AppleButton className="ml-auto grow-0" />
           </div>
         </section>
       </div>
