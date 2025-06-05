@@ -18,10 +18,7 @@
     "release": "standard-version"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "biome lint",
-      "biome format --write"
-    ]
+    "*.{ts,tsx,js,jsx}": ["biome lint", "biome format --write"]
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
@@ -37,7 +34,7 @@
     "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "^1.9.4",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@tailwindcss/postcss": "^4",
