@@ -1,6 +1,7 @@
 import { VideoPlayer } from "@/components/modules/video-player"
-import { getLocale, getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server"
 import Image from "next/image"
+import { SlidesOverlay } from "./slides"
 
 export async function HomePageTemplate() {
   const t = await getTranslations("home-page.layout")
@@ -39,54 +40,22 @@ export async function HomePageTemplate() {
         </section>
       </div>
 
-      <Slides />
+      <SlidesOverlay />
+
+      <section className="container">
+        <div>Вы обретете</div>
+        <div className="grid grid-cols-3 place-items-center gap-4">
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+          <div className="size-[300px] rounded bg-primary/50" />
+        </div>
+      </section>
     </>
   )
-}
-
-const Slides = async () => {
-  const t = await getTranslations("home-page.layout")
-  const locale = await getLocale()
-
-  const imageKeys = [
-    "learn",
-    "meditation",
-    "breath",
-    "yoga",
-    "tests",
-    "watch",
-    "warmup",
-  ]
-
-  const slides = imageKeys.map((image, index) => ({
-    title: t(`slides.${index}.title`),
-    description: t(`slides.${index}.description`),
-    image,
-  }))
-
-  return slides.map((s) => (
-    <section className="container h-screen" key={s.image}>
-      <div className="grid h-full grid-cols-3 place-items-center">
-        <div className="flex flex-col gap-y-2 font-bold text-2xl">
-          {slides.map((el) => (
-            <div key={el.title}>{el.title}</div>
-          ))}
-        </div>
-
-        <div className="">
-          <Image
-            src={`/screenshots/${locale}/${s.image}.png`}
-            alt={s.title}
-            width={280}
-            height={600}
-            className="aspect-auto size-auto"
-          />
-        </div>
-
-        <div className=" font-medium text-muted-foreground">
-          {s.description}
-        </div>
-      </div>
-    </section>
-  ))
 }
