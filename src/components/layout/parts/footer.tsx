@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation"
 
 export const Footer = () => {
   return (
-    <footer className="container flex flex-col-reverse items-start gap-6 py-6 md:grid md:grid-cols-3">
+    <footer className="container flex flex-col-reverse items-start gap-10 py-6 md:grid md:grid-cols-3 md:gap-6">
       <FooterCopy />
       <FooterLinks />
       <FooterNavLinks />
