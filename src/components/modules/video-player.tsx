@@ -1,6 +1,6 @@
 "use client"
 
-import { PlayIcon } from "lucide-react"
+import Image from "next/image"
 import { useRef, useState } from "react"
 
 type Props = {
@@ -40,7 +40,9 @@ export function VideoPlayer({ src }: Props) {
         className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/30 transition hover:bg-black/50"
         type="button"
       >
-        {isPlaying ? null : <PlayIcon className="h-12 w-12 text-white" />}
+        {isPlaying ? null : (
+          <Image src="/icons/play.svg" alt="play-icon" width={48} height={48} />
+        )}
       </button>
     </div>
   )
