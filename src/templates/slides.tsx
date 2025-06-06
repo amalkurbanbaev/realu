@@ -25,6 +25,7 @@ export function SlidesOverlay() {
   const locale = useLocale()
 
   const sectionRefs = useRef<(HTMLElement | null)[]>([])
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const slides = imageKeys.map((key, index) => ({
     key,
@@ -33,7 +34,7 @@ export function SlidesOverlay() {
     image: `/screenshots/${locale}/${key}.png`,
   }))
 
-  const { activeIndex } = useScrollAnimation(sectionRefs)
+  const { activeIndex } = useScrollAnimation(sectionRefs, imageRefs)
 
   return (
     <section className="container">
@@ -69,10 +70,15 @@ export function SlidesOverlay() {
               ref={(el) => {
                 sectionRefs.current[i] = el
               }}
-              className="grid h-screen grid-cols-[auto_1fr] items-center gap-8 will-change-transform"
+              className="grid h-screen grid-cols-2 items-center justify-center gap-8 will-change-transform"
             >
               {/* Центр: скриншот */}
-              <div className="flex items-center justify-center">
+              <div
+                ref={(el) => {
+                  imageRefs.current[i] = el
+                }}
+                className="flex items-center justify-center will-change-transform"
+              >
                 <Image
                   src={slide.image}
                   alt={slide.title}

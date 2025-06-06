@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export const useScrollAnimation = (
   slidesRef: RefObject<(HTMLElement | null)[]>,
+  imageRefs: RefObject<(HTMLElement | null)[]>,
 ) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -34,8 +35,12 @@ export const useScrollAnimation = (
   useEffect(() => {
     const triggers: ScrollTrigger[] = []
 
-    for (const el of slidesRef.current) {
-      if (!el) continue
+    for (let i = 0; i < slidesRef.current.length; i++) {
+      const el = slidesRef.current[i]
+      const imageEl = imageRefs.current[i]
+      if (!el || !imageEl) continue
+
+      gsap.set(imageEl, { transformOrigin: "center center" })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -47,7 +52,7 @@ export const useScrollAnimation = (
       })
 
       tl.fromTo(
-        el,
+        imageEl,
         {
           opacity: 0,
           y: 60,
@@ -63,7 +68,7 @@ export const useScrollAnimation = (
           ease: "power3.out",
         },
       ).to(
-        el,
+        imageEl,
         {
           opacity: 0,
           y: -60,
@@ -83,7 +88,7 @@ export const useScrollAnimation = (
         trigger.kill()
       }
     }
-  }, [slidesRef])
+  }, [slidesRef, imageRefs])
 
   return { activeIndex, setActiveIndex }
 }
