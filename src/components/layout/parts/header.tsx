@@ -25,7 +25,7 @@ export const Header = () => {
     <header
       className={cn(
         "container relative z-50 flex items-center justify-between py-6",
-        isHome ? "absolute top-0" : "",
+        isHome ? "absolute inset-x-0 top-0" : "",
       )}
     >
       <Link href="/" onClick={() => toggleMenu()}>
