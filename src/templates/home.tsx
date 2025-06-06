@@ -16,7 +16,7 @@ export async function HomePageTemplate() {
         </section>
 
         <section className="container">
-          <div className="flex flex-col items-end gap-4 py-6 lg:flex-row">
+          <div className="flex flex-col items-end gap-6 py-6 lg:flex-row">
             <h1 className="max-w-sm font-bold text-2xl">{t("title")}</h1>
             <h5 className="max-w-sm font-medium text-muted-foreground">
               {t("description")}
@@ -29,7 +29,7 @@ export async function HomePageTemplate() {
 
       <SlidesOverlay />
 
-      <section className="container">
+      <section className="container py-10">
         <div>Вы обретете</div>
         <div className="grid grid-cols-3 place-items-center gap-4">
           <div className="size-[300px] rounded bg-primary/50" />
