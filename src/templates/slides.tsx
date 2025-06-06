@@ -40,7 +40,7 @@ export function SlidesOverlay() {
     <section className="container">
       <div className="relative grid h-full grid-cols-3 gap-4">
         {/* Панелька */}
-        <div className="sticky top-1/3 z-10 flex h-screen flex-col items-start gap-4 pt-10">
+        <div className="sticky top-0 z-10 flex h-screen flex-col items-start justify-center gap-4">
           {slides.map((slide, i) => (
             <button
               key={slide.key}
@@ -52,7 +52,7 @@ export function SlidesOverlay() {
                 })
               }
               className={cn(
-                "cursor-pointer font-semibold text-xl transition-colors",
+                "cursor-pointer font-semibold text-xl transition-colors duration-500",
                 i === activeIndex ? "text-foreground" : "text-muted-foreground",
               )}
             >
@@ -89,7 +89,7 @@ export function SlidesOverlay() {
               </div>
 
               {/* Справа: текст */}
-              <div className="flex max-w-sm items-center p-4 pl-14">
+              <div className="flex max-w-sm items-center p-4">
                 <div className="font-medium text-muted-foreground">
                   {slide.description}
                 </div>
