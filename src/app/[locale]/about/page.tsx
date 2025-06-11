@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/layout"
 import { AboutPageTemplate } from "@/templates/about"
 import { getTranslations } from "next-intl/server"
 
@@ -16,5 +17,9 @@ export async function generateMetadata({
 }
 
 export default function AboutPage() {
-  return <AboutPageTemplate />
+  return (
+    <PageLayout>
+      <AboutPageTemplate />
+    </PageLayout>
+  )
 }

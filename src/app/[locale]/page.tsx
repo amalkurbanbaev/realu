@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/layout"
 import { HomePageTemplate } from "@/templates/home"
 import { getTranslations } from "next-intl/server"
 
@@ -16,5 +17,9 @@ export async function generateMetadata({
 }
 
 export default async function Home() {
-  return <HomePageTemplate />
+  return (
+    <PageLayout withGradient={false}>
+      <HomePageTemplate />
+    </PageLayout>
+  )
 }

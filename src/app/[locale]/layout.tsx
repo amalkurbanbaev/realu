@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import "@/styles/globals.css"
 import "lenis/dist/lenis.css"
-import { PageLayout } from "@/components/layout"
 import { routing } from "@/i18n/routing"
 
 import { montserrat } from "@/styles/fonts"
@@ -51,7 +50,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${montserrat.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <PageLayout>{children}</PageLayout>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

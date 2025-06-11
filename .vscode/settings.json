@@ -1,7 +1,14 @@
 {
-    "i18n-ally.localesPaths": [
-        "src/i18n",
-        "src/messages"
-    ],
-    "i18n-ally.keystyle": "nested"
+  "tailwindCSS.experimental.classRegex": [
+    "className\\s*=\\s*\"([^\"]*)\"",
+    "className\\s*=\\s*`([^`]*)`",
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^'\"`]+)(?:'|\"|`)"]
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "css.lint.unknownAtRules": "ignore"
 }
