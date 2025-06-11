@@ -52,8 +52,10 @@ export function SlidesOverlay() {
                 })
               }
               className={cn(
-                "cursor-pointer font-semibold text-xl transition-colors duration-500",
-                i === activeIndex ? "text-foreground" : "text-muted-foreground",
+                "cursor-pointer font-semibold text-2xl transition-colors duration-500",
+                i === activeIndex
+                  ? "font-semibold text-foreground"
+                  : "font-medium text-muted-foreground",
               )}
             >
               {slide.title}
@@ -90,7 +92,7 @@ export function SlidesOverlay() {
 
               {/* Справа: текст */}
               <div className="flex max-w-sm items-center p-4">
-                <div className="font-medium text-muted-foreground">
+                <div className="font-medium text-white/80 text-xl">
                   {slide.description}
                 </div>
               </div>
