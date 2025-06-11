@@ -17,10 +17,8 @@ export async function HomePageTemplate() {
 
         <section className="container">
           <div className="flex flex-col items-end gap-6 py-6 lg:flex-row">
-            <h1 className="max-w-sm font-bold text-2xl">{t("title")}</h1>
-            <h5 className="max-w-sm font-medium text-muted-foreground">
-              {t("description")}
-            </h5>
+            <h1 className="max-w-xs font-bold text-2xl">{t("title")}</h1>
+            <h5 className="max-w-sm font-light">{t("description")}</h5>
 
             <AppleButton className="ml-auto grow-0" />
           </div>
@@ -29,18 +27,30 @@ export async function HomePageTemplate() {
 
       <SlidesOverlay />
 
-      <section className="container py-10">
-        <div>Вы обретете</div>
-        <div className="grid grid-cols-3 place-items-center gap-4">
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
-          <div className="size-[300px] rounded bg-primary/50" />
+      <section className="container space-y-12 py-10">
+        <h3 className="mb-6 font-bold text-2xl">Вы найдете</h3>
+        <div className="grid grid-cols-3 place-items-start gap-4">
+          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
+          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
+          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
+        </div>
+
+        <h3 className="mb-6 font-bold text-2xl">Люди говорят</h3>
+        <div className="grid grid-cols-3 place-items-start gap-4">
+          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
+          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
+          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
+        </div>
+      </section>
+
+      <section className="container mt-12 mb-20">
+        <div className="flex flex-col items-end gap-12 py-6 lg:flex-row">
+          <h1 className="max-w-sm font-bold text-2xl">{t("title2")}</h1>
+          <h5 className="max-w-lg font-medium text-muted-foreground">
+            {t("description2")}
+          </h5>
+
+          <AppleButton className="ml-auto grow-0" />
         </div>
       </section>
     </>
