@@ -8,26 +8,26 @@ export async function HomePageTemplate() {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col">
-        <section className="container flex h-full grow items-center justify-center rounded-b-3xl bg-black">
-          <div className="h-[520px] w-[240px] overflow-hidden rounded-3xl border border-white/10 shadow-lg">
-            <VideoPlayer src="/test-video.mp4" />
-          </div>
-        </section>
+      <section className="sticky top-0 flex h-screen flex-col overflow-hidden">
+        <div className="flex-grow overflow-hidden rounded-b-[56px]">
+          <VideoPlayer src="/test-video.mp4" />
+        </div>
 
-        <section className="container">
-          <div className="flex flex-col items-end gap-6 py-6 lg:flex-row">
+        <div className="container relative z-10 py-6">
+          <div className="flex flex-col items-center justify-center gap-6 lg:flex-row">
             <h1 className="max-w-xs font-bold text-2xl">{t("title")}</h1>
             <h5 className="max-w-sm font-light">{t("description")}</h5>
 
             <AppleButton className="ml-auto grow-0" />
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      <SlidesOverlay />
+      <section className="relative z-50 bg-background">
+        <SlidesOverlay />
+      </section>
 
-      <section className="container space-y-12 py-10">
+      <section className="container relative z-30 space-y-12 bg-background py-10">
         <h3 className="mb-6 font-bold text-2xl">Вы найдете</h3>
         <div className="grid grid-cols-3 place-items-start gap-4">
           <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
@@ -43,7 +43,7 @@ export async function HomePageTemplate() {
         </div>
       </section>
 
-      <section className="container mt-12 mb-20">
+      <section className="container relative z-30 space-y-12 overflow-clip rounded-b-[56px] bg-background py-10">
         <div className="flex flex-col items-end gap-12 py-6 lg:flex-row">
           <h1 className="max-w-sm font-bold text-2xl">{t("title2")}</h1>
           <h5 className="max-w-lg font-medium text-muted-foreground">

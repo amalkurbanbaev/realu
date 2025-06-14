@@ -1,9 +1,29 @@
+import { cn } from "@/lib/utils"
 import Image from "next/image"
 
-export function GradientBackground() {
+type GradientBackgroundProps = {
+  position: "top" | "bottom"
+}
+
+export function GradientBackground({ position }: GradientBackgroundProps) {
   return (
-    <div className="wrong-class -z-10 -mt-20 absolute top-1/2 right-1/2 size-[3000px] translate-x-[70%] translate-y-[-74%]">
-      <Image src="/gradient.svg" alt="gradient" fill className="object-fill" />
+    <div
+      className={cn(
+        "pointer-events-none absolute inset-x-0",
+        position === "top"
+          ? "top-0 z-10 size-full"
+          : "-z-10 bottom-0 h-[300px] w-full object-cover object-bottom",
+      )}
+    >
+      <Image
+        src={
+          position === "top"
+            ? "/gradients/header-gradient.png"
+            : "/gradients/footer-gradient.png"
+        }
+        alt={`gradient-${position}`}
+        fill
+      />
     </div>
   )
 }

@@ -35,13 +35,20 @@ export function VideoPlayer({ src }: Props) {
         muted
         loop
       />
+
       <button
         onClick={togglePlayback}
-        className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/30 transition hover:bg-black/50"
+        className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50"
         type="button"
       >
         {isPlaying ? null : (
-          <Image src="/icons/play.svg" alt="play-icon" width={48} height={48} />
+          <Image
+            src="/icons/play.svg"
+            alt="play-icon"
+            width={48}
+            height={48}
+            className="transition-transform hover:scale-110"
+          />
         )}
       </button>
     </div>

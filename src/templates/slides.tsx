@@ -66,7 +66,7 @@ export function SlidesOverlay() {
         {/* Слайды */}
         <div className="col-span-2 flex flex-col scroll-smooth">
           {slides.map((slide, i) => (
-            <section
+            <div
               key={slide.key}
               data-index={i}
               ref={(el) => {
@@ -96,7 +96,7 @@ export function SlidesOverlay() {
                   {slide.description}
                 </div>
               </div>
-            </section>
+            </div>
           ))}
         </div>
       </div>
