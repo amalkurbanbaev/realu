@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { FOOTER_LINKS, HEADER_LINKS } from "@/constants/links"
 import { ArrowRightIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation"
 
 export const Footer = () => {

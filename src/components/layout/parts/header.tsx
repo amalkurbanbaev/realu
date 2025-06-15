@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { Menu, XIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
