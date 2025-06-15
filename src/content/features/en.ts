@@ -1,4 +1,6 @@
-export const FEATURES = [
+import type { AppFeature } from "@/types/entities"
+
+export const features: AppFeature[] = [
   {
     title: "Понимание и выбор техник",
     description:

@@ -32,13 +32,13 @@ export function TestimonialCarousel({
             className="pl-6 md:basis-1/2 lg:basis-1/3"
           >
             <div
-              className="rounded-3xl p-6"
+              className="h-full rounded-3xl p-6"
               style={{
                 background:
                   "linear-gradient(102.6deg, #252737 13.89%, #42366F 162.25%)",
               }}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col gap-2 xl:flex-row xl:items-center">
                 <div className="flex items-center gap-0.5">
                   {Array.from({ length: f.rating }).map((_, i) => (
                     <Image
@@ -58,7 +58,7 @@ export function TestimonialCarousel({
                 </div>
               </div>
 
-              <p className="mt-2 font-light">{f.text}</p>
+              <p className="mt-2.5 font-light">{f.text}</p>
             </div>
           </CarouselItem>
         ))}

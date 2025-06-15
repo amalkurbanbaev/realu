@@ -3,7 +3,6 @@ import { FeatureCarousel } from "@/components/modules/feature-carousel"
 import { GradientBackground } from "@/components/modules/gradient-background"
 import { TestimonialCarousel } from "@/components/modules/tesimonials-carousel"
 import { VideoPlayer } from "@/components/modules/video-player"
-import { FEATURES } from "@/constants/features"
 import { getLocale, getTranslations } from "next-intl/server"
 import { SlidesOverlay } from "./slides"
 
@@ -11,10 +10,15 @@ export async function HomePageTemplate() {
   const t = await getTranslations("home-page.layout")
   const locale = await getLocale()
 
+  const features =
+    locale === "ru"
+      ? require("@/content/features/ru").features
+      : require("@/content/features/en").features
+
   const testimonials =
     locale === "ru"
-      ? require("@/constants/testimonials/ru").testimonials
-      : require("@/constants/testimonials/en").testimonials
+      ? require("@/content/testimonials/ru").testimonials
+      : require("@/content/testimonials/en").testimonials
 
   return (
     <>
@@ -41,7 +45,7 @@ export async function HomePageTemplate() {
         <GradientBackground position="top" />
 
         <h3 className="mb-6 font-bold text-2xl">Вы найдете</h3>
-        <FeatureCarousel features={FEATURES} />
+        <FeatureCarousel features={features} />
 
         <h3 className="mb-6 font-bold text-2xl">Люди говорят</h3>
         <TestimonialCarousel testimonials={testimonials} />
