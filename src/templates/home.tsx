@@ -1,5 +1,8 @@
 import { AppleButton } from "@/components/modules/apple-button"
+import { FeatureCarousel } from "@/components/modules/feature-carousel"
+import { GradientBackground } from "@/components/modules/gradient-background"
 import { VideoPlayer } from "@/components/modules/video-player"
+import { FEATURES } from "@/constants/features"
 import { getTranslations } from "next-intl/server"
 import { SlidesOverlay } from "./slides"
 
@@ -28,12 +31,9 @@ export async function HomePageTemplate() {
       </section>
 
       <section className="container relative z-30 space-y-12 bg-background py-10">
+        <GradientBackground position="top" />
         <h3 className="mb-6 font-bold text-2xl">Вы найдете</h3>
-        <div className="grid grid-cols-3 place-items-start gap-4">
-          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
-          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
-          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
-        </div>
+        <FeatureCarousel features={FEATURES} />
 
         <h3 className="mb-6 font-bold text-2xl">Люди говорят</h3>
         <div className="grid grid-cols-3 place-items-start gap-4">

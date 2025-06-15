@@ -131,3 +131,39 @@
   padding-inline: 2.5rem;
   max-width: 100%;
 }
+
+@layer utilities {
+  .border-gradient {
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+  }
+
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 3px;
+    background: linear-gradient(
+      230.53deg,
+      #f8a1a7 -30.87%,
+      #7c77c9 30.18%,
+      #4d4985 92.43%
+    );
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    z-index: 0;
+  }
+
+  .border-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 25px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15), inset 0 0 16px
+      rgba(255, 255, 255, 0.11); /* внутреннее свечение */
+    z-index: 2; /* тень позади градиента и контента */
+    pointer-events: none;
+  }
+}
