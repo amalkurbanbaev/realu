@@ -1,6 +1,11 @@
 import type { AppFeature } from "@/types/entities"
 import Image from "next/image"
-import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+} from "../ui/carousel"
 import { GlowCard } from "./glow-card"
 
 type FeatureCarouselProps = {
@@ -29,7 +34,7 @@ export function FeatureCarousel({ features }: FeatureCarouselProps) {
                 alt={f.title}
                 className="mb-4"
               />
-              <h4 className="mt-auto font-semibold text-lg">{f.title}</h4>
+              <h4 className="mt-auto font-medium text-lg">{f.title}</h4>
               <p className="mt-2 text-muted-foreground text-sm">
                 {f.description}
               </p>
@@ -37,6 +42,8 @@ export function FeatureCarousel({ features }: FeatureCarouselProps) {
           </CarouselItem>
         ))}
       </CarouselContent>
+
+      <CarouselDots />
     </Carousel>
   )
 }

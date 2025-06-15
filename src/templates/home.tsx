@@ -1,13 +1,20 @@
 import { AppleButton } from "@/components/modules/apple-button"
 import { FeatureCarousel } from "@/components/modules/feature-carousel"
 import { GradientBackground } from "@/components/modules/gradient-background"
+import { TestimonialCarousel } from "@/components/modules/tesimonials-carousel"
 import { VideoPlayer } from "@/components/modules/video-player"
 import { FEATURES } from "@/constants/features"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { SlidesOverlay } from "./slides"
 
 export async function HomePageTemplate() {
   const t = await getTranslations("home-page.layout")
+  const locale = await getLocale()
+
+  const testimonials =
+    locale === "ru"
+      ? require("@/constants/testimonials/ru").testimonials
+      : require("@/constants/testimonials/en").testimonials
 
   return (
     <>
@@ -32,15 +39,12 @@ export async function HomePageTemplate() {
 
       <section className="container relative z-30 space-y-12 bg-background py-10">
         <GradientBackground position="top" />
+
         <h3 className="mb-6 font-bold text-2xl">Вы найдете</h3>
         <FeatureCarousel features={FEATURES} />
 
         <h3 className="mb-6 font-bold text-2xl">Люди говорят</h3>
-        <div className="grid grid-cols-3 place-items-start gap-4">
-          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
-          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
-          <div className="size-[300px] h-[244px] w-[384px] rounded-2xl border-3 border-primary" />
-        </div>
+        <TestimonialCarousel testimonials={testimonials} />
       </section>
 
       <section className="container relative z-30 space-y-12 overflow-clip rounded-b-[56px] bg-background py-10">
