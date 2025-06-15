@@ -1,8 +1,3 @@
-import { Link } from "@/i18n/navigation"
-import { cn } from "@/lib/utils"
-import { ChevronDownIcon } from "lucide-react"
-import { getTranslations } from "next-intl/server"
-
 type HelpPageTemplate = {
   activeTab?: string
 }
@@ -12,21 +7,22 @@ const DEFAULT_TAB = "about_app"
 export async function HelpPageTemplate({
   activeTab = DEFAULT_TAB,
 }: HelpPageTemplate) {
-  const t = await getTranslations("help-page")
+  // const t = await getTranslations("help-page")
 
-  const sections = t.raw("units") as Record<
-    string,
-    { title: string; questions: { title: string; text: string }[] }
-  >
+  // const sections = t.raw("units") as Record<
+  //   string,
+  //   { title: string; questions: { title: string; text: string }[] }
+  // >
 
-  const tabKeys = Object.keys(sections)
+  // const tabKeys = Object.keys(sections)
 
-  const section = sections[activeTab]
+  // const section = sections[activeTab]
 
   return (
     <section className="container relative z-10 py-20 text-white">
       <div className="grid grid-cols-[220px_1fr] gap-12">
-        <nav className="flex flex-col gap-4">
+        {activeTab}
+        {/* <nav className="flex flex-col gap-4">
           {tabKeys.map((key) => (
             <Link
               key={key}
@@ -57,7 +53,7 @@ export async function HelpPageTemplate({
               </div>
             </details>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   )
