@@ -1,13 +1,28 @@
+import { Link } from "@/i18n/navigation"
+import { cn, getLocalizedContent } from "@/lib/utils"
+import type { FAQSection } from "@/types/entities"
+import { ChevronDownIcon } from "lucide-react"
+import { getLocale } from "next-intl/server"
+
 type HelpPageTemplate = {
   activeTab?: string
 }
 
-const DEFAULT_TAB = "about_app"
+const DEFAULT_TAB = "about"
 
 export async function HelpPageTemplate({
   activeTab = DEFAULT_TAB,
 }: HelpPageTemplate) {
   // const t = await getTranslations("help-page")
+  const locale = await getLocale()
+
+  const allQuestions = await getLocalizedContent<FAQSection | undefined>(
+    "faq",
+    locale,
+  )
+
+  const sections = allQuestions?.map((el) => ({ id: el.id, title: el.unit }))
+  const questions = allQuestions?.find((el) => el.id === activeTab)?.questions
 
   // const sections = t.raw("units") as Record<
   //   string,
@@ -20,40 +35,38 @@ export async function HelpPageTemplate({
 
   return (
     <section className="container relative z-10 py-20 text-white">
-      <div className="grid grid-cols-[220px_1fr] gap-12">
-        {activeTab}
-        {/* <nav className="flex flex-col gap-4">
-          {tabKeys.map((key) => (
+      <div className="grid grid-cols-[320px_1fr] gap-12">
+        <nav className="flex w-full flex-col gap-4">
+          {sections?.map((s) => (
             <Link
-              key={key}
-              href={`?tab=${key}`}
+              key={s.id}
+              href={`?tab=${s.id}`}
               className={cn(
                 "text-2xl transition-colors",
-                key === activeTab
+                s.id === activeTab
                   ? "font-bold text-white"
                   : "text-muted-foreground",
               )}
             >
-              {sections[key].title}
+              {s.title}
             </Link>
           ))}
         </nav>
 
         <div className="ml-auto w-full max-w-4xl space-y-4">
-          {section.questions.map((q, i) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <details key={i} className="group rounded-2xl bg-white/5">
+          {questions?.map((q) => (
+            <details key={q.text} className="group rounded-2xl bg-white/5">
               <summary className="flex cursor-pointer list-none items-center justify-between p-6 font-semibold text-white">
-                <span>{q.title}</span>
+                <span>{q.text}</span>
                 <ChevronDownIcon className="transition-transform duration-300 group-open:rotate-180" />
               </summary>
 
               <div className="px-6 pb-6">
-                <p className="text-white/80 leading-relaxed">{q.text}</p>
+                <p className="text-white/80 leading-relaxed">{q.answer}</p>
               </div>
             </details>
           ))}
-        </div> */}
+        </div>
       </div>
     </section>
   )
