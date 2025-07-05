@@ -13,33 +13,63 @@ export function HeroSection() {
   const t = useTranslations("home-page.layout")
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  const [isPausedByScroll, setIsPausedByScroll] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false)
+  const [shouldZoomOut, setShouldZoomOut] = useState(false)
+
+  const skipScrollPlayUntilTop = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
       const video = videoRef.current
       if (!video) return
 
-      if (window.scrollY > 100) {
-        if (!video.paused) {
+      const scrolledDown = window.scrollY > 100
+
+      if (scrolledDown) {
+        setShouldZoomOut(true)
+
+        if (!video.paused && !isManuallyPaused) {
           video.pause()
-          setIsPausedByScroll(true)
         }
-      } else if (window.scrollY < 100) {
-        if (video.paused && video.readyState >= 2) {
-          video.play().catch((e) => {
-            console.warn("Autoplay error:", e)
-          })
-          setIsPausedByScroll(false)
+      } else {
+        // Скролл вверх
+        if (skipScrollPlayUntilTop.current) {
+          // 💥 блокируем воспроизведение до возвращения вверх
+          return
+        }
+
+        if (
+          !skipScrollPlayUntilTop.current &&
+          !isManuallyPaused &&
+          video.paused &&
+          video.readyState >= 2
+        ) {
+          video.play().catch(() => {})
+          setShouldZoomOut(false)
         }
       }
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [isManuallyPaused])
 
+  const handleTogglePlay = () => {
+    const video = videoRef.current
+    if (!video) return
+
+    if (video.paused) {
+      video.play().catch(() => {})
+      setIsManuallyPaused(false)
+    } else {
+      video.pause()
+      setIsManuallyPaused(true)
+      setShouldZoomOut(true)
+
+      skipScrollPlayUntilTop.current = true
+    }
+  }
   const toggleMute = () => {
     setIsMuted((prev) => !prev)
   }
@@ -49,13 +79,14 @@ export function HeroSection() {
       <div
         className={cn(
           "mx-auto w-full flex-grow overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out md:max-w-3/4",
-          isPausedByScroll && "scale-90",
+          shouldZoomOut && "scale-90",
         )}
       >
         <VideoPlayer
           ref={videoRef}
+          muted={isMuted}
+          onClick={handleTogglePlay} // 💡 прокидываем контроль воспроизведения в VideoPlayer
           src="https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main_compressed-Zz2XLGcCQAUh1ZgGtoFHx0BioJXXIP.mp4"
-          //   src="/test-video.mp4"
           poster="/video/poster-main.png"
         />
       </div>
@@ -68,7 +99,7 @@ export function HeroSection() {
       </div>
 
       <Button
-        aria-label="play-pause"
+        aria-label="mute"
         tabIndex={0}
         variant="secondary"
         className="absolute bottom-10 left-10 z-50 flex size-10 cursor-pointer flex-col items-center justify-center rounded-full"
@@ -76,6 +107,7 @@ export function HeroSection() {
       >
         {isMuted ? <Volume2Icon /> : <MuteIcon />}
       </Button>
+
       <ScrollScreenButton />
     </section>
   )
