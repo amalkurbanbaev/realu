@@ -4,15 +4,17 @@ import { Button } from "@/components/ui/button"
 import { FOOTER_LINKS, HEADER_LINKS } from "@/constants/links"
 import { ArrowRightIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation"
 
 export const Footer = () => {
   return (
-    <footer className="container flex flex-col-reverse items-start gap-6 py-6 md:grid md:grid-cols-3">
-      <FooterCopy />
-      <FooterLinks />
-      <FooterNavLinks />
+    <footer className="z-50">
+      <section className="container flex flex-col-reverse gap-10 py-6 md:grid md:grid-cols-5 md:items-center md:gap-6">
+        <FooterCopy />
+        <FooterLinks />
+        <FooterNavLinks />
+      </section>
     </footer>
   )
 }
@@ -30,8 +32,8 @@ const FooterCopy = () => {
 const FooterLinks = () => {
   const tFooter = useTranslations("footer.links")
   return (
-    <nav>
-      <ul className="flex max-w-md flex-col flex-wrap items-start gap-x-4 gap-y-2 text-center text-muted-foreground text-xs md:flex-row md:items-center">
+    <nav className="col-span-3">
+      <ul className="flex h-full max-w-full flex-col flex-wrap items-start justify-center gap-x-4 gap-y-2 text-center text-muted-foreground text-xs md:flex-row md:items-center">
         {FOOTER_LINKS.map((link) => (
           <li key={link.translationKey} className="hover:underline">
             <Link href={link.href}>{tFooter(link.translationKey)}</Link>
@@ -49,7 +51,7 @@ const FooterNavLinks = () => {
   const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
 
   return (
-    <nav className="flex items-center justify-end gap-4">
+    <nav className="flex items-center gap-4 md:justify-end">
       {HEADER_LINKS.filter(
         (link) => link.href !== "/" && normalizedPath !== link.href,
       ).map((link) => {

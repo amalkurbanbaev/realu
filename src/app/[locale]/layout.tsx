@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import "@/styles/globals.css"
 import "lenis/dist/lenis.css"
-import { PageLayout } from "@/components/layout"
 import { routing } from "@/i18n/routing"
-import { geistMono, geistSans } from "@/styles/fonts"
+
+import { montserrat } from "@/styles/fonts"
 import { NextIntlClientProvider, hasLocale } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -48,11 +48,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${montserrat.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <PageLayout>{children}</PageLayout>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

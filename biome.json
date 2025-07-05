@@ -58,7 +58,8 @@
           "level": "error",
           "fix": "safe"
         },
-        "useExhaustiveDependencies": "warn"
+        "useExhaustiveDependencies": "warn",
+        "noUnusedFunctionParameters": "error"
       },
       "nursery": {
         "useSortedClasses": {

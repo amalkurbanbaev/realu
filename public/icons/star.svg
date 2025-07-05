@@ -1,0 +1,21 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_4081_1888)">
+<path d="M16.88 12.7879C14.96 11.8182 14.32 7.93939 14.32 6C14.32 7.93939 13.68 11.8182 11.76 12.7879C10.8074 13.269 7.92 14 6 14C7.92 14 10.1283 14.4608 11.76 15.697C13.68 17.1515 14.32 20.5455 14.32 22C14.32 20.5455 14.819 17.2583 16.88 15.697C18.16 14.7273 20.72 14 22 14C20.72 14 18.2272 13.4683 16.88 12.7879Z" fill="#E9878F" fill-opacity="0.4"/>
+</g>
+<g opacity="0.3" filter="url(#filter1_f_4081_1888)">
+<path d="M16.88 12.7879C14.96 11.8182 14.32 7.93939 14.32 6C14.32 7.93939 13.68 11.8182 11.76 12.7879C10.8074 13.269 7.92 14 6 14C7.92 14 10.1283 14.4608 11.76 15.697C13.68 17.1515 14.32 20.5455 14.32 22C14.32 20.5455 14.819 17.2583 16.88 15.697C18.16 14.7273 20.72 14 22 14C20.72 14 18.2272 13.4683 16.88 12.7879Z" fill="#FFAF39"/>
+</g>
+<path d="M16.56 13.2187C14.8533 12.3568 14.2844 8.90896 14.2844 7.18506C14.2844 8.90896 13.7155 12.3568 12.0089 13.2187C11.1621 13.6464 9.70667 14.2962 8 14.2962C9.70667 14.2962 10.5585 14.7058 12.0089 15.8046C13.7155 17.0975 14.2844 20.1144 14.2844 21.4073C14.2844 20.1144 14.728 17.1925 16.56 15.8046C17.6978 14.9426 18.8622 14.2962 20 14.2962C18.8622 14.2962 17.7575 13.8235 16.56 13.2187Z" fill="#FFE8A3"/>
+<defs>
+<filter id="filter0_f_4081_1888" x="1" y="1" width="26" height="26" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="2.5" result="effect1_foregroundBlur_4081_1888"/>
+</filter>
+<filter id="filter1_f_4081_1888" x="0.750021" y="0.750021" width="26.5" height="26.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="2.62499" result="effect1_foregroundBlur_4081_1888"/>
+</filter>
+</defs>
+</svg>

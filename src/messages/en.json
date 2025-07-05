@@ -1,28 +1,88 @@
 {
   "home-page": {
     "meta": {
-      "title": "Real\u00A0U\u00A0Mobile\u00A0App",
-      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathing\u00A0from\u00A0the\u00A0sources\u00A0of\u00A0yoga"
+      "title": "RealU\u00A0Mobile\u00A0App",
+      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
     },
     "layout": {
-      "title": "If\u00A0something\u00A0is\u00A0missing, it's\u00A0probably\u00A0you",
-      "description": "Feel life — meditations\u00A0and\u00A0breathing from\u00A0the\u00A0sources\u00A0of\u00A0yoga"
+      "title": "What you are missing, might be yourself",
+      "title2": "Don't\u00A0wait.\n\nStart\u00A0today",
+      "description": "Fill yourself with attention and energy through breathwork and meditation",
+      "description2": "Meditation and pranayama help you get back to yourself, hear yourself, and take life into your own hands.",
+      "slides": [
+        {
+          "title": "Learn & Explore",
+          "description": "All courses are based on original texts and include both theory and practice. We provide systematic knowledge.",
+          "image": "learn"
+        },
+        {
+          "title": "Meditate",
+          "description": "Daily meditations, over 100 unique sessions, from 10 to 30 minutes and more.",
+          "image": "meditation"
+        },
+        {
+          "title": "Breathe",
+          "description": "Adjust your breathing practice to your current state and environment.",
+          "image": "breath"
+        },
+        {
+          "title": "Yoga Nidra",
+          "description": "An ancient yogic practice for deep relaxation and energy restoration. Ideal for sleep issues.",
+          "image": "yoga"
+        },
+        {
+          "title": "Tests",
+          "description": "Answer questions to find the practice that best suits you — right here and now.",
+          "image": "tests"
+        },
+        {
+          "title": "Observe",
+          "description": "All data is securely protected.",
+          "image": "watch"
+        },
+        {
+          "title": "Warm-Up",
+          "description": "Physical preparation for practice — accessible to everyone.",
+          "image": "warmup"
+        }
+      ]
+    }
+  },
+  "about-page": {
+    "meta": {
+      "title": "About Us",
+      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
+    },
+    "layout": {
+      "title": "About Us",
+      "description": "Медита́ция (лат. meditatio — «размышление») — ряд <underline>психических</underline> упражнений, используемых в составе духовно-религиозной или оздоровительной практик, или же особое психическое состояние, возникающее в результате этих упражнений (или в силу иных причин). Медитация может рассматриваться как вид созерцания (лат. contemplatio). \n\n Занимаясь медитацией, согласно ряду традиций, не надо делать над собой никаких усилий, нужно полностью расслабиться. Медитация — это состояние расслабленной сосредоточенности, в котором идет отрешённое наблюдение за происходящим[2]. Медитация означает, что мы чему-то предоставляем место, позволяем этому развиваться, наблюдаем, воспринимаем во всей полноте. Занимающийся медитацией ничего не должен оценивать, предоставив свободу мыслям, чувствам и протекающим в организме процессам. \n\nУ самых разных школ медитации есть два общих компонента, которые в терминологии буддийской психокультуры описываются как: 1) шаматха (пали: саматха), что можно перевести как «безмятежность», «мир», «внутреннее спокойствие», умственное или физическое, 2) випашьяна (пали: випассана), что можно перевести как «осознанность», «видение мира таким, какой он есть», а не таким, каким мы хотели бы или не хотели бы его видеть."
+    }
+  },
+  "help-page": {
+    "meta": {
+      "title": "Help",
+      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
+    },
+    "layout": {
+      "title": "Help",
+      "contact": "If there is no answer to your question here, send an email <a>support@meditolife.com</a>"
     }
   },
   "header": {
     "links": {
-      "app": "App",
-      "about": "About",
-      "help": "Help"
+      "app": "About the app",
+      "blog": "Blog",
+      "about": "About us",
+      "help": "FAQ"
     }
   },
   "footer": {
     "links": {
       "user-agreement": "User\u00A0Agreement",
       "privacy-policy": "Privacy\u00A0Policy",
-      "email-subscription": "Email\u00A0Subscription",
-      "cookies": "Cookies",
-      "about": "About",
+      "email-subscription": "Email\u00A0Subscription\u00A0Consent",
+      "cookies": "Cookies\u00A0Policy",
+      "about": "About\u00A0Us",
       "help": "Help"
     }
   }
