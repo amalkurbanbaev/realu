@@ -4,11 +4,11 @@ import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { HEADER_LINKS } from "@/constants/links"
 import { useNormalizedPathname } from "@/hooks"
+import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 import { Menu, XIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
@@ -32,7 +32,7 @@ export const Header = () => {
   return (
     <header
       className={cn(
-        "container inset-x-0 top-0 flex items-center justify-between py-6",
+        "container inset-x-0 top-0 flex h-[var(--header-height)] items-center justify-between",
         isHome ? "fixed z-10" : "relative z-50",
       )}
     >
@@ -51,6 +51,8 @@ export const Header = () => {
         <HeaderLinks />
       </nav>
 
+      <AppleButton className="hidden md:block" />
+
       {/* Mobile burger */}
       <button
         onClick={() => toggleMenu()}
@@ -68,7 +70,7 @@ export const Header = () => {
           menuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
-        <nav className="flex h-full flex-col justify-between">
+        <nav className="flex h-full flex-col justify-center">
           <Button
             variant="secondary"
             className="w-fit self-end"

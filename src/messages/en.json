@@ -5,9 +5,9 @@
       "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
     },
     "layout": {
-      "title": "What\u00A0you're\u00A0looking for is\u00A0already\u00A0inside",
+      "title": "What you are missing, might be yourself",
       "title2": "Don't\u00A0wait.\n\nStart\u00A0today",
-      "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources",
+      "description": "Fill yourself with attention and energy through breathwork and meditation",
       "description2": "Meditation and pranayama help you get back to yourself, hear yourself, and take life into your own hands.",
       "slides": [
         {
@@ -70,9 +70,10 @@
   },
   "header": {
     "links": {
-      "app": "App",
-      "about": "About\u00A0Us",
-      "help": "Help"
+      "app": "About the app",
+      "blog": "Blog",
+      "about": "About us",
+      "help": "FAQ"
     }
   },
   "footer": {
