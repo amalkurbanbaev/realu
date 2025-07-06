@@ -1,10 +1,9 @@
 "use client"
-
-import { Particle } from "@/components/modules/particle"
 import { useSlides } from "@/hooks/use-slides"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { Particle } from "./particle"
 
 export function ScrollFade() {
   const slides = useSlides()
@@ -83,14 +82,38 @@ export function ScrollFade() {
               "pointer-events-none", // можно оставить, чтобы не мешали скрытые слои
             )}
           >
-            <div className="flex items-center justify-center">
+            <div className="relative flex w-full items-center justify-center">
               <Image
                 src={slide.image}
                 alt={slide.title}
                 width={279}
                 height={606}
-                className="rounded-xl shadow-xl"
+                className={cn("rounded-xl shadow-xl")}
               />
+
+              <div className="-z-10 absolute inset-0 mx-auto h-full w-2/3">
+                {slide.particles.map((p, pi) => (
+                  <Particle
+                    key={`${p.src}-${i}-${pi}`}
+                    width={p.width}
+                    height={p.height}
+                    src={p.src}
+                    alt={p.src}
+                    className={cn(
+                      enabled ? "opacity-100" : "opacity-0",
+                      i === activeIndex &&
+                        enabled &&
+                        "animate-in duration-[1.5s] ease-in-out",
+                      pi === 0 &&
+                        "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
+                      pi === 1 &&
+                        "slide-in-from-right-60 -translate-y-1/2 inset-x-0 top-1/2",
+                      pi === 2 &&
+                        "slide-in-from-right-60 slide-in-from-top-40 inset-x-0 bottom-0",
+                    )}
+                  />
+                ))}
+              </div>
             </div>
 
             <div className="-z-10 absolute inset-0">
@@ -102,27 +125,10 @@ export function ScrollFade() {
               />
             </div>
 
-            <div className="relative flex max-w-sm items-center p-4">
+            <div className="flex max-w-md items-center p-4 text-center">
               <div className="z-10 font-medium text-white/80 text-xl">
                 {slide.description}
               </div>
-
-              {slide.particles.map((p, pi) => (
-                <Particle
-                  key={`${p.src}-${i}-${pi}`}
-                  width={p.width}
-                  height={p.height}
-                  src={p.src}
-                  alt={p.src}
-                  className={cn(
-                    p.position,
-                    i === activeIndex && enabled && "animate-in duration-1000",
-                    pi % 2 !== 0
-                      ? "slide-in-from-bottom-25"
-                      : "slide-in-from-top-25",
-                  )}
-                />
-              ))}
             </div>
           </div>
         ))}
