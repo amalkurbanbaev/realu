@@ -3,6 +3,8 @@ import { useSlides } from "@/hooks/use-slides"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { ArrowDownIcon } from "../icons"
+import { Button } from "../ui/button"
 import { Particle } from "./particle"
 
 export function ScrollFade() {
@@ -12,6 +14,7 @@ export function ScrollFade() {
   const sentinelRef = useRef<HTMLDivElement>(null) // ← наблюдаем за ним
   const [activeIndex, setActiveIndex] = useState(0)
   const [enabled, setEnabled] = useState(false)
+  const [isScrolling] = useState(false)
 
   useEffect(() => {
     const checkIfFullyInView = () => {
@@ -24,6 +27,8 @@ export function ScrollFade() {
 
       if (fullyVisible) {
         setEnabled(true)
+      } else {
+        setEnabled(false)
       }
     }
 
@@ -67,6 +72,38 @@ export function ScrollFade() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [slides.length])
 
+  const handleScroll = (dir: "prev" | "next") => {
+    if (!wrapperRef.current) return
+
+    const screenHeight = window.innerHeight
+    const wrapperTop = wrapperRef.current.offsetTop
+    const startOffset = screenHeight * 0.4
+
+    const isLast = activeIndex >= slides.length - 1
+    const isFirst = activeIndex <= 0
+
+    if (dir === "next" && isLast) {
+      const reviewsSection = document.getElementById("reviews")
+      if (reviewsSection) {
+        reviewsSection.scrollIntoView({ behavior: "smooth" })
+      }
+      return
+    }
+
+    if (dir === "prev" && isFirst) {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      return
+    }
+
+    const nextIndex = dir === "next" ? activeIndex + 1 : activeIndex - 1
+    const scrollTarget = wrapperTop + startOffset + screenHeight * nextIndex
+
+    window.scrollTo({
+      top: scrollTarget,
+      behavior: "smooth",
+    })
+  }
+
   return (
     <section ref={wrapperRef} className="relative z-20 h-[700vh]">
       {/* ← наблюдаемый триггер, появляется в начале секции */}
@@ -79,7 +116,6 @@ export function ScrollFade() {
             className={cn(
               "absolute inset-0 ml-auto flex w-full flex-col items-center justify-center gap-8 overflow-visible px-8 transition-opacity duration-700 will-change-[opacity]",
               i === activeIndex ? "opacity-100" : "opacity-0",
-              "pointer-events-none", // можно оставить, чтобы не мешали скрытые слои
             )}
           >
             <div className="relative flex w-full items-center justify-center">
@@ -91,7 +127,7 @@ export function ScrollFade() {
                 className={cn("rounded-xl shadow-xl")}
               />
 
-              <div className="-z-10 absolute inset-0 mx-auto h-full w-2/3">
+              <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
                 {slide.particles.map((p, pi) => (
                   <Particle
                     key={`${p.src}-${i}-${pi}`}
@@ -103,7 +139,8 @@ export function ScrollFade() {
                       enabled ? "opacity-100" : "opacity-0",
                       i === activeIndex &&
                         enabled &&
-                        "animate-in duration-[1.5s] ease-in-out",
+                        "fade-in animate-in duration-[1.5s] ease-in-out",
+                      i === 0 && "delay-100",
                       pi === 0 &&
                         "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
                       pi === 1 &&
@@ -133,6 +170,97 @@ export function ScrollFade() {
           </div>
         ))}
       </div>
+
+      <SliderCounter
+        activeIndex={activeIndex + 1}
+        total={slides.length}
+        enabled={enabled}
+      />
+
+      <SliderNavButtons
+        enabled={enabled}
+        prevSlide={() => {
+          handleScroll("prev")
+        }}
+        nextSlide={() => {
+          handleScroll("next")
+        }}
+        disabled={{
+          prev: isScrolling,
+          next: isScrolling,
+        }}
+      />
     </section>
+  )
+}
+
+type SliderCounterProps = {
+  activeIndex: number
+  total: number
+  enabled: boolean
+}
+const SliderCounter = ({ activeIndex, total, enabled }: SliderCounterProps) => {
+  return (
+    <div
+      className={cn(
+        "-z-50 fixed bottom-10 left-10 flex items-center gap-2.5",
+        enabled
+          ? "fade-in animate-in opacity-100"
+          : "fade-out animate-out opacity-0 delay-200",
+      )}
+    >
+      <span className="font-medium text-[32px]">{activeIndex}</span>
+      <span className="text-muted-foreground">/</span>
+      <span className="text-muted-foreground">{total}</span>
+    </div>
+  )
+}
+
+type SliderNavButtonsProps = {
+  prevSlide: () => void
+  nextSlide: () => void
+  disabled: {
+    prev: boolean
+    next: boolean
+  }
+  enabled: boolean
+}
+
+const SliderNavButtons = ({
+  prevSlide,
+  nextSlide,
+  disabled,
+  enabled,
+}: SliderNavButtonsProps) => {
+  return (
+    <div
+      className={cn(
+        "fixed right-10 bottom-10 z-[500] flex flex-col gap-2.5 duration-500",
+        enabled
+          ? "fade-in animate-in opacity-100"
+          : "fade-out animate-out opacity-0 delay-200",
+      )}
+    >
+      <Button
+        variant="secondary"
+        disabled={disabled.prev}
+        className="z-50 flex size-10 flex-col items-center justify-center rounded-full"
+        onClick={prevSlide}
+        aria-label="prev-slide"
+        tabIndex={0}
+      >
+        <ArrowDownIcon className="rotate-180" />
+      </Button>
+      <Button
+        variant="secondary"
+        disabled={disabled.next}
+        className="size-10 rounded-full"
+        onClick={nextSlide}
+        aria-label="next-slide"
+        tabIndex={0}
+      >
+        <ArrowDownIcon />
+      </Button>
+    </div>
   )
 }

@@ -21,7 +21,7 @@ export function ScrollScreenButton({ className, ...props }: Props) {
       tabIndex={0}
       variant="secondary"
       className={cn(
-        "absolute right-10 bottom-10 z-50 flex size-10 cursor-pointer flex-col items-center justify-center rounded-full",
+        "flex size-10 cursor-pointer flex-col items-center justify-center rounded-full",
         className,
       )}
       onClick={handleScrollScreen}
