@@ -203,7 +203,7 @@ const SliderCounter = ({ activeIndex, total, enabled }: SliderCounterProps) => {
   return (
     <div
       className={cn(
-        "-z-50 fixed bottom-10 left-10 flex items-center gap-2.5",
+        "pointer-events-none fixed bottom-10 left-10 flex items-center gap-2.5",
         enabled
           ? "fade-in animate-in opacity-100"
           : "fade-out animate-out opacity-0 delay-200",
