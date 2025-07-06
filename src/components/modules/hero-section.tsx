@@ -91,24 +91,24 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container relative z-10 py-4 md:pt-8 md:pb-12">
+      <div className="flex items-end justify-between py-4 md:pt-8 md:pb-12">
+        <Button
+          aria-label="mute"
+          tabIndex={0}
+          variant="secondary"
+          className="flex size-10 cursor-pointer flex-col items-center justify-center rounded-full"
+          onClick={toggleMute}
+        >
+          {isMuted ? <Volume2Icon /> : <MuteIcon />}
+        </Button>
+
         <div className="flex flex-col items-center justify-center gap-2">
           <h1 className="font-bold text-2xl">{t("title")}</h1>
           <h5 className="font-light">{t("description")}</h5>
         </div>
+
+        <ScrollScreenButton />
       </div>
-
-      <Button
-        aria-label="mute"
-        tabIndex={0}
-        variant="secondary"
-        className="absolute bottom-10 left-10 z-50 flex size-10 cursor-pointer flex-col items-center justify-center rounded-full"
-        onClick={toggleMute}
-      >
-        {isMuted ? <Volume2Icon /> : <MuteIcon />}
-      </Button>
-
-      <ScrollScreenButton />
     </section>
   )
 }

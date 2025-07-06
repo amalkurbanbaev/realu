@@ -28,7 +28,10 @@ export async function HomePageTemplate() {
         <ScrollFade />
       </section>
 
-      <section className="container relative z-30 space-y-12 bg-background py-10">
+      <section
+        id="reviews"
+        className="container relative z-30 space-y-12 bg-background py-10"
+      >
         <GradientBackground position="top" />
 
         <h3 className="mb-6 font-bold text-2xl">Вы найдете</h3>
