@@ -209,10 +209,11 @@ export function ScrollFade() {
               />
             </div>
 
-            <div className="flex max-w-md items-center p-4 text-center">
-              <div className="z-10 font-medium text-white/80 text-xl">
+            <div className="flex max-w-md flex-col items-center p-4 text-center">
+              <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
+              <h5 className="z-10 font-medium text-base text-white/80">
                 {slide.description}
-              </div>
+              </h5>
             </div>
           </div>
         ))}
