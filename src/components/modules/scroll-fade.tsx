@@ -1,8 +1,9 @@
 "use client"
+
 import { useSlides } from "@/hooks/use-slides"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { ArrowDownIcon } from "../icons"
 import { Button } from "../ui/button"
 import { Particle } from "./particle"
@@ -11,104 +12,150 @@ export function ScrollFade() {
   const slides = useSlides()
 
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const sentinelRef = useRef<HTMLDivElement>(null) // ← наблюдаем за ним
+
   const [activeIndex, setActiveIndex] = useState(0)
-  const [enabled, setEnabled] = useState(false)
-  const [isScrolling] = useState(false)
+  const [panelVisible, setPanelVisible] = useState(false) // рендерим UI только когда секция целиком во вью
+  const [animEnabled, setAnimEnabled] = useState(false) // партиклы живут на 1-м экране и когда секция во вью
+  const [isAnimating, setIsAnimating] = useState(false)
+  const animFallbackRef = useRef<number | null>(null)
 
+  const H = () => window.innerHeight
+  const getWrapperTop = () => {
+    const el = wrapperRef.current
+    if (!el) return 0
+    const r = el.getBoundingClientRect()
+    return r.top + window.scrollY
+  }
+  const isFullyInView = () => {
+    const el = wrapperRef.current
+    if (!el) return false
+    const rect = el.getBoundingClientRect()
+    const vh = window.innerHeight
+    return rect.top <= 0 && rect.bottom >= vh
+  }
+
+  // высота секции = кол-во слайдов * 100vh
+  useLayoutEffect(() => {
+    const el = wrapperRef.current
+    if (!el) return
+    el.style.height = `${Math.max(1, slides.length) * 100}vh`
+  }, [slides.length])
+
+  // флаги видимости/анимаций
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    const checkIfFullyInView = () => {
-      if (!wrapperRef.current) return
-
-      const rect = wrapperRef.current.getBoundingClientRect()
-      const screenHeight = window.innerHeight
-
-      const fullyVisible = rect.top <= 0 && rect.bottom >= screenHeight
-
-      if (fullyVisible) {
-        setEnabled(true)
-      } else {
-        setEnabled(false)
-      }
+    const updateFlags = () => {
+      const fully = isFullyInView()
+      setPanelVisible(fully)
+      setAnimEnabled(fully || (window.scrollY === 0 && activeIndex === 0))
     }
-
-    window.addEventListener("scroll", checkIfFullyInView)
-    window.addEventListener("resize", checkIfFullyInView)
-
-    // Проверяем при загрузке
-    checkIfFullyInView()
-
+    updateFlags()
+    window.addEventListener("scroll", updateFlags, { passive: true })
+    window.addEventListener("resize", updateFlags)
     return () => {
-      window.removeEventListener("scroll", checkIfFullyInView)
-      window.removeEventListener("resize", checkIfFullyInView)
+      window.removeEventListener("scroll", updateFlags)
+      window.removeEventListener("resize", updateFlags)
     }
-  }, [])
+  }, [activeIndex])
 
+  // индекс по полу — без перепрыгиваний
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const onScroll = () => {
-      if (!wrapperRef.current) return
+      const top = getWrapperTop()
+      const rel = window.scrollY - top
+      const h = H()
 
-      const wrapperTop = wrapperRef.current.offsetTop
-      const scrollY = window.scrollY
-      const screenHeight = window.innerHeight
-
-      // 🧮 Насколько вниз мы ушли от начала секции
-      const relativeScroll = scrollY - wrapperTop
-
-      // ⏳ Пока секция не полностью заняла экран — ничего не делаем
-      if (relativeScroll < 0) {
+      if (rel < 0) {
         setActiveIndex(0)
         return
       }
 
-      const startOffset = screenHeight * 0.4
-
-      const index = Math.floor((relativeScroll - startOffset) / screenHeight)
-
-      const clampedIndex = Math.max(0, Math.min(index, slides.length - 1))
-      setActiveIndex(clampedIndex)
+      const idx = Math.floor(rel / h + 0.001)
+      const clamped = Math.max(0, Math.min(idx, slides.length - 1))
+      setActiveIndex(clamped)
     }
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    onScroll()
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+    }
   }, [slides.length])
 
-  const handleScroll = (dir: "prev" | "next") => {
-    if (!wrapperRef.current) return
+  // своя анимация скролла
+  const animateScrollTo = (toY: number, duration = 500) => {
+    if (animFallbackRef.current) {
+      clearTimeout(animFallbackRef.current)
+      animFallbackRef.current = null
+    }
 
-    const screenHeight = window.innerHeight
-    const wrapperTop = wrapperRef.current.offsetTop
-    const startOffset = screenHeight * 0.4
+    setIsAnimating(true)
+
+    const fromY = window.scrollY
+    const diff = toY - fromY
+    if (Math.abs(diff) < 1) {
+      window.scrollTo({ top: toY })
+      setIsAnimating(false)
+      return
+    }
+
+    const start = performance.now()
+    const ease = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)
+
+    let raf = 0
+    const step = (now: number) => {
+      const p = Math.min(1, (now - start) / duration)
+      const y = fromY + diff * ease(p)
+      window.scrollTo({ top: y })
+      if (p < 1) {
+        raf = requestAnimationFrame(step)
+      } else {
+        setIsAnimating(false)
+      }
+    }
+    raf = requestAnimationFrame(step)
+
+    // фолбэк — гарант разблокировки
+    animFallbackRef.current = window.setTimeout(() => {
+      cancelAnimationFrame(raf)
+      window.scrollTo({ top: toY })
+      setIsAnimating(false)
+      animFallbackRef.current = null
+    }, duration + 400)
+  }
+
+  const handleScroll = (dir: "prev" | "next") => {
+    const top = getWrapperTop()
+    const h = H()
 
     const isLast = activeIndex >= slides.length - 1
     const isFirst = activeIndex <= 0
 
     if (dir === "next" && isLast) {
-      const reviewsSection = document.getElementById("reviews")
-      if (reviewsSection) {
-        reviewsSection.scrollIntoView({ behavior: "smooth" })
+      // после секции (ровно за слайдер)
+      const el = wrapperRef.current
+      if (el) {
+        const rect = el.getBoundingClientRect()
+        const wrapperBottom = window.scrollY + rect.bottom
+        animateScrollTo(wrapperBottom)
       }
       return
     }
 
     if (dir === "prev" && isFirst) {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      animateScrollTo(0)
       return
     }
 
     const nextIndex = dir === "next" ? activeIndex + 1 : activeIndex - 1
-    const scrollTarget = wrapperTop + startOffset + screenHeight * nextIndex
-
-    window.scrollTo({
-      top: scrollTarget,
-      behavior: "smooth",
-    })
+    animateScrollTo(top + nextIndex * h)
   }
 
   return (
-    <section ref={wrapperRef} className="relative z-20 h-[700vh]">
-      {/* ← наблюдаемый триггер, появляется в начале секции */}
-      <div ref={sentinelRef} className="-z-50 absolute top-0 h-screen w-full" />
-
+    <section ref={wrapperRef} className="relative z-20 [scroll-snap-type:none]">
       <div className="sticky top-0 h-screen w-full">
         {slides.map((slide, i) => (
           <div
@@ -124,7 +171,7 @@ export function ScrollFade() {
                 alt={slide.title}
                 width={279}
                 height={606}
-                className={cn("rounded-xl shadow-xl")}
+                className="rounded-xl shadow-xl"
               />
 
               <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
@@ -136,9 +183,9 @@ export function ScrollFade() {
                     src={p.src}
                     alt={p.src}
                     className={cn(
-                      enabled ? "opacity-100" : "opacity-0",
+                      animEnabled ? "opacity-100" : "opacity-0",
                       i === activeIndex &&
-                        enabled &&
+                        animEnabled &&
                         "fade-in animate-in duration-[1.5s] ease-in-out",
                       i === 0 && "delay-100",
                       pi === 0 &&
@@ -171,25 +218,27 @@ export function ScrollFade() {
         ))}
       </div>
 
-      <SliderCounter
-        activeIndex={activeIndex + 1}
-        total={slides.length}
-        enabled={enabled}
-      />
+      {/* Счётчик и кнопки — МОНТИМ только когда секция целиком во вью.
+          Пока их нет в DOM — по hero ничего не наложится. */}
+      {panelVisible && (
+        <>
+          <SliderCounter
+            activeIndex={activeIndex + 1}
+            total={slides.length}
+            enabled={panelVisible}
+          />
 
-      <SliderNavButtons
-        enabled={enabled}
-        prevSlide={() => {
-          handleScroll("prev")
-        }}
-        nextSlide={() => {
-          handleScroll("next")
-        }}
-        disabled={{
-          prev: isScrolling,
-          next: isScrolling,
-        }}
-      />
+          <SliderNavButtons
+            enabled={panelVisible}
+            prevSlide={() => handleScroll("prev")}
+            nextSlide={() => handleScroll("next")}
+            disabled={{
+              prev: isAnimating,
+              next: isAnimating,
+            }}
+          />
+        </>
+      )}
     </section>
   )
 }
@@ -199,15 +248,14 @@ type SliderCounterProps = {
   total: number
   enabled: boolean
 }
-const SliderCounter = ({ activeIndex, total, enabled }: SliderCounterProps) => {
+const SliderCounter = ({ activeIndex, total }: SliderCounterProps) => {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed bottom-10 left-10 flex items-center gap-2.5",
-        enabled
-          ? "fade-in animate-in opacity-100"
-          : "fade-out animate-out opacity-0 delay-200",
+        "pointer-events-none fixed bottom-10 left-10 z-40 flex items-center gap-2.5",
+        "fade-in animate-in opacity-100",
       )}
+      aria-hidden
     >
       <span className="font-medium text-[32px]">{activeIndex}</span>
       <span className="text-muted-foreground">/</span>
@@ -230,34 +278,33 @@ const SliderNavButtons = ({
   prevSlide,
   nextSlide,
   disabled,
-  enabled,
 }: SliderNavButtonsProps) => {
   return (
     <div
       className={cn(
-        "fixed right-10 bottom-10 z-[500] flex flex-col gap-2.5 duration-500",
-        enabled
-          ? "fade-in animate-in opacity-100"
-          : "fade-out animate-out opacity-0 delay-200",
+        "fixed right-10 bottom-10 z-40 flex flex-col gap-2.5",
+        "fade-in animate-in opacity-100",
       )}
+      // гарантируем, что клики проходят только по видимым кнопкам
+      style={{ pointerEvents: "auto" }}
     >
       <Button
+        type="button"
         variant="secondary"
         disabled={disabled.prev}
-        className="z-50 flex size-10 flex-col items-center justify-center rounded-full"
+        className="z-40 flex size-10 flex-col items-center justify-center rounded-full"
         onClick={prevSlide}
         aria-label="prev-slide"
-        tabIndex={0}
       >
         <ArrowDownIcon className="rotate-180" />
       </Button>
       <Button
+        type="button"
         variant="secondary"
         disabled={disabled.next}
-        className="size-10 rounded-full"
+        className="z-40 size-10 rounded-full"
         onClick={nextSlide}
         aria-label="next-slide"
-        tabIndex={0}
       >
         <ArrowDownIcon />
       </Button>

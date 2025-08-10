@@ -140,7 +140,11 @@ export function HeroSection() {
           <h5 className="font-light">{t("description")}</h5>
         </div>
 
-        <ScrollScreenButton />
+        <ScrollScreenButton
+          targetId="presentation"
+          className="z-50"
+          type="button"
+        />
       </div>
     </section>
   )
