@@ -15,6 +15,7 @@ const MAIN_VIDEO_RU =
   "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main-ru.mp4"
 const MAIN_VIDEO_EN =
   "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main_compressed-Zz2XLGcCQAUh1ZgGtoFHx0BioJXXIP.mp4"
+const SCROLL_TO_VIDEO_ZOOM_OUT = 100
 
 export function HeroSection() {
   const locale = useLocale()
@@ -27,41 +28,43 @@ export function HeroSection() {
   const [isManuallyPaused, setIsManuallyPaused] = useState(false)
   const [shouldZoomOut, setShouldZoomOut] = useState(false)
 
-  const skipScrollPlayUntilTop = useRef(false)
+  // NEW: было ли видео когда-либо запущено пользователем (Play)
+  const userStartedRef = useRef(false)
+  // NEW: ставили ли паузу именно из-за скролла вниз
+  const pausedByScrollRef = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
       const video = videoRef.current
       if (!video) return
 
-      const scrolledDown = window.scrollY > 100
+      const scrolledDown = window.scrollY > SCROLL_TO_VIDEO_ZOOM_OUT
 
       if (scrolledDown) {
         setShouldZoomOut(true)
 
+        // Пауза только если играем и это не ручная пауза
         if (!video.paused && !isManuallyPaused) {
           video.pause()
+          pausedByScrollRef.current = true
         }
       } else {
-        // Скролл вверх
-        if (skipScrollPlayUntilTop.current) {
-          // 💥 блокируем воспроизведение до возвращения вверх
-          return
-        }
+        setShouldZoomOut(false)
 
         if (
-          !skipScrollPlayUntilTop.current &&
+          userStartedRef.current &&
+          pausedByScrollRef.current &&
           !isManuallyPaused &&
           video.paused &&
           video.readyState >= 2
         ) {
           video.play().catch(() => {})
-          setShouldZoomOut(false)
+          pausedByScrollRef.current = false
         }
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [isManuallyPaused])
 
@@ -70,16 +73,21 @@ export function HeroSection() {
     if (!video) return
 
     if (video.paused) {
+      // Пользовательский старт — теперь можно авторезюмить после скролла
+      userStartedRef.current = true
       video.play().catch(() => {})
       setIsManuallyPaused(false)
+      // если до этого мы ставили паузу скроллом — снимаем флаг
+      pausedByScrollRef.current = false
     } else {
+      // Ручная пауза — больше не возобновляем автоматически
       video.pause()
       setIsManuallyPaused(true)
       setShouldZoomOut(true)
-
-      skipScrollPlayUntilTop.current = true
+      pausedByScrollRef.current = false
     }
   }
+
   const toggleMute = () => {
     setIsMuted((prev) => !prev)
   }
@@ -101,20 +109,18 @@ export function HeroSection() {
           shouldZoomOut && "scale-90",
         )}
       >
+        <canvas
+          className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in opacity-50 blur-3xl duration-1000"
+          ref={canvasRef}
+        />
+
         <VideoPlayer
           preload="auto"
           ref={videoRef}
           muted={isMuted}
-          onClick={handleTogglePlay} // 💡 прокидываем контроль воспроизведения в VideoPlayer
+          onClick={handleTogglePlay}
           src={videoSrc}
           poster="/video/poster-main.png"
-        />
-
-        <canvas
-          width="10"
-          height="6"
-          className="-z-10 fade-in pointer-events-none absolute inset-0 m-auto size-[95%] animate-in opacity-50 blur-3xl duration-1000"
-          ref={canvasRef}
         />
       </div>
 

@@ -1,5 +1,3 @@
-"use client"
-
 import { type RefObject, useEffect, useRef } from "react"
 
 export const useVideoBackground = (
@@ -7,73 +5,125 @@ export const useVideoBackground = (
 ) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const init = () => {
+  useEffect(() => {
     const video = videoRef.current
     const canvas = canvasRef.current
-    let step: number | undefined
-
-    const mediaQuery = window?.matchMedia("(prefers-reduced-motion: reduce)")
-
-    if (mediaQuery.matches || !canvas || !video) {
-      return
-    }
+    if (!video || !canvas) return
 
     const ctx = canvas.getContext("2d")
+    if (!ctx) return
 
-    if (!ctx) {
-      return
-    }
-
-    // 🔹 если есть постер — рисуем его сразу, чтобы фон был с первого кадра
-    const poster = video.getAttribute("poster")
-    if (poster) {
-      const img = new Image()
-      img.crossOrigin = "anonymous"
-      img.onload = () => {
-        try {
-          ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
-        } catch {}
-      }
-      img.src = poster
-    }
-
-    ctx.filter = "blur(3px)"
+    let rafId: number | undefined
+    let vfcId: number | undefined
+    let keepAliveId: number | undefined
+    const hasRVFC = "requestVideoFrameCallback" in HTMLVideoElement.prototype
 
     const draw = () => {
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      try {
+        ctx.filter = "blur(3px)"
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      } catch {}
     }
 
-    const drawLoop = () => {
+    const syncSize = () => {
+      const w = video.videoWidth || canvas.clientWidth || 640
+      const h = video.videoHeight || canvas.clientHeight || 360
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w
+        canvas.height = h
+        draw() // сразу перерисовать после любого изменения размера
+      }
+    }
+
+    const startRAF = () => {
+      stopRAF()
+      const loop = () => {
+        draw()
+        rafId = requestAnimationFrame(loop)
+      }
+      rafId = requestAnimationFrame(loop)
+    }
+    const stopRAF = () => {
+      if (rafId) cancelAnimationFrame(rafId)
+      rafId = undefined
+    }
+
+    const startRVFC = () => {
+      stopRVFC()
+      const step = () => {
+        draw()
+        vfcId = video.requestVideoFrameCallback(step)
+      }
+      vfcId = video.requestVideoFrameCallback(step)
+    }
+    const stopRVFC = () => {
+      if (vfcId && video.cancelVideoFrameCallback)
+        video.cancelVideoFrameCallback(vfcId)
+      vfcId = undefined
+    }
+
+    // 🔸 keep-alive при паузе: низкочастотная перерисовка
+    const startKeepAlive = () => {
+      stopKeepAlive()
+      keepAliveId = window.setInterval(() => {
+        syncSize()
+        draw()
+      }, 250)
+    }
+    const stopKeepAlive = () => {
+      if (keepAliveId) clearInterval(keepAliveId)
+      keepAliveId = undefined
+    }
+
+    const onPlay = () => {
+      stopKeepAlive()
+      syncSize()
+      hasRVFC ? startRVFC() : startRAF()
+    }
+
+    const onPause = () => {
+      stopRVFC()
+      stopRAF()
+      syncSize()
+      draw() // зафиксировать последний кадр
+      startKeepAlive() // подстраховать очистки холста
+    }
+
+    const onLoadedMeta = () => {
+      syncSize()
       draw()
-      step = window.requestAnimationFrame(drawLoop)
+    }
+    const onLoadedData = () => {
+      syncSize()
+      draw()
+    }
+    const onResize = () => {
+      syncSize()
+      if (!video.paused) draw()
     }
 
-    const drawPause = () => {
-      if (step) window.cancelAnimationFrame(step)
-      step = undefined
-    }
+    video.addEventListener("loadedmetadata", onLoadedMeta)
+    video.addEventListener("loadeddata", onLoadedData)
+    video.addEventListener("play", onPlay)
+    video.addEventListener("pause", onPause)
+    video.addEventListener("ended", onPause)
+    window.addEventListener("resize", onResize)
 
-    // Initialize
-    video.addEventListener("loadeddata", draw, false)
-    video.addEventListener("seeked", draw, false)
-    video.addEventListener("play", drawLoop, false)
-    video.addEventListener("pause", drawPause, false)
-    video.addEventListener("ended", drawPause, false)
+    // первичная инициализация
+    onLoadedMeta()
 
-    // Run cleanup on unmount event
     return () => {
-      video.removeEventListener("loadeddata", draw)
-      video.removeEventListener("seeked", draw)
-      video.removeEventListener("play", drawLoop)
-      video.removeEventListener("pause", drawPause)
-      video.removeEventListener("ended", drawPause)
+      stopKeepAlive()
+      stopRVFC()
+      stopRAF()
+      video.removeEventListener("loadedmetadata", onLoadedMeta)
+      video.removeEventListener("loadeddata", onLoadedData)
+      video.removeEventListener("play", onPlay)
+      video.removeEventListener("pause", onPause)
+      video.removeEventListener("ended", onPause)
+      window.removeEventListener("resize", onResize)
     }
-  }
+  }, [videoRef])
 
-  useEffect(init, [])
-
-  return {
-    canvasRef,
-    videoRef,
-  }
+  return { canvasRef }
 }
