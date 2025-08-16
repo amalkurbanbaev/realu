@@ -105,17 +105,18 @@ export function HeroSection() {
 
   return (
     <section className="container sticky top-0 flex h-screen flex-col overflow-hidden pt-[var(--header-height)]">
+      <canvas
+        className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl duration-1000"
+        ref={canvasRef}
+        style={{ opacity: shouldZoomOut ? 0.4 : 0.5 }}
+      />
+
       <div
         className={cn(
           "mx-auto w-full flex-grow overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out md:max-w-3/4",
           shouldZoomOut && "scale-90",
         )}
       >
-        <canvas
-          className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in opacity-50 blur-3xl duration-1000"
-          ref={canvasRef}
-        />
-
         <VideoPlayer
           preload="auto"
           ref={videoRef}
