@@ -18,6 +18,6 @@ export type Question = {
 
 export type FAQSection = Array<{
   id: "about" | "learn" | "meditation" | "breath"
-  unit: string
+  title: string
   questions: Array<Question>
 }>

@@ -1,15 +1,9 @@
-import type { Question } from "@/types/entities"
-
-type FAQSection = Array<{
-  id: "about" | "learn" | "meditation" | "breath"
-  unit: string
-  questions: Array<Question>
-}>
+import type { FAQSection } from "@/types/entities"
 
 const questions: FAQSection = [
   {
     id: "about",
-    unit: "О приложении",
+    title: "О приложении",
     questions: [
       {
         text: "Почему в вашем приложении нет музыкальных композиций, мантр, звуков природы? 1",
@@ -25,7 +19,7 @@ const questions: FAQSection = [
   },
   {
     id: "learn",
-    unit: "Обучение",
+    title: "Обучение",
     questions: [
       {
         text: "Почему в вашем приложении нет музыкальных композиций, мантр, звуков природы? 2",
@@ -41,7 +35,7 @@ const questions: FAQSection = [
   },
   {
     id: "meditation",
-    unit: "Медитации",
+    title: "Медитации",
     questions: [
       {
         text: "У меня нет времени на прохождение курса, полезно ли мне будет ваше приложение? 5",
@@ -57,7 +51,7 @@ const questions: FAQSection = [
   },
   {
     id: "breath",
-    unit: "Дыхание (пранаяма)",
+    title: "Дыхание (пранаяма)",
     questions: [
       {
         text: "Почему в вашем приложении нет музыкальных композиций, мантр, звуков природы? 4",
