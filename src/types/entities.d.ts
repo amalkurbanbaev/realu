@@ -17,7 +17,7 @@ export type Question = {
 }
 
 export type FAQSection = Array<{
-  id: "about" | "learn" | "meditation" | "breath"
+  id: "about" | "learn" | "meditation" | "breath" | "yoga-nidra"
   title: string
   questions: Array<Question>
 }>
