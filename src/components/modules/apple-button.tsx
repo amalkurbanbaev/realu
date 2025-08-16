@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils"
-import Image from "next/image"
 import type { ComponentPropsWithoutRef } from "react"
+import Image from "next/image"
+
+import { cn } from "@/lib/utils"
 
 export function AppleButton({
   className,

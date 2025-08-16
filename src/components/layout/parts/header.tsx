@@ -1,16 +1,17 @@
 "use client"
 
+import { useState } from "react"
+import { Menu, XIcon } from "lucide-react"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
+import { useLocale, useTranslations } from "next-intl"
+
 import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { HEADER_LINKS } from "@/constants/links"
 import { useNormalizedPathname } from "@/hooks"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
-import { Menu, XIcon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { useState } from "react"
 
 export const Header = () => {
   const pathname = useNormalizedPathname()

@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 import "@/styles/globals.css"
 import "lenis/dist/lenis.css"
-import { routing } from "@/i18n/routing"
-
-import { montserrat } from "@/styles/fonts"
-import { NextIntlClientProvider, hasLocale } from "next-intl"
-import { getMessages, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
+import { hasLocale, NextIntlClientProvider } from "next-intl"
+import { getMessages, getTranslations } from "next-intl/server"
+
+import { routing } from "@/i18n/routing"
+import { montserrat } from "@/styles/fonts"
 
 export async function generateMetadata({
   params,

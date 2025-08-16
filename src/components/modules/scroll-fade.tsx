@@ -1,9 +1,11 @@
 "use client"
 
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import Image from "next/image"
+
 import { useSlides } from "@/hooks/use-slides"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+
 import { ArrowDownIcon } from "../icons"
 import { Button } from "../ui/button"
 import { Particle } from "./particle"
@@ -42,7 +44,7 @@ export function ScrollFade() {
   }, [slides.length])
 
   // флаги видимости/анимаций
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: use only needed deps
   useEffect(() => {
     const updateFlags = () => {
       const fully = isFullyInView()
@@ -59,7 +61,7 @@ export function ScrollFade() {
   }, [activeIndex])
 
   // индекс по полу — без перепрыгиваний
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: use only needed deps
   useEffect(() => {
     const onScroll = () => {
       const top = getWrapperTop()

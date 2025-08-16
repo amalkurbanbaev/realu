@@ -1,5 +1,5 @@
-import { useLocale } from "next-intl"
 import { usePathname } from "next/navigation"
+import { useLocale } from "next-intl"
 
 export function useNormalizedPathname() {
   const pathname = usePathname()

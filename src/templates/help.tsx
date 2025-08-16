@@ -1,8 +1,9 @@
+import { ChevronDownIcon } from "lucide-react"
+import { getLocale } from "next-intl/server"
+
 import { Link } from "@/i18n/navigation"
 import { cn, getLocalizedContent } from "@/lib/utils"
 import type { FAQSection } from "@/types/entities"
-import { ChevronDownIcon } from "lucide-react"
-import { getLocale } from "next-intl/server"
 
 type HelpPageTemplate = {
   activeTab?: string

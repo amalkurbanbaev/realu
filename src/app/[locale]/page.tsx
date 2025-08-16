@@ -1,6 +1,7 @@
+import { getTranslations } from "next-intl/server"
+
 import { PageLayout } from "@/components/layout"
 import { HomePageTemplate } from "@/templates/home"
-import { getTranslations } from "next-intl/server"
 
 export async function generateMetadata({
   params,

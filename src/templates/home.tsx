@@ -1,10 +1,11 @@
+import { getLocale, getTranslations } from "next-intl/server"
+
 import { AppleButton } from "@/components/modules/apple-button"
 import { FeatureCarousel } from "@/components/modules/feature-carousel"
 import { GradientBackground } from "@/components/modules/gradient-background"
 import { HeroSection } from "@/components/modules/hero-section"
 import { ScrollFade } from "@/components/modules/scroll-fade"
 import { TestimonialCarousel } from "@/components/modules/tesimonials-carousel"
-import { getLocale, getTranslations } from "next-intl/server"
 
 export async function HomePageTemplate() {
   const t = await getTranslations("home-page.layout")

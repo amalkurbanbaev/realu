@@ -1,8 +1,10 @@
 "use client"
 
-import type { Testimonial } from "@/types/entities"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
+
+import type { Testimonial } from "@/types/entities"
+
 import {
   Carousel,
   CarouselContent,

@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils" // если у тебя есть утиль cn()
 import Image from "next/image"
+
+import { cn } from "@/lib/utils" // если у тебя есть утиль cn()
 
 interface ParticleProps {
   src: string

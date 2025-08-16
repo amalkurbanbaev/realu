@@ -1,8 +1,8 @@
 "use client"
 
+import { type ReactNode, useEffect, useRef } from "react"
 import gsap from "gsap"
 import ReactLenis, { type LenisRef } from "lenis/react"
-import { type ReactNode, useEffect, useRef } from "react"
 
 export function ScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<LenisRef>(null)

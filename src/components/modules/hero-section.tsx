@@ -1,10 +1,12 @@
 "use client"
 
-import { useVideoBackground } from "@/hooks"
-import { cn } from "@/lib/utils"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Volume2Icon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
-import { useEffect, useMemo, useRef, useState } from "react"
+
+import { useVideoBackground } from "@/hooks"
+import { cn } from "@/lib/utils"
+
 import { MuteIcon } from "../icons"
 import { Button } from "../ui/button"
 import { ScrollScreenButton } from "./scroll-screen-button"

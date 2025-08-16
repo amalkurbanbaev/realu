@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,20 +7,19 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      "node_modules",
-      "src/generated",
-      "src/vite-env.d.ts",
-      "dist",
-      "build",
-      "**/.next/**",
-      "**/dist/**",
-      "**/public/**",
-      ".vercel/**",
-      "**/*.md",
-      "**/*.mdx",
-      "tailwind.css",
-      "root.css"
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/src/generated",
+      "!**/src/vite-env.d.ts",
+      "!**/dist",
+      "!**/build",
+      "!**/.next/**",
+      "!**/dist/**",
+      "!**/public/**",
+      "!**/.vercel/**",
+      "!**/*.md",
+      "!**/*.mdx"
     ]
   },
   "formatter": {
@@ -30,8 +29,34 @@
     "indentWidth": 2,
     "lineWidth": 80
   },
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":BUN:",
+              ":NODE:",
+              "react",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              ["npm:*", "npm:*/**"],
+              ":PACKAGE_WITH_PROTOCOL:",
+              ":BLANK_LINE:",
+              ":URL:",
+              ":BLANK_LINE:",
+              ["/**"],
+              ":BLANK_LINE:",
+              ["@*", "@*/**"],
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        },
+        "recommended": true
+      }
+    }
   },
   "linter": {
     "enabled": true,
@@ -40,9 +65,24 @@
       "style": {
         "useSelfClosingElements": {
           "level": "warn",
-          "fix": "safe"
+          "fix": "safe",
+          "options": {
+            "ignoreHtmlElements": false
+          }
         },
-        "noUnusedTemplateLiteral": "off"
+        "noUnusedTemplateLiteral": "off",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSingleVarDeclarator": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error",
+        "useConsistentCurlyBraces": {
+          "level": "warn",
+          "fix": "safe"
+        }
       },
       "suspicious": {
         "noConsole": {
@@ -50,6 +90,9 @@
           "options": {
             "allow": ["warn", "error", "info"]
           }
+        },
+        "noIrregularWhitespace": {
+          "level": "warn"
         }
       },
       "correctness": {
@@ -69,13 +112,6 @@
             "attributes": ["className"],
             "functions": ["clsx", "cva", "tw"]
           }
-        },
-        "useConsistentCurlyBraces": {
-          "level": "warn",
-          "fix": "safe"
-        },
-        "noIrregularWhitespace": {
-          "level": "warn"
         }
       },
       "a11y": {
@@ -94,7 +130,7 @@
   },
   "overrides": [
     {
-      "include": ["./tsconfig.app.json", "./tsconfig.node.json"],
+      "includes": ["tsconfig.app.json", "tsconfig.node.json"],
       "json": {
         "parser": {
           "allowComments": true
@@ -111,9 +147,6 @@
       "enabled": true,
       "indentStyle": "space",
       "indentWidth": 2
-    },
-    "assists": {
-      "enabled": true
     },
     "linter": {
       "enabled": true

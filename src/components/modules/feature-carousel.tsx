@@ -1,5 +1,7 @@
-import type { AppFeature } from "@/types/entities"
 import Image from "next/image"
+
+import type { AppFeature } from "@/types/entities"
+
 import {
   Carousel,
   CarouselContent,
