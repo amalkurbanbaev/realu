@@ -2,23 +2,22 @@
 
 import { useRef } from "react"
 import { Accordion } from "@radix-ui/react-accordion"
+import { useTranslations } from "next-intl"
 
 import { useActiveSection } from "@/hooks"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 import type { FAQSection } from "@/types/entities"
 
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion"
+import { AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 
 type FAQNavigationProps = { sections?: { id: string; title: string }[] }
 
 export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
+  const t = useTranslations("help-page.layout")
+
   const sectionIds = sections?.map((s) => s.id) || []
-  const activeSection = useActiveSection(sectionIds)
+  const { activeSection } = useActiveSection(sectionIds)
 
   const scrollTo = (id: string) => {
     const element = document.getElementById(id)
@@ -39,13 +38,8 @@ export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
   }
 
   return (
-    <nav
-      className={cn(
-        "fixed inset-x-0 bottom-0 flex w-full flex-col gap-4 pb-10",
-        "lg:sticky lg:top-[calc(var(--header-height)+2.5rem)] lg:h-[calc(100vh-var(--header-height)-2.5rem)]",
-      )}
-    >
-      <h3 className="mb-6 font-bold text-2xl">Вопросы-ответы</h3>
+    <nav className="sticky top-[calc(var(--header-height)+2.5rem)] hidden h-[calc(100vh-var(--header-height)-4.5rem)] flex-col pb-[2.5rem] lg:flex">
+      <h3 className="mb-6 font-bold text-2xl">{t("title")}</h3>
 
       <div className="relative flex px-4 lg:flex-col" ref={barRef}>
         <div className="absolute top-0 left-0 h-full w-0.5">
@@ -68,10 +62,7 @@ export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
             href={`#${s.id}`}
             scroll={false}
             onClick={() => scrollTo(s.id)}
-            className={cn(
-              "font-semibold text-base text-muted-foreground leading-8 transition-colors",
-              activeSection === s.id && "text-white",
-            )}
+            className={cn("font-semibold text-base text-muted-foreground leading-8 transition-colors", activeSection === s.id && "text-white")}
           >
             {s.title}
           </Link>
@@ -79,10 +70,13 @@ export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
       </div>
 
       <div className="mt-auto text-muted-foreground">
-        Если здесь нет ответа на ваш вопрос, напишите на почту{" "}
-        <Link href="mailto:support@meditolife.com" className="text-white">
-          support@meditolife.com
-        </Link>
+        {t.rich("contact", {
+          a: (chunks) => (
+            <Link href="mailto:support@meditolife.com" className="text-white">
+              {chunks}
+            </Link>
+          ),
+        })}
       </div>
     </nav>
   )
