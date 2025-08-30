@@ -27,7 +27,7 @@
     "indentStyle": "space",
     "lineEnding": "lf",
     "indentWidth": 2,
-    "lineWidth": 80
+    "lineWidth": 150
   },
   "assist": {
     "actions": {
@@ -89,14 +89,15 @@
           "level": "error",
           "options": {
             "allow": ["warn", "error", "info"]
-          }
+          },
+          "fix": "none"
         },
         "noIrregularWhitespace": {
           "level": "warn"
         }
       },
       "correctness": {
-        "noUnusedVariables": "error",
+        "noUnusedVariables": { "level": "error", "fix": "none", "options": { "ignoreRestSiblings": false } },
         "noUnusedImports": {
           "level": "error",
           "fix": "safe"
