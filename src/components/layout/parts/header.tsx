@@ -34,17 +34,11 @@ export const Header = () => {
     <header
       className={cn(
         "container inset-x-0 top-0 flex h-[var(--header-height)] items-center justify-between",
-        isHome ? "fixed z-10" : "relative z-50",
+        isHome ? "fixed z-[999]" : "relative z-50",
       )}
     >
       <Link href="/" onClick={() => toggleMenu()}>
-        <Image
-          alt="Site logo"
-          src="/logo.svg"
-          priority
-          width={119}
-          height={40}
-        />
+        <Image alt="Site logo" src="/logo.svg" priority width={119} height={40} />
       </Link>
 
       {/* Desktop menu */}
@@ -55,12 +49,7 @@ export const Header = () => {
       <AppleButton className="hidden md:block" />
 
       {/* Mobile burger */}
-      <button
-        onClick={() => toggleMenu()}
-        className="md:hidden"
-        aria-label="Toggle menu"
-        type="button"
-      >
+      <button onClick={() => toggleMenu()} className="md:hidden" aria-label="Toggle menu" type="button">
         <Menu size={28} />
       </button>
 
@@ -72,11 +61,7 @@ export const Header = () => {
         )}
       >
         <nav className="flex h-full flex-col justify-center">
-          <Button
-            variant="secondary"
-            className="w-fit self-end"
-            onClick={toggleMenu}
-          >
+          <Button variant="secondary" className="w-fit self-end" onClick={toggleMenu}>
             <XIcon />
           </Button>
           <HeaderLinks onClick={() => toggleMenu()} />
@@ -115,13 +100,7 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
       {HEADER_LINKS.map((link) => {
         const isActive = normalizedPath === link.href
         return (
-          <li
-            key={link.translationKey}
-            className={cn(
-              "py-2 transition-opacity",
-              isActive ? "opacity-50" : "opacity-100 hover:opacity-80",
-            )}
-          >
+          <li key={link.translationKey} className={cn("py-2 transition-opacity", isActive ? "opacity-50" : "opacity-100 hover:opacity-80")}>
             <Link href={link.href} onClick={onClick}>
               {t(link.translationKey)}
             </Link>
