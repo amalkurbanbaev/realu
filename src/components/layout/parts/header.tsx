@@ -96,7 +96,7 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
   const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
 
   return (
-    <ul className="flex grow flex-col items-center justify-center gap-4 font-semibold text-xl md:flex-row md:gap-x-8">
+    <ul className="flex grow flex-col items-center justify-center gap-4 font-medium text-xl md:flex-row md:gap-x-8">
       {HEADER_LINKS.map((link) => {
         const isActive = normalizedPath === link.href
         return (
