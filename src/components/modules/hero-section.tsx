@@ -13,10 +13,8 @@ import { ScrollScreenButton } from "./scroll-screen-button"
 import { VideoPlayer } from "./video-player"
 
 const isDev = process.env.NODE_ENV === "development"
-const MAIN_VIDEO_RU =
-  "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main-ru.mp4"
-const MAIN_VIDEO_EN =
-  "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main_compressed-Zz2XLGcCQAUh1ZgGtoFHx0BioJXXIP.mp4"
+const MAIN_VIDEO_RU = "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main-ru.mp4"
+const MAIN_VIDEO_EN = "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main_compressed-Zz2XLGcCQAUh1ZgGtoFHx0BioJXXIP.mp4"
 const SCROLL_TO_VIDEO_ZOOM_OUT = 100
 
 export function HeroSection() {
@@ -26,12 +24,12 @@ export function HeroSection() {
 
   const { canvasRef } = useVideoBackground(videoRef)
 
-  const [isMuted, setIsMuted] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
   const [isManuallyPaused, setIsManuallyPaused] = useState(false)
   const [shouldZoomOut, setShouldZoomOut] = useState(false)
 
   // NEW: было ли видео когда-либо запущено пользователем (Play)
-  const userStartedRef = useRef(false)
+  const userStartedRef = useRef(true) // Устанавливаем true для автоплея
   // NEW: ставили ли паузу именно из-за скролла вниз
   const pausedByScrollRef = useRef(false)
 
@@ -53,13 +51,7 @@ export function HeroSection() {
       } else {
         setShouldZoomOut(false)
 
-        if (
-          userStartedRef.current &&
-          pausedByScrollRef.current &&
-          !isManuallyPaused &&
-          video.paused &&
-          video.readyState >= 2
-        ) {
+        if (userStartedRef.current && pausedByScrollRef.current && !isManuallyPaused && video.paused && video.readyState >= 2) {
           video.play().catch(() => {})
           pausedByScrollRef.current = false
         }
@@ -121,6 +113,7 @@ export function HeroSection() {
           preload="auto"
           ref={videoRef}
           muted={isMuted}
+          autoPlay={true}
           onClick={handleTogglePlay}
           src={videoSrc}
           poster="/video/poster-main.png"
@@ -143,11 +136,7 @@ export function HeroSection() {
           <h5 className="font-light">{t("description")}</h5>
         </div>
 
-        <ScrollScreenButton
-          targetId="presentation"
-          className="z-50"
-          type="button"
-        />
+        <ScrollScreenButton targetId="presentation" className="z-50" type="button" />
       </div>
     </section>
   )
