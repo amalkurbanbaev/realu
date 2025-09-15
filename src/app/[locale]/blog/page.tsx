@@ -11,9 +11,12 @@ export default async function BlogIndex({ params }: { params: Promise<{ locale: 
 
   return (
     <PageLayout>
-      <section className="container">
-        <h1 className="font-bold text-3xl">{locale.startsWith("ru") ? "Блог" : "Blog"}</h1>
-        <ul className="space-y-6">
+      <section className="container flex flex-col gap-x-10 pb-10 lg:flex-row">
+        <div className="mb-6 w-full lg:mb-0 lg:w-2/3">
+          <h1 className="font-bold text-3xl">{locale.startsWith("ru") ? "Блог" : "Blog"}</h1>
+        </div>
+
+        <ul className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((p) => (
             <li key={`${p.slug}`} className="group">
               <Link href={`/${locale}/blog/${p.slug}`} className="block">
