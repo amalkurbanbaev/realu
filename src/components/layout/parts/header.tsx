@@ -9,7 +9,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { HEADER_LINKS } from "@/constants/links"
-import { useNormalizedPathname } from "@/hooks"
+import { useNormalizedPathname, useScrollLockWhen } from "@/hooks"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
@@ -22,13 +22,7 @@ export const Header = () => {
     setMenuOpen((prev) => !prev)
   }
 
-  // useEffect(() => {
-  //   if (menuOpen) document.body.classList.add("overflow-hidden!")
-
-  //   return () => {
-  //     document.body.classList.add("overflow-hidden!")
-  //   }
-  // }, [menuOpen])
+  useScrollLockWhen(menuOpen)
 
   return (
     <header
