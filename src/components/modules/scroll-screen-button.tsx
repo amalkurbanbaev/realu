@@ -14,12 +14,7 @@ type Props = ComponentPropsWithoutRef<"button"> & {
   offset?: number
 }
 
-export function ScrollScreenButton({
-  className,
-  targetId,
-  offset = 0,
-  ...props
-}: Props) {
+export function ScrollScreenButton({ className, targetId, offset = 0, ...props }: Props) {
   const handleScrollScreen = () => {
     if (targetId) {
       const el = document.getElementById(targetId)
@@ -44,10 +39,7 @@ export function ScrollScreenButton({
       aria-label="scroll-down"
       tabIndex={0}
       variant="secondary"
-      className={cn(
-        "flex size-10 cursor-pointer flex-col items-center justify-center rounded-full",
-        className,
-      )}
+      className={cn("flex size-10 cursor-pointer flex-col items-center justify-center rounded-full", className)}
       onClick={handleScrollScreen}
       {...props}
     >

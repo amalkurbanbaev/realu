@@ -1,9 +1,6 @@
 import type { Messages } from "next-intl"
 
-export type LinkKey<
-  T extends keyof Messages,
-  U extends keyof Messages[T],
-> = keyof Messages[T][U]
+export type LinkKey<T extends keyof Messages, U extends keyof Messages[T]> = keyof Messages[T][U]
 
 export type LinkType<T extends keyof Messages, U extends keyof Messages[T]> = {
   translationKey: LinkKey<T, U>

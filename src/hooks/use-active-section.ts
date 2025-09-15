@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/useExhaustiveDependencies: render hook */
 "use client"
 
 import { useEffect, useRef, useState } from "react"

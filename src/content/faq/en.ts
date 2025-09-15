@@ -58,8 +58,7 @@ const questions: FAQSection = [
       },
       {
         text: "Can pranayama help with recovery after illness?",
-        answer:
-          "Yes, especially using psychic breathing techniques like Ujjayi.",
+        answer: "Yes, especially using psychic breathing techniques like Ujjayi.",
       },
       {
         text: "What's the right order—pranayama first or meditation first?",
@@ -119,8 +118,7 @@ const questions: FAQSection = [
       },
       {
         text: "How can I understand if I'm doing the meditation techniques correctly?",
-        answer:
-          "If you're able to hold a thread of concentration for even a few seconds, you're on the right path.",
+        answer: "If you're able to hold a thread of concentration for even a few seconds, you're on the right path.",
       },
       {
         text: "I find it hard to believe in something I can't feel, like energy movement. What would you say to skeptics?",
@@ -149,8 +147,7 @@ const questions: FAQSection = [
       },
       {
         text: "Can meditation make me happier?",
-        answer:
-          "It helps you see clearly what happiness means for you. And once you know that, your own choices and actions will guide the way.",
+        answer: "It helps you see clearly what happiness means for you. And once you know that, your own choices and actions will guide the way.",
       },
     ],
   },
@@ -170,8 +167,7 @@ const questions: FAQSection = [
       },
       {
         text: "What's better during the day—a nap or yoga nidra?",
-        answer:
-          "Yoga nidra is the better choice. It relaxes both body and mind without making you feel sluggish or mentally dull.",
+        answer: "Yoga nidra is the better choice. It relaxes both body and mind without making you feel sluggish or mentally dull.",
       },
       {
         text: "How and why does intention work in yoga nidra?",
@@ -190,8 +186,7 @@ const questions: FAQSection = [
       },
       {
         text: "How long does a Yoga Nidra session last?",
-        answer:
-          "Anywhere from 20 minutes to 90 minutes, depending on the format and your available time.",
+        answer: "Anywhere from 20 minutes to 90 minutes, depending on the format and your available time.",
       },
     ],
   },

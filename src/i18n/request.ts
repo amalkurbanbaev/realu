@@ -7,9 +7,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   // Typically corresponds to the `[locale]` segment
   const requested = await requestLocale
 
-  const locale = hasLocale(routing.locales, requested)
-    ? requested
-    : routing.defaultLocale
+  const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale
 
   return {
     locale,

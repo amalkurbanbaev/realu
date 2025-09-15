@@ -168,13 +168,7 @@ export function ScrollFade() {
             )}
           >
             <div className="relative flex w-full items-center justify-center">
-              <Image
-                src={slide.image}
-                alt={slide.title}
-                width={279}
-                height={606}
-                className="rounded-xl shadow-xl"
-              />
+              <Image src={slide.image} alt={slide.title} width={279} height={606} className="rounded-xl shadow-xl" />
 
               <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
                 {slide.particles.map((p, pi) => (
@@ -186,16 +180,11 @@ export function ScrollFade() {
                     alt={p.src}
                     className={cn(
                       animEnabled ? "opacity-100" : "opacity-0",
-                      i === activeIndex &&
-                        animEnabled &&
-                        "fade-in animate-in duration-[1.5s] ease-in-out",
+                      i === activeIndex && animEnabled && "fade-in animate-in duration-[1.5s] ease-in-out",
                       i === 0 && "delay-100",
-                      pi === 0 &&
-                        "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
-                      pi === 1 &&
-                        "slide-in-from-right-60 -translate-y-1/2 inset-x-0 top-1/2",
-                      pi === 2 &&
-                        "slide-in-from-right-60 slide-in-from-top-40 inset-x-0 bottom-0",
+                      pi === 0 && "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
+                      pi === 1 && "slide-in-from-right-60 -translate-y-1/2 inset-x-0 top-1/2",
+                      pi === 2 && "slide-in-from-right-60 slide-in-from-top-40 inset-x-0 bottom-0",
                     )}
                   />
                 ))}
@@ -203,19 +192,12 @@ export function ScrollFade() {
             </div>
 
             <div className="-z-10 absolute inset-0">
-              <Image
-                src={`/gradients/${slide.id}.png`}
-                alt="slide-background"
-                fill
-                className="object-cover"
-              />
+              <Image src={`/gradients/${slide.id}.png`} alt="slide-background" fill className="object-cover" />
             </div>
 
             <div className="flex max-w-md flex-col items-center p-4 text-center">
               <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
-              <h5 className="z-10 font-medium text-base text-white/80">
-                {slide.description}
-              </h5>
+              <h5 className="z-10 font-medium text-base text-white/80">{slide.description}</h5>
             </div>
           </div>
         ))}
@@ -225,11 +207,7 @@ export function ScrollFade() {
           Пока их нет в DOM — по hero ничего не наложится. */}
       {panelVisible && (
         <>
-          <SliderCounter
-            activeIndex={activeIndex + 1}
-            total={slides.length}
-            enabled={panelVisible}
-          />
+          <SliderCounter activeIndex={activeIndex + 1} total={slides.length} enabled={panelVisible} />
 
           <SliderNavButtons
             enabled={panelVisible}
@@ -253,13 +231,7 @@ type SliderCounterProps = {
 }
 const SliderCounter = ({ activeIndex, total }: SliderCounterProps) => {
   return (
-    <div
-      className={cn(
-        "pointer-events-none fixed bottom-10 left-10 z-40 flex items-center gap-2.5",
-        "fade-in animate-in opacity-100",
-      )}
-      aria-hidden
-    >
+    <div className={cn("pointer-events-none fixed bottom-10 left-10 z-40 flex items-center gap-2.5", "fade-in animate-in opacity-100")} aria-hidden>
       <span className="font-medium text-[32px]">{activeIndex}</span>
       <span className="text-muted-foreground">/</span>
       <span className="text-muted-foreground">{total}</span>
@@ -277,17 +249,10 @@ type SliderNavButtonsProps = {
   enabled: boolean
 }
 
-const SliderNavButtons = ({
-  prevSlide,
-  nextSlide,
-  disabled,
-}: SliderNavButtonsProps) => {
+const SliderNavButtons = ({ prevSlide, nextSlide, disabled }: SliderNavButtonsProps) => {
   return (
     <div
-      className={cn(
-        "fixed right-10 bottom-10 z-40 flex flex-col gap-2.5",
-        "fade-in animate-in opacity-100",
-      )}
+      className={cn("fixed right-10 bottom-10 z-40 flex flex-col gap-2.5", "fade-in animate-in opacity-100")}
       // гарантируем, что клики проходят только по видимым кнопкам
       style={{ pointerEvents: "auto" }}
     >

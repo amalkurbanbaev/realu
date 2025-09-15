@@ -10,23 +10,14 @@ interface ParticleProps {
   alt?: string
 }
 
-export function Particle({
-  src,
-  className,
-  width = 32,
-  height = 32,
-  alt = "particle",
-}: ParticleProps) {
+export function Particle({ src, className, width = 32, height = 32, alt = "particle" }: ParticleProps) {
   return (
     <Image
       src={src}
       alt={alt}
       width={width}
       height={height}
-      className={cn(
-        "pointer-events-none absolute left-0 scale-110 select-none",
-        className,
-      )}
+      className={cn("pointer-events-none absolute left-0 scale-110 select-none", className)}
       draggable={false}
     />
   )

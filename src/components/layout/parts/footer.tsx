@@ -53,16 +53,9 @@ const FooterNavLinks = () => {
 
   return (
     <nav className="flex items-center gap-4 md:justify-end">
-      {HEADER_LINKS.filter(
-        (link) => link.href !== "/" && normalizedPath !== link.href,
-      ).map((link) => {
+      {HEADER_LINKS.filter((link) => link.href !== "/" && normalizedPath !== link.href).map((link) => {
         return (
-          <Button
-            key={link.href}
-            asChild
-            variant="secondary"
-            className="min-w-fit max-w-36"
-          >
+          <Button key={link.href} asChild variant="secondary" className="min-w-fit max-w-36">
             <Link href={link.href}>
               {tNav(link.translationKey)}
               <ArrowRightIcon className="ml-1 size-4" />

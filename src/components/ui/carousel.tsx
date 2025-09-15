@@ -2,9 +2,7 @@
 "use client"
 
 import * as React from "react"
-import useEmblaCarousel, {
-  type UseEmblaCarouselType,
-} from "embla-carousel-react"
+import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -45,15 +43,7 @@ function useCarousel() {
   return context
 }
 
-function Carousel({
-  orientation = "horizontal",
-  opts,
-  setApi,
-  plugins,
-  className,
-  children,
-  ...props
-}: React.ComponentProps<"div"> & CarouselProps) {
+function Carousel({ orientation = "horizontal", opts, setApi, plugins, className, children, ...props }: React.ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
@@ -63,9 +53,7 @@ function Carousel({
   )
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
-  const [selectedIndex, setSelectedIndex] = React.useState(
-    opts?.startIndex || 0,
-  )
+  const [selectedIndex, setSelectedIndex] = React.useState(opts?.startIndex || 0)
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return
@@ -127,8 +115,7 @@ function Carousel({
         carouselRef,
         api: api,
         opts,
-        orientation:
-          orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+        orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
         scrollPrev,
         scrollNext,
         scrollTo,
@@ -137,13 +124,7 @@ function Carousel({
         selectedIndex,
       }}
     >
-      <div
-        onKeyDownCapture={handleKeyDown}
-        className={cn("relative", className)}
-        aria-roledescription="carousel"
-        data-slot="carousel"
-        {...props}
-      >
+      <div onKeyDownCapture={handleKeyDown} className={cn("relative", className)} aria-roledescription="carousel" data-slot="carousel" {...props}>
         {children}
       </div>
     </CarouselContext.Provider>
@@ -154,19 +135,8 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel()
 
   return (
-    <div
-      ref={carouselRef}
-      className="overflow-hidden"
-      data-slot="carousel-content"
-    >
-      <div
-        className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
-          className,
-        )}
-        {...props}
-      />
+    <div ref={carouselRef} className="overflow-hidden" data-slot="carousel-content">
+      <div className={cn("flex", orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col", className)} {...props} />
     </div>
   )
 }
@@ -180,14 +150,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
   const { selectedIndex, scrollTo, api } = useCarousel()
 
   return (
-    <div
-      role="tablist"
-      className={cn(
-        "mt-4 flex w-full items-center justify-center gap-2",
-        className,
-      )}
-      {...props}
-    >
+    <div role="tablist" className={cn("mt-4 flex w-full items-center justify-center gap-2", className)} {...props}>
       {api?.scrollSnapList().map((_, index) => (
         <button
           // biome-ignore lint/suspicious/noArrayIndexKey: static dots
@@ -198,10 +161,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
           aria-selected={index === selectedIndex}
           aria-controls="carousel-item"
           aria-label={`Slide ${index + 1}`}
-          className={cn(
-            "size-2.5 cursor-pointer rounded-full",
-            index === selectedIndex ? "bg-white/80" : "bg-white/20",
-          )}
+          className={cn("size-2.5 cursor-pointer rounded-full", index === selectedIndex ? "bg-white/80" : "bg-white/20")}
           onClick={() => scrollTo(index)}
         />
       ))}
@@ -217,22 +177,13 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
       role="group"
       aria-roledescription="slide"
       data-slot="carousel-item"
-      className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
-        className,
-      )}
+      className={cn("min-w-0 shrink-0 grow-0 basis-full", orientation === "horizontal" ? "pl-4" : "pt-4", className)}
       {...props}
     />
   )
 }
 
-function CarouselPrevious({
-  className,
-  variant = "outline",
-  size = "icon",
-  ...props
-}: React.ComponentProps<typeof Button>) {
+function CarouselPrevious({ className, variant = "outline", size = "icon", ...props }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
@@ -242,9 +193,7 @@ function CarouselPrevious({
       size={size}
       className={cn(
         "absolute size-8 rounded-full",
-        orientation === "horizontal"
-          ? "-left-12 -translate-y-1/2 top-1/2"
-          : "-top-12 -translate-x-1/2 left-1/2 rotate-90",
+        orientation === "horizontal" ? "-left-12 -translate-y-1/2 top-1/2" : "-top-12 -translate-x-1/2 left-1/2 rotate-90",
         className,
       )}
       disabled={!canScrollPrev}
@@ -257,12 +206,7 @@ function CarouselPrevious({
   )
 }
 
-function CarouselNext({
-  className,
-  variant = "outline",
-  size = "icon",
-  ...props
-}: React.ComponentProps<typeof Button>) {
+function CarouselNext({ className, variant = "outline", size = "icon", ...props }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
@@ -272,9 +216,7 @@ function CarouselNext({
       size={size}
       className={cn(
         "absolute size-8 rounded-full",
-        orientation === "horizontal"
-          ? "-right-12 -translate-y-1/2 top-1/2"
-          : "-bottom-12 -translate-x-1/2 left-1/2 rotate-90",
+        orientation === "horizontal" ? "-right-12 -translate-y-1/2 top-1/2" : "-bottom-12 -translate-x-1/2 left-1/2 rotate-90",
         className,
       )}
       disabled={!canScrollNext}
@@ -287,12 +229,4 @@ function CarouselNext({
   )
 }
 
-export {
-  type CarouselApi,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-  CarouselDots,
-}
+export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDots }

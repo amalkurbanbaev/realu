@@ -8,11 +8,7 @@ import { getMessages, getTranslations } from "next-intl/server"
 import { routing } from "@/i18n/routing"
 import { montserrat } from "@/styles/fonts"
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: "ru" | "en" }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: "ru" | "en" }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "home-page.meta" })
 

@@ -1,8 +1,6 @@
 import { type RefObject, useEffect, useRef } from "react"
 
-export const useVideoBackground = (
-  videoRef: RefObject<HTMLVideoElement | null>,
-) => {
+export const useVideoBackground = (videoRef: RefObject<HTMLVideoElement | null>) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -57,8 +55,7 @@ export const useVideoBackground = (
       vfcId = video.requestVideoFrameCallback(step)
     }
     const stopRVFC = () => {
-      if (vfcId && video.cancelVideoFrameCallback)
-        video.cancelVideoFrameCallback(vfcId)
+      if (vfcId && video.cancelVideoFrameCallback) video.cancelVideoFrameCallback(vfcId)
       vfcId = undefined
     }
 
