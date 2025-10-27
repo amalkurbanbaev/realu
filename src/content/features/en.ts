@@ -2,21 +2,21 @@ import type { AppFeature } from "@/types/entities"
 
 export const features: AppFeature[] = [
   {
-    title: "Понимание и выбор техник",
+    title: "A deeper connection to your life",
     description:
-      "Изучите, как действительно работает медитация и пранаяма: не как аудиофайл, а как осознанная практика. Найдите подходящие именно вам техники",
+      "In a fast-changing world, concentration helps you think clearly and see without illusions. Through mindful observation, you reconnect with inner fulfillment, a sense of purpose, and unconditional happiness",
     icon: "/icons/yog.svg",
   },
   {
-    title: "Энергия и внутренний ресурс",
+    title: "Emotional resilience",
     description:
-      "Медитация, пранаяма и йога-нидра помогают управлять энергией: накапливать, а не терять. Это ключ к восстановлению и устойчивости в жизни",
+      "The physical world is dual by nature — joy follows sadness, heat cools, highs crash. Breath and meditation practices help you observe these shifts objectively and stay balanced through them",
     icon: "/icons/hands.svg",
   },
   {
-    title: "Осознанность и регулярность",
+    title: "Health",
     description:
-      "Трансформация приходит через регулярную, осмысленную практику. Структурированные курсы, трекер дыхания и дневник помогут практиковать глубже и отслеживать",
+      "Mental and physical health are inseparable. Breath control and meditation techniques boost life energy, strengthen the nervous system, and support overall well-being",
     icon: "/icons/sun.svg",
   },
 ]
