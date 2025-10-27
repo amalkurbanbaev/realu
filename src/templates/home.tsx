@@ -20,7 +20,7 @@ export async function HomePageTemplate() {
       </section>
 
       <section id="features" className="container relative z-30 space-y-12 overflow-clip rounded-b-[56px] bg-background py-10">
-        <GradientBackground position="top" />
+        <GradientBackground />
         <AppFeatures features={features} />
         <DownloadBanner />
       </section>
