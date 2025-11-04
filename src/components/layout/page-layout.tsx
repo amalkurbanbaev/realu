@@ -2,8 +2,9 @@
 
 import { useMediaQuery } from "usehooks-ts"
 
-import { GradientBackground, GradientBackgroundBottom } from "../modules/gradient-background"
+import { GradientBackgroundBottom, GradientBackgroundTop } from "../modules/gradient-background"
 import { ScrollProvider } from "../providers"
+import { ClientOnly } from "../ui/client-only"
 import { Footer, Header } from "./parts"
 
 type PageLayoutProps = {
@@ -18,13 +19,13 @@ export function PageLayout({ children, withGradient = true }: PageLayoutProps) {
     <div className="relative flex min-h-screen flex-col">
       <Header />
 
-      {withGradient ? <GradientBackground /> : null}
+      {withGradient ? <GradientBackgroundTop /> : null}
 
       <main className="flex-1 rounded-b-[56px] bg-background">
         <ScrollProvider>{children}</ScrollProvider>
       </main>
 
-      {isDesktop ? <GradientBackgroundBottom /> : null}
+      <ClientOnly>{isDesktop ? <GradientBackgroundBottom /> : null}</ClientOnly>
 
       <Footer />
     </div>

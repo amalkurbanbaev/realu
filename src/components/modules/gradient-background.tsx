@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 
-export function GradientBackground() {
+export function GradientBackgroundTop() {
   return (
     <div className={cn("pointer-events-none absolute inset-x-0 flex", "top-0 z-0 h-[calc(100vh/1.5)] w-full")}>
       <Image src="/gradients/header-gradient.png" fill alt="gradient" />
