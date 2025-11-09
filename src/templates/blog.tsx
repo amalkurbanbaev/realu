@@ -28,7 +28,7 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
         <h1 className="font-medium text-xl lg:font-bold lg:text-4xl">{t("title")}</h1>
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid w-full grid-cols-1 items-start gap-8 sm:grid-cols-2 md:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
@@ -44,17 +44,13 @@ function PostCard({ post }: { post: PostMeta }) {
         <div className="flex size-full flex-col gap-3">
           {post.cover && (
             <div className="relative aspect-square size-full overflow-clip rounded-2xl">
-              <Image
-                src={post.cover}
-                alt={post.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              <Image src={post.cover} alt={post.title} fill className="object-cover" />
             </div>
           )}
 
-          <h2 className="mb-3 text-center font-semibold text-xl leading-tight transition-colors group-hover:text-primary">{post.title}</h2>
+          <h2 className="mb-3 line-clamp-2 min-h-14 text-balance text-center font-semibold text-xl leading-tight transition-colors group-hover:text-primary">
+            {post.title}
+          </h2>
         </div>
       </Link>
     </article>

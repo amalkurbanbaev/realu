@@ -4,29 +4,28 @@ import type { Locale } from "next-intl"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 import { mdxComponents } from "@/components/modules/mdx"
-import { PostNavigation } from "@/components/modules/post-navigation"
 import { Link } from "@/i18n/navigation"
-import type { Post, PostMeta } from "@/lib/blog"
+import type { Post } from "@/lib/blog"
 import { formatDate } from "@/utils/format-date"
 
 interface ArticleTemplateProps {
   post: Post
   locale: Locale
-  previousPost?: PostMeta
-  nextPost?: PostMeta
 }
 
-export function ArticleTemplate({ post, locale, previousPost, nextPost }: ArticleTemplateProps) {
+export function ArticleTemplate({ post, locale }: ArticleTemplateProps) {
   return (
     <div className="container py-16">
       <article className="mx-auto max-w-4xl">
         <ArticleHeader post={post} locale={locale} />
 
         <div className="prose prose-neutral dark:prose-invert mx-auto max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl">
-          <MDXRemote source={post.content} components={mdxComponents} />
+          {post.content ? (
+            <MDXRemote source={post.content} components={mdxComponents} />
+          ) : (
+            <p className="text-muted-foreground">{locale === "ru" ? "Контент статьи недоступен" : "Article content is not available"}</p>
+          )}
         </div>
-
-        <PostNavigation previousPost={previousPost} nextPost={nextPost} locale={locale} />
 
         <footer className="pt-8">
           <div className="flex items-center justify-between">
@@ -63,7 +62,7 @@ function ArticleHeader({ post, locale }: { post: Post; locale: Locale }) {
       )}
 
       <div className="space-y-4">
-        <h1 className="whitespace-nowrap font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
+        <h1 className="font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
 
         <p className="text-muted-foreground text-xl leading-relaxed">{post.summary}</p>
 

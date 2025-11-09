@@ -20,13 +20,38 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
 
     document.addEventListener("visibilitychange", onVisible)
 
+    // Слушаем события блокировки/разблокировки скролла для модальных окон
+    const handleModalOpen = () => {
+      lenis.stop()
+    }
+
+    const handleModalClose = () => {
+      lenis.start()
+    }
+
+    // Кастомные события для управления Lenis из модальных окон
+    document.addEventListener("lenis:stop", handleModalOpen)
+    document.addEventListener("lenis:start", handleModalClose)
+
     return () => {
       gsap.ticker.remove(update)
       document.removeEventListener("visibilitychange", onVisible)
+      document.removeEventListener("lenis:stop", handleModalOpen)
+      document.removeEventListener("lenis:start", handleModalClose)
     }
   }, [])
+
   return (
-    <ReactLenis ref={lenisRef} root>
+    <ReactLenis
+      ref={lenisRef}
+      root
+      options={{
+        // Исключаем элементы с data-lenis-prevent из обработки
+        prevent: (node) => {
+          return node.hasAttribute("data-lenis-prevent")
+        },
+      }}
+    >
       {children}
     </ReactLenis>
   )

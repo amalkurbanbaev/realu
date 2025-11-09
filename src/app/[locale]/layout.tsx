@@ -8,9 +8,9 @@ import { getMessages, getTranslations } from "next-intl/server"
 import { routing } from "@/i18n/routing"
 import { montserrat } from "@/styles/fonts"
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: "ru" | "en" }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "home-page.meta" })
+  const t = await getTranslations({ locale: locale as "en" | "ru", namespace: "home-page.meta" })
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -28,15 +28,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: "
   }
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
+type Props = {
   children: React.ReactNode
-  params: Promise<{ locale: "ru" | "en" }>
-}>) {
+  modal: React.ReactNode
+  params: Promise<{ locale: string }>
+}
+
+export default async function RootLayout({ children, modal, params }: Props) {
   const { locale } = await params
-  const messages = await getMessages({ locale })
+  const messages = await getMessages({ locale: locale as "en" | "ru" })
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -47,6 +47,7 @@ export default async function RootLayout({
       <body className={`${montserrat.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
+          {modal}
         </NextIntlClientProvider>
       </body>
     </html>

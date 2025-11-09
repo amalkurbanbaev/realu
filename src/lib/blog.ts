@@ -52,6 +52,9 @@ function validateFrontmatter(data: unknown): data is PostFrontmatter {
     typeof data.title === "string" &&
     typeof data.summary === "string" &&
     typeof data.date === "string" &&
+    data.title.trim().length > 0 &&
+    data.summary.trim().length > 0 &&
+    data.date.trim().length > 0 &&
     (!("draft" in data) || !data.draft)
   )
 }
@@ -155,7 +158,19 @@ export async function getAdjacentPosts(currentSlug: string, locale: Locale): Pro
 }
 
 // Генерация статических параметров для Next.js
-export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
+export async function generateStaticParams(): Promise<Array<{ locale: string; slug: string }>> {
   const slugs = await getAllSlugs()
-  return slugs.map((slug) => ({ slug }))
+  const params: Array<{ locale: string; slug: string }> = []
+
+  for (const slug of slugs) {
+    for (const locale of SUPPORTED_LOCALES) {
+      // Проверяем, существует ли пост для данной локали
+      const post = await getPostBySlug(slug, locale)
+      if (post) {
+        params.push({ locale, slug })
+      }
+    }
+  }
+
+  return params
 }

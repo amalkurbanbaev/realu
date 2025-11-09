@@ -179,3 +179,12 @@
     }
   }
 }
+
+/* Предотвращение конфликтов с Lenis для модальных окон */
+[data-lenis-prevent] {
+  overscroll-behavior: contain !important;
+}
+
+[data-lenis-prevent] * {
+  overscroll-behavior: contain !important;
+}
