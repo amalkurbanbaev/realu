@@ -28,11 +28,11 @@ export function ArticleTemplate({ post, locale, previousPost, nextPost }: Articl
 
         <PostNavigation previousPost={previousPost} nextPost={nextPost} locale={locale} />
 
-        <footer className="mt-16 border-t pt-8">
+        <footer className="pt-8">
           <div className="flex items-center justify-between">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-secondary-foreground transition-colors hover:bg-secondary/80"
+              className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-secondary-foreground transition-colors hover:bg-secondary/80"
             >
               <ArrowLeft className="h-4 w-4" />
               {locale === "ru" ? "Все статьи" : "All articles"}
@@ -63,7 +63,7 @@ function ArticleHeader({ post, locale }: { post: Post; locale: Locale }) {
       )}
 
       <div className="space-y-4">
-        <h1 className="font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
+        <h1 className="whitespace-nowrap font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
 
         <p className="text-muted-foreground text-xl leading-relaxed">{post.summary}</p>
 
