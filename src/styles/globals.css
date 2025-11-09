@@ -110,7 +110,7 @@
   --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
   --tracking-normal: 0.025em;
 
-  --header-height: 96px;
+  --header-height: 92px;
 }
 
 @layer base {

@@ -1,4 +1,12 @@
 {
+  "blog": {
+    "title": "Blog",
+    "description": "Articles about meditation, breathwork and mindfulness",
+    "noPosts": "No published articles yet",
+    "postNotFound": "Post not found",
+    "postNotFoundDescription": "The post may have been removed or moved",
+    "backToBlog": "Back to blog"
+  },
   "home-page": {
     "meta": {
       "title": "RealU\u00A0Mobile\u00A0App",
