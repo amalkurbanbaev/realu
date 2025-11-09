@@ -1,14 +1,13 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { FOOTER_LINKS } from "@/constants/links"
 import { Link } from "@/i18n/navigation"
-import { cn } from "@/lib/utils"
 
 export const Footer = () => {
   return (
-    <footer className="container z-50 grid grid-cols-3 gap-0 py-6">
+    <footer className="container z-50 grid grid-cols-1 gap-4 py-8 sm:gap-6 md:grid-cols-3 md:gap-0 md:py-6">
       <FooterLinks />
       <FooterCopy />
       <FooterContact />
@@ -16,23 +15,15 @@ export const Footer = () => {
   )
 }
 
-const FooterCopy = () => {
-  const currentYear = new Date().getFullYear()
-  return (
-    <div className="space-y-1 text-center text-muted-foreground text-xs">
-      <div>Dubai, UAE. LOTofUS L.L.C — FZ.</div>
-      <div>All rights reserved © {currentYear}</div>
-    </div>
-  )
-}
-
 const FooterLinks = () => {
   const tFooter = useTranslations("footer.links")
   return (
-    <ul className={cn("text-center text-xs", "flex w-full max-w-[280px] flex-wrap gap-2")}>
+    <ul className="flex flex-col items-center gap-2 text-center text-muted-foreground text-xs sm:gap-3 md:max-w-[280px] md:flex-row md:flex-wrap md:justify-start md:gap-2">
       {FOOTER_LINKS.map((link) => (
-        <li key={link.translationKey} className="hover:underline">
-          <Link href={link.href}>{tFooter(link.translationKey)}</Link>
+        <li key={link.translationKey}>
+          <Link href={link.href} className="hover:underline">
+            {tFooter(link.translationKey)}
+          </Link>
         </li>
       ))}
     </ul>
@@ -41,8 +32,26 @@ const FooterLinks = () => {
 
 const FooterContact = () => {
   return (
-    <div className="text-right text-muted-foreground text-xs">
-      <Link href="mailto:support@lotofus.co">support@lotofus.co</Link>
+    <div className="text-center md:text-right">
+      <Link
+        href="mailto:support@lotofus.co"
+        className="font-medium text-muted-foreground text-sm hover:underline sm:text-base md:font-normal md:text-xs"
+      >
+        support@lotofus.co
+      </Link>
+    </div>
+  )
+}
+
+const FooterCopy = () => {
+  const locale = useLocale()
+  const currentYear = new Date().getFullYear()
+  return (
+    <div className="flex flex-col items-center gap-1 text-center text-muted-foreground text-xs md:items-center">
+      <div>Dubai, UAE. LOTOFUS L.L.C — FZ.</div>
+      <div>
+        {locale === "ru" ? "Все права защищены" : "All rights reserved"} © {currentYear}
+      </div>
     </div>
   )
 }

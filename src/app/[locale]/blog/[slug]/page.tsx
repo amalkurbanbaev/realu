@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import type { Locale } from "next-intl"
+import { MDXRemote } from "next-mdx-remote/rsc"
 
 import { PageLayout } from "@/components/layout"
+import { mdxComponents } from "@/components/modules/mdx"
 import { getPostBySlug, generateStaticParams as getStaticParams } from "@/lib/blog"
-import { ArticleTemplate } from "@/templates/article"
+import { ArticleModalDesktop } from "@/templates/article-modal-desktop"
 
 export const generateStaticParams = getStaticParams
 
@@ -47,7 +49,11 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: Lo
 
   return (
     <PageLayout>
-      <ArticleTemplate post={post} locale={locale} />
+      <ArticleModalDesktop post={post} locale={locale}>
+        <div className="prose prose-neutral dark:prose-invert mx-auto max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl">
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </div>
+      </ArticleModalDesktop>
     </PageLayout>
   )
 }

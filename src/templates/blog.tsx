@@ -43,12 +43,12 @@ function PostCard({ post }: { post: PostMeta }) {
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="flex size-full flex-col gap-3">
           {post.cover && (
-            <div className="relative aspect-square size-full overflow-clip rounded-2xl">
+            <div className="relative aspect-square size-full overflow-clip rounded-4xl">
               <Image src={post.cover} alt={post.title} fill className="object-cover" />
             </div>
           )}
 
-          <h2 className="mb-3 line-clamp-2 min-h-14 text-balance text-center font-semibold text-xl leading-tight transition-colors group-hover:text-primary">
+          <h2 className="mb-3 text-balance text-center font-semibold text-xl leading-tight transition-colors group-hover:text-primary sm:line-clamp-2 sm:min-h-12">
             {post.title}
           </h2>
         </div>

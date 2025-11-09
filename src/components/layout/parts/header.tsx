@@ -32,7 +32,7 @@ export const Header = () => {
         isHome ? "fixed z-[999]" : "relative z-50",
       )}
     >
-      <Link href="/" onClick={() => toggleMenu()}>
+      <Link href="/">
         <Image alt="Site logo" src="/logo.svg" priority width={119} height={40} className="size-20 lg:size-28" />
       </Link>
 

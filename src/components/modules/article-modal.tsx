@@ -9,7 +9,6 @@ import { useMediaQuery } from "usehooks-ts"
 import { useLenisControl } from "@/hooks"
 import type { Post } from "@/lib/blog"
 import { ArticleModalDesktop } from "@/templates/article-modal-desktop"
-import { formatDate } from "@/utils/format-date"
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog"
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "../ui/drawer"
@@ -85,12 +84,12 @@ function ArticleHeader({ post, locale }: { post: Post; locale: Locale }) {
       <div className="space-y-3 md:space-y-4">
         <h1 className="font-bold text-2xl leading-tight md:text-4xl lg:text-5xl">{post.title}</h1>
 
-        <p className="text-lg text-muted-foreground leading-relaxed md:text-xl">{post.summary}</p>
+        <p className="sr-only">{post.summary}</p>
 
         <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm md:gap-6">
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4" />
-            <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
+            {/* <time dateTime={post.date}>{formatDate(post.date, locale)}</time> */}
           </div>
 
           <div className="flex items-center gap-2">
