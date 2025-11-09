@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, XIcon } from "lucide-react"
+import { XIcon } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 
+import { MenuMinimalIcon } from "@/components/icons"
 import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { HEADER_LINKS } from "@/constants/links"
@@ -32,7 +33,7 @@ export const Header = () => {
       )}
     >
       <Link href="/" onClick={() => toggleMenu()}>
-        <Image alt="Site logo" src="/logo.svg" priority width={119} height={40} />
+        <Image alt="Site logo" src="/logo.svg" priority width={119} height={40} className="size-20 lg:size-28" />
       </Link>
 
       {/* Desktop menu */}
@@ -43,8 +44,8 @@ export const Header = () => {
       <AppleButton className="hidden md:block" />
 
       {/* Mobile burger */}
-      <button onClick={() => toggleMenu()} className="md:hidden" aria-label="Toggle menu" type="button">
-        <Menu size={28} />
+      <button onClick={() => toggleMenu()} className="text-white/90 md:hidden" aria-label="Toggle menu" type="button">
+        <MenuMinimalIcon />
       </button>
 
       {/* Mobile drawer */}

@@ -63,8 +63,8 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, ...props 
   }
 
   return (
-    <div className="relative aspect-video size-full">
-      <video ref={internalRef} src={src} className="h-full w-full object-cover" playsInline loop {...props} />
+    <div className="relative overflow-hidden rounded-[48px]">
+      <video ref={internalRef} src={src} className="aspect-video size-full object-cover" playsInline loop {...props} />
 
       <button
         onClick={togglePlayback}

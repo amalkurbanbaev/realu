@@ -27,7 +27,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: L
 
   return (
     <PageLayout>
-      <BlogTemplate posts={posts} locale={locale} />
+      <BlogTemplate posts={posts} />
     </PageLayout>
   )
 }

@@ -19,7 +19,7 @@ export async function HomePageTemplate() {
         <ScrollFade />
       </section>
 
-      <section id="features" className="container relative z-30 space-y-12 overflow-clip rounded-b-[56px] bg-background py-10">
+      <section id="features" className="relative z-30 space-y-12 overflow-clip rounded-b-[56px] bg-background py-10">
         <GradientBackgroundTop />
         <AppFeatures features={features} />
         <DownloadBanner />
