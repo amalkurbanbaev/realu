@@ -33,7 +33,7 @@ export const Header = () => {
       )}
     >
       <Link href="/">
-        <Image alt="Site logo" src="/logo.svg" priority width={119} height={40} className="size-20 lg:size-28" />
+        <Image alt="Site logo" src="/logo.svg" priority width={96} height={32} className="h-[32px] w-[96px]" />
       </Link>
 
       {/* Desktop menu */}
@@ -95,7 +95,7 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
       {HEADER_LINKS.map((link) => {
         const isActive = normalizedPath === link.href
         return (
-          <li key={link.translationKey} className={cn("py-2 transition-opacity", isActive ? "opacity-50" : "opacity-100 hover:opacity-80")}>
+          <li key={link.translationKey} className={cn("py-2", isActive ? "text-white transition-colors" : "text-white/40 hover:text-white")}>
             <Link href={link.href} onClick={onClick}>
               {t(link.translationKey)}
             </Link>

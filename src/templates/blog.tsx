@@ -23,12 +23,12 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
   }
 
   return (
-    <section className="container flex flex-col gap-8 md:py-6 lg:flex-row lg:gap-12">
-      <div className="w-full lg:w-[30%]">
+    <section className="container flex flex-col gap-8 md:py-6 lg:flex-row lg:gap-10">
+      <div className="w-full lg:max-w-xs">
         <h1 className="font-medium text-xl lg:font-bold lg:text-4xl">{t("title")}</h1>
       </div>
 
-      <div className="grid w-full grid-cols-1 items-start gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid w-full grid-cols-1 items-start gap-6 sm:grid-cols-2 md:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
@@ -39,7 +39,7 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
 
 function PostCard({ post }: { post: PostMeta }) {
   return (
-    <article className="group h-full">
+    <article className="group relative h-full">
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="flex size-full flex-col gap-3">
           {post.cover && (

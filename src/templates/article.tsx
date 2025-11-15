@@ -17,7 +17,57 @@ export function ArticleTemplate({ post, locale }: ArticleTemplateProps) {
   return (
     <div className="container py-16">
       <article className="mx-auto max-w-4xl">
-        <ArticleHeader post={post} locale={locale} />
+        <header className="mb-12">
+          <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" />
+            {locale === "ru" ? "Назад к блогу" : "Back to blog"}
+          </Link>
+
+          <div className="flex flex-col gap-8 md:flex-row">
+            {post.cover && (
+              <div className="relative h-[264px] w-[264px] shrink-0 overflow-hidden rounded-2xl">
+                <Image src={post.cover} alt={post.title} fill className="object-cover" priority sizes="264px" />
+              </div>
+            )}
+
+            <div className="flex flex-1 flex-col justify-center space-y-4">
+              <h1 className="font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
+
+              <p className="text-muted-foreground text-xl leading-relaxed">{post.summary}</p>
+
+              <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  <span>
+                    {post.readingTime} {locale === "ru" ? "мин чтения" : "minutes to read"}
+                  </span>
+                </div>
+
+                {post.author && (
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{post.author}</span>
+                  </div>
+                )}
+              </div>
+
+              {post.tags && post.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground text-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </header>
 
         <div className="prose prose-neutral dark:prose-invert mx-auto max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl">
           {post.content ? (
@@ -44,59 +94,5 @@ export function ArticleTemplate({ post, locale }: ArticleTemplateProps) {
         </footer>
       </article>
     </div>
-  )
-}
-
-function ArticleHeader({ post, locale }: { post: Post; locale: Locale }) {
-  return (
-    <header className="mb-12">
-      <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" />
-        {locale === "ru" ? "Назад к блогу" : "Back to blog"}
-      </Link>
-
-      {post.cover && (
-        <div className="relative mb-8 aspect-[2/1] overflow-hidden rounded-2xl">
-          <Image src={post.cover} alt={post.title} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 768px" />
-        </div>
-      )}
-
-      <div className="space-y-4">
-        <h1 className="font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
-
-        <p className="text-muted-foreground text-xl leading-relaxed">{post.summary}</p>
-
-        <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm">
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span>
-              {post.readingTime} {locale === "ru" ? "мин чтения" : "min read"}
-            </span>
-          </div>
-
-          {post.author && (
-            <div className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              <span>{post.author}</span>
-            </div>
-          )}
-        </div>
-
-        {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
-            {post.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground text-sm">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    </header>
   )
 }

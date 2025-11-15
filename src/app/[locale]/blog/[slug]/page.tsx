@@ -53,7 +53,7 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: Lo
   // Если открыто из iOS web view - показываем без хедера и футера
   if (isWebView) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="relative min-h-screen bg-background">
         <ArticleModalDesktop post={post} locale={locale}>
           <div className="prose prose-neutral dark:prose-invert mx-auto max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl">
             <MDXRemote source={post.content} components={mdxComponents} />
