@@ -14,6 +14,7 @@ export const Footer = () => {
     </footer>
   )
 }
+// TODO: добавить ссылку на App Store (кнопка)
 
 const FooterLinks = () => {
   const tFooter = useTranslations("footer.links")

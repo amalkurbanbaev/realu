@@ -30,11 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 type Props = {
   children: React.ReactNode
-  modal: React.ReactNode
   params: Promise<{ locale: string }>
 }
 
-export default async function RootLayout({ children, modal, params }: Props) {
+export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
   const messages = await getMessages({ locale: locale as "en" | "ru" })
 
@@ -47,7 +46,6 @@ export default async function RootLayout({ children, modal, params }: Props) {
       <body className={`${montserrat.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
-          {modal}
         </NextIntlClientProvider>
       </body>
     </html>

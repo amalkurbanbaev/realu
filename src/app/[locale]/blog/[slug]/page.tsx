@@ -7,6 +7,7 @@ import { PageLayout } from "@/components/layout"
 import { mdxComponents } from "@/components/modules/mdx"
 import { getPostBySlug, generateStaticParams as getStaticParams } from "@/lib/blog"
 import { ArticleModalDesktop } from "@/templates/article-modal-desktop"
+import { isIOSWebView } from "@/utils/user-agent"
 
 export const generateStaticParams = getStaticParams
 
@@ -47,9 +48,25 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: Lo
     notFound()
   }
 
+  const isWebView = await isIOSWebView()
+
+  // Если открыто из iOS web view - показываем без хедера и футера
+  if (isWebView) {
+    return (
+      <div className="min-h-screen bg-background">
+        <ArticleModalDesktop post={post} locale={locale}>
+          <div className="prose prose-neutral dark:prose-invert mx-auto max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl">
+            <MDXRemote source={post.content} components={mdxComponents} />
+          </div>
+        </ArticleModalDesktop>
+      </div>
+    )
+  }
+
+  // Обычный браузер - показываем с хедером и футером
   return (
     <PageLayout>
-      <ArticleModalDesktop post={post} locale={locale}>
+      <ArticleModalDesktop post={post} locale={locale} showCloseButton={false}>
         <div className="prose prose-neutral dark:prose-invert mx-auto max-w-none prose-headings:scroll-mt-20 prose-img:rounded-xl">
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
