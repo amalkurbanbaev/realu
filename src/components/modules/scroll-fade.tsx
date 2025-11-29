@@ -205,7 +205,7 @@ export function ScrollFade() {
             </div>
 
             {/* Частицы */}
-            <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
+            <div className="-z-10 absolute inset-0">
               {slide.particles.map((p, pi) => (
                 <Particle
                   key={`${p.src}-${i}-${pi}`}
@@ -214,12 +214,11 @@ export function ScrollFade() {
                   src={p.src}
                   alt={p.src}
                   className={cn(
+                    "absolute",
+                    p.position,
                     animEnabled ? "opacity-100" : "opacity-0",
                     i === activeIndex && animEnabled && "fade-in animate-in duration-[1.5s] ease-in-out",
                     i === 0 && "delay-100",
-                    pi === 0 && "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
-                    pi === 1 && "slide-in-from-right-60 -translate-y-1/2 inset-x-0 top-1/2",
-                    pi === 2 && "slide-in-from-right-60 slide-in-from-top-40 inset-x-0 bottom-0",
                   )}
                 />
               ))}

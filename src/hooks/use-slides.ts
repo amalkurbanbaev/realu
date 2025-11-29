@@ -1,8 +1,9 @@
 import { useLocale, useTranslations } from "next-intl"
 
 import { RAW_SLIDES } from "@/constants/slides"
+import type { Slide } from "@/types/entities"
 
-export const useSlides = () => {
+export const useSlides = (): Slide[] => {
   const t = useTranslations("home-page.layout")
   const locale = useLocale()
 

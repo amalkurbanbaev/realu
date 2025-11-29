@@ -1,39 +1,47 @@
-export const RAW_SLIDES = [
+import type { RawSlide } from "@/types/entities"
+
+export const RAW_SLIDES: RawSlide[] = [
   {
     id: "learn",
     particles: [
+      // Слева вверху (вылетает из центра влево)
       {
         src: "/particles/learn/1.png",
         width: 322,
         height: 184,
-        position: "inset-20 slide-in-from-right-40",
+        position: "hidden md:block left-1/2 -translate-x-[320px] top-[20%] slide-in-from-right-40",
       },
+      // Слева посередине (вылетает из центра влево)
       {
         src: "/particles/learn/2.png",
         width: 338,
         height: 226,
-        position: "inset-x-0 top-1/2 slide-in-from-right",
+        position: "hidden border-4 md:block left-1/2 -translate-x-[400px] top-[40%] slide-in-from-right-20",
       },
+      // Слева внизу (вылетает из центра влево)
       {
         src: "/particles/learn/3.png",
         width: 389,
         height: 227,
-        position: "inset-x-0 bottom-0 translate-x-1/2 slide-in-from-right",
+        position: "hidden md:block left-1/2 -translate-x-[350px] bottom-[15%] slide-in-from-right-20",
       },
+      // Справа вверху (вылетает из центра вправо)
       {
         src: "/particles/learn/4.png",
         width: 273,
         height: 326,
-        position: "inset-x-0 bottom-0 -translate-x-1/2 slide-in-from-left",
+        position: "hidden md:block left-1/2 translate-x-[140px] top-[30%] slide-in-from-left-40",
       },
+      // Справа внизу (вылетает из центра вправо)
       {
         src: "/particles/learn/5.png",
         width: 322,
         height: 184,
-        position: "inset-x-0 bottom-0 -translate-x-1/2 slide-in-from-left",
+        position: "hidden md:block left-1/2 translate-x-[180px] bottom-[20%] slide-in-from-left-20",
       },
     ],
   },
+
   {
     id: "meditation",
     particles: [
@@ -41,13 +49,13 @@ export const RAW_SLIDES = [
         src: "/particles/meditation-1.svg",
         width: 414,
         height: 192,
-        position: "top-0 -translate-y-full",
+        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
       },
       {
         src: "/particles/meditation-2.svg",
         width: 411,
         height: 228,
-        position: "bottom-0 translate-y-full",
+        position: "left-1/2 -translate-x-1/2 bottom-0 translate-y-full",
       },
     ],
   },
@@ -58,13 +66,13 @@ export const RAW_SLIDES = [
         src: "/particles/breath-1.png",
         width: 357,
         height: 230,
-        position: "inset-0 -translate-y-full -left-1/4",
+        position: "left-1/4 top-0 -translate-y-full",
       },
       {
         src: "/particles/breath-2.svg",
         width: 384,
         height: 228,
-        position: "bottom-0 translate-y-full",
+        position: "left-1/2 -translate-x-1/2 bottom-0 translate-y-full",
       },
     ],
   },
@@ -75,7 +83,7 @@ export const RAW_SLIDES = [
         src: "/particles/yoga-1.svg",
         width: 307,
         height: 132,
-        position: "top-0 -translate-y-full",
+        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
       },
     ],
   },
@@ -86,19 +94,19 @@ export const RAW_SLIDES = [
         src: "/particles/tests-1.png",
         width: 362,
         height: 231,
-        position: "top-0 -translate-y-3/4",
+        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-3/4",
       },
       {
         src: "/particles/tests-2.png",
         width: 361,
         height: 171,
-        position: "bottom-0 translate-y-10/12 left-1/10",
+        position: "left-[10%] bottom-0 translate-y-10/12",
       },
       {
         src: "/particles/tests-3.png",
         width: 375,
         height: 197,
-        position: "-bottom-10 translate-y-full left-1/5",
+        position: "left-[20%] -bottom-10 translate-y-full",
       },
     ],
   },
@@ -109,13 +117,13 @@ export const RAW_SLIDES = [
         src: "/particles/diary-1.png",
         width: 402,
         height: 290,
-        position: "top-0 -translate-y-full",
+        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
       },
       {
         src: "/particles/diary-2.png",
         width: 317,
         height: 192,
-        position: "bottom-0 translate-y-full",
+        position: "left-1/2 -translate-x-1/2 bottom-0 translate-y-full",
       },
     ],
   },
@@ -126,13 +134,13 @@ export const RAW_SLIDES = [
         src: "/particles/warmup-1.png",
         width: 395,
         height: 183,
-        position: "top-0 -translate-y-full",
+        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
       },
       {
         src: "/particles/warmup-2.png",
         width: 358,
         height: 165,
-        position: "-bottom-20 translate-y-full",
+        position: "left-1/2 -translate-x-1/2 -bottom-20 translate-y-full",
       },
     ],
   },

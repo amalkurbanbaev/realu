@@ -21,3 +21,21 @@ export type FAQSection = Array<{
   title: string
   questions: Array<Question>
 }>
+
+export type SlideParticle = {
+  src: string
+  width: number
+  height: number
+  position: string
+}
+
+export type RawSlide = {
+  id: string
+  particles: SlideParticle[]
+}
+
+export type Slide = RawSlide & {
+  title: string
+  description: string
+  image: string
+}
