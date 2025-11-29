@@ -205,7 +205,7 @@ export function ScrollFade() {
             </div>
 
             {/* Частицы */}
-            <div className="-z-10 absolute inset-0">
+            <div className="-z-10 absolute inset-0 hidden md:block">
               {slide.particles.map((p, pi) => (
                 <Particle
                   key={`${p.src}-${i}-${pi}`}
