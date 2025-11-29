@@ -13,7 +13,7 @@ type PageLayoutProps = {
 }
 
 export function PageLayout({ children, withGradient = true }: PageLayoutProps) {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isDesktop = useMediaQuery("(min-width: 1024px)")
 
   return (
     <div className="relative flex min-h-screen flex-col">

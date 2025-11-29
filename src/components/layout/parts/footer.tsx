@@ -1,16 +1,26 @@
 "use client"
 
+import { ArrowUpIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 
+import { Button } from "@/components/ui/button"
 import { FOOTER_LINKS } from "@/constants/links"
 import { Link } from "@/i18n/navigation"
 
 export const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   return (
-    <footer className="container z-50 grid grid-cols-1 gap-4 py-8 sm:gap-6 md:grid-cols-3 md:gap-0 md:py-6">
+    <footer className="container z-50 flex flex-col justify-between gap-4 py-8 lg:flex-row lg:gap-0 lg:py-6">
       <FooterLinks />
-      <FooterCopy />
       <FooterContact />
+      <FooterCopy />
+
+      <Button variant="secondary" className="order-4 size-10 self-end rounded-full" onClick={scrollToTop}>
+        <ArrowUpIcon className="size-4" />
+      </Button>
     </footer>
   )
 }
@@ -19,25 +29,22 @@ export const Footer = () => {
 const FooterLinks = () => {
   const tFooter = useTranslations("footer.links")
   return (
-    <ul className="flex flex-col items-center gap-2 text-center text-muted-foreground text-xs sm:gap-3 md:max-w-[280px] md:flex-row md:flex-wrap md:justify-start md:gap-2">
+    <div className="mx-auto max-w-[480px] text-center text-white/60 text-xs lg:mx-0 lg:text-left">
       {FOOTER_LINKS.map((link) => (
-        <li key={link.translationKey}>
+        <span key={link.translationKey} className="mr-2 mb-2 inline-block whitespace-nowrap align-top">
           <Link href={link.href} className="hover:underline">
             {tFooter(link.translationKey)}
           </Link>
-        </li>
+        </span>
       ))}
-    </ul>
+    </div>
   )
 }
 
 const FooterContact = () => {
   return (
-    <div className="text-center md:text-right">
-      <Link
-        href="mailto:support@lotofus.co"
-        className="font-medium text-muted-foreground text-sm hover:underline sm:text-base md:font-normal md:text-xs"
-      >
+    <div className="order-2 text-center lg:order-3 lg:text-right">
+      <Link href="mailto:support@lotofus.co" className="font-medium text-foreground text-xs hover:underline lg:font-normal lg:text-white/60">
         support@lotofus.co
       </Link>
     </div>
@@ -48,7 +55,7 @@ const FooterCopy = () => {
   const locale = useLocale()
   const currentYear = new Date().getFullYear()
   return (
-    <div className="flex flex-col items-center gap-1 text-center text-muted-foreground text-xs md:items-center">
+    <div className="order-3 flex flex-col items-center gap-1 text-center text-white/80 text-xs lg:order-2">
       <div>Dubai, UAE. LOTOFUS L.L.C — FZ.</div>
       <div>
         {locale === "ru" ? "Все права защищены" : "All rights reserved"} © {currentYear}
@@ -64,7 +71,7 @@ const FooterCopy = () => {
 //   const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
 
 //   return (
-//     <nav className="flex items-center gap-4 md:justify-end">
+//     <nav className="flex items-center gap-4 sm:justify-end">
 //       {HEADER_LINKS.filter((link) => link.href !== "/" && normalizedPath !== link.href).map((link) => {
 //         return (
 //           <Button key={link.href} asChild variant="secondary" className="min-w-fit max-w-36">

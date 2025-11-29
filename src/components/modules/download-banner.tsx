@@ -9,25 +9,31 @@ export async function DownloadBanner() {
   const t = await getTranslations("home-page.layout")
 
   return (
-    <div className="container relative w-full overflow-hidden rounded-3xl p-6 text-center md:p-12 md:text-left">
-      <DownloadBannerBackground className="-z-10 absolute inset-0 hidden h-full w-full md:block" />
-      <Image
-        src="/yog.png"
-        fill
-        alt="yoga"
-        className={cn(
-          "-z-10 ml-auto w-full",
-          "hidden md:block",
-          "object-cover md:max-w-[370px] md:object-[100px_0px] lg:max-w-[500px] lg:object-[0%_15%] xl:max-w-[600px] xl:object-[0%_35%]",
-        )}
-      />
+    <div className="container relative w-full text-center md:text-left">
+      <div className="relative overflow-hidden rounded-3xl">
+        <DownloadBannerBackground className="-z-10 absolute inset-0 hidden h-full w-full rounded-3xl md:block" />
 
-      <div className="flex w-full max-w-md flex-col gap-4">
-        <h3 className="font-bold text-2xl">{t("title2")}</h3>
+        <Image
+          src="/yog.png"
+          fill
+          alt="yoga"
+          className={cn(
+            "-z-10 absolute top-0 right-0 hidden object-cover md:block",
+            "md:max-w-[370px] md:object-[0px_0px]",
+            "lg:max-w-[500px] lg:object-[0%_15%]",
+            "ml-auto xl:max-w-[600px] xl:object-[0%_35%]",
+          )}
+        />
 
-        <div className="flex flex-col-reverse items-center gap-4 md:flex-row">
-          <AppleButton className="shrink-0" />
-          <p className="max-w-[250px] text-white/80">{t("description2")}</p>
+        <div className="p-6 text-center md:p-12 md:text-left">
+          <div className="mx-auto flex w-full max-w-md flex-col gap-4 md:mx-0">
+            <h3 className="font-bold text-2xl">{t("title2")}</h3>
+
+            <div className="flex flex-col-reverse items-center gap-4 md:flex-row">
+              <AppleButton className="shrink-0" />
+              <p className="max-w-[250px] text-white/80">{t("description2")}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,7 +42,7 @@ export async function DownloadBanner() {
 
 const DownloadBannerBackground = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg width="1200" height="224" viewBox="0 0 1200 224" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg viewBox="0 0 1200 224" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" {...props}>
       <title>Download Banner Background</title>
       <g filter="url(#filter0_f_652_6743)">
         <path

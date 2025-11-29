@@ -168,7 +168,7 @@ export function ScrollFade() {
             )}
           >
             <div className="relative flex w-full items-center justify-center">
-              <Image src={slide.image} alt={slide.title} width={279} height={606} className="rounded-xl shadow-xl" />
+              <Image src={slide.image} alt={slide.title} width={279} height={606} className="pointer-events-none rounded-xl shadow-xl" />
 
               <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
                 {slide.particles.map((p, pi) => (
@@ -191,7 +191,7 @@ export function ScrollFade() {
               </div>
             </div>
 
-            <div className="-z-10 absolute inset-0">
+            <div className="-z-10 pointer-events-none absolute inset-0">
               <Image src={`/gradients/${slide.id}.png`} alt="slide-background" fill className="object-cover" />
             </div>
 
