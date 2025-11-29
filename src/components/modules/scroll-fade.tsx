@@ -22,6 +22,8 @@ export function ScrollFade() {
   const animFallbackRef = useRef<number | null>(null)
 
   const H = () => window.innerHeight
+  // дополнительное пространство для последнего слайда (в vh)
+  const LAST_SLIDE_EXTRA_VH = 0.5
   const getWrapperTop = () => {
     const el = wrapperRef.current
     if (!el) return 0
@@ -36,11 +38,13 @@ export function ScrollFade() {
     return rect.top <= 0 && rect.bottom >= vh
   }
 
-  // высота секции = кол-во слайдов * 100vh
+  // высота секции = кол-во слайдов * 100vh + дополнительное пространство для последнего слайда
   useLayoutEffect(() => {
     const el = wrapperRef.current
     if (!el) return
-    el.style.height = `${Math.max(1, slides.length) * 100}vh`
+    const baseHeight = Math.max(1, slides.length) * 100
+    const extraHeight = LAST_SLIDE_EXTRA_VH * 100
+    el.style.height = `${baseHeight + extraHeight}vh`
   }, [slides.length])
 
   // флаги видимости/анимаций
@@ -49,7 +53,10 @@ export function ScrollFade() {
     const updateFlags = () => {
       const fully = isFullyInView()
       setPanelVisible(fully)
-      setAnimEnabled(fully || (window.scrollY === 0 && activeIndex === 0))
+      // particles показываем когда секция во вью, на первом слайде вверху страницы,
+      // или когда мы на последнем слайде (даже если секция уже ушла вверх)
+      const isOnLastSlide = activeIndex === slides.length - 1
+      setAnimEnabled(fully || (window.scrollY === 0 && activeIndex === 0) || isOnLastSlide)
     }
     updateFlags()
     window.addEventListener("scroll", updateFlags, { passive: true })
@@ -58,7 +65,7 @@ export function ScrollFade() {
       window.removeEventListener("scroll", updateFlags)
       window.removeEventListener("resize", updateFlags)
     }
-  }, [activeIndex])
+  }, [activeIndex, slides.length])
 
   // индекс по полу — без перепрыгиваний
   // biome-ignore lint/correctness/useExhaustiveDependencies: use only needed deps
@@ -70,6 +77,21 @@ export function ScrollFade() {
 
       if (rel < 0) {
         setActiveIndex(0)
+        return
+      }
+
+      // для последнего слайда учитываем дополнительное пространство
+      const lastSlideStart = (slides.length - 1) * h
+      const lastSlideExtra = LAST_SLIDE_EXTRA_VH * h
+
+      if (rel >= lastSlideStart) {
+        // если мы в зоне последнего слайда (включая дополнительное пространство)
+        if (rel <= lastSlideStart + lastSlideExtra) {
+          setActiveIndex(slides.length - 1)
+        } else {
+          // если проскроллили дальше дополнительного пространства, остаёмся на последнем слайде
+          setActiveIndex(slides.length - 1)
+        }
         return
       }
 
@@ -137,12 +159,22 @@ export function ScrollFade() {
     const isFirst = activeIndex <= 0
 
     if (dir === "next" && isLast) {
-      // после секции (ровно за слайдер)
-      const el = wrapperRef.current
-      if (el) {
-        const rect = el.getBoundingClientRect()
-        const wrapperBottom = window.scrollY + rect.bottom
-        animateScrollTo(wrapperBottom)
+      // проверяем, находимся ли мы в дополнительном пространстве последнего слайда
+      const rel = window.scrollY - top
+      const lastSlideStart = (slides.length - 1) * h
+      const lastSlideExtra = LAST_SLIDE_EXTRA_VH * h
+
+      if (rel < lastSlideStart + lastSlideExtra) {
+        // если ещё не проскроллили дополнительное пространство, скроллим до конца секции
+        animateScrollTo(top + lastSlideStart + lastSlideExtra)
+      } else {
+        // после секции (ровно за слайдер)
+        const el = wrapperRef.current
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          const wrapperBottom = window.scrollY + rect.bottom
+          animateScrollTo(wrapperBottom)
+        }
       }
       return
     }
@@ -168,7 +200,7 @@ export function ScrollFade() {
             )}
           >
             <div className="relative flex w-full items-center justify-center">
-              <Image src={slide.image} alt={slide.title} width={279} height={606} className="pointer-events-none rounded-xl shadow-xl" />
+              <Image src={slide.image} alt={slide.title} width={279} height={606} className="pointer-events-none select-none rounded-xl shadow-xl" />
 
               <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
                 {slide.particles.map((p, pi) => (
