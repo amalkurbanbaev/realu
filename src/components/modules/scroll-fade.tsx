@@ -206,7 +206,7 @@ export function ScrollFade() {
       {/* Счётчик и кнопки — МОНТИМ только когда секция целиком во вью.
           Пока их нет в DOM — по hero ничего не наложится. */}
       {panelVisible && (
-        <>
+        <div className="-translate-x-1/2 container fixed bottom-10 left-1/2 z-50 flex w-full items-end justify-between">
           <SliderCounter activeIndex={activeIndex + 1} total={slides.length} enabled={panelVisible} />
 
           <SliderNavButtons
@@ -218,7 +218,7 @@ export function ScrollFade() {
               next: isAnimating,
             }}
           />
-        </>
+        </div>
       )}
     </section>
   )
@@ -231,7 +231,7 @@ type SliderCounterProps = {
 }
 const SliderCounter = ({ activeIndex, total }: SliderCounterProps) => {
   return (
-    <div className={cn("pointer-events-none fixed bottom-10 left-10 z-40 flex items-center gap-2.5", "fade-in animate-in opacity-100")} aria-hidden>
+    <div className={cn("pointer-events-none flex items-center gap-2.5", "fade-in animate-in opacity-100")} aria-hidden>
       <span className="font-medium text-[32px]">{activeIndex}</span>
       <span className="text-muted-foreground">/</span>
       <span className="text-muted-foreground">{total}</span>
@@ -252,7 +252,7 @@ type SliderNavButtonsProps = {
 const SliderNavButtons = ({ prevSlide, nextSlide, disabled }: SliderNavButtonsProps) => {
   return (
     <div
-      className={cn("fixed right-10 bottom-10 z-40 flex flex-col gap-2.5", "fade-in animate-in opacity-100")}
+      className={cn("flex flex-col gap-2.5", "fade-in animate-in opacity-100")}
       // гарантируем, что клики проходят только по видимым кнопкам
       style={{ pointerEvents: "auto" }}
     >

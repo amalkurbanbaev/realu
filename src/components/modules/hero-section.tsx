@@ -120,7 +120,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="flex items-end justify-between py-4 md:pt-8 md:pb-12">
+      <div className="container flex items-end justify-between py-4 md:pt-8 md:pb-12">
         <Button
           aria-label="mute"
           tabIndex={0}
