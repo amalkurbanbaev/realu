@@ -205,7 +205,7 @@ export function ScrollFade() {
             </div>
 
             {/* Частицы */}
-            <div className="-z-10 absolute inset-0 hidden md:block">
+            <div className="-z-10 absolute inset-0 hidden overflow-hidden md:block">
               {slide.particles.map((p, pi) => (
                 <Particle
                   key={`${p.src}-${i}-${pi}`}
@@ -225,7 +225,7 @@ export function ScrollFade() {
             </div>
 
             {/* Изображение по центру */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 mb-10 flex items-center justify-center">
               <Image
                 src={slide.image}
                 alt={slide.title}
@@ -237,7 +237,7 @@ export function ScrollFade() {
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
             {panelVisible && i === activeIndex && (
-              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-md flex-col items-center text-center">
+              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-[520px] flex-col items-center text-center">
                 <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
                 <h5 className="font-medium text-base text-white/80">{slide.description}</h5>
               </div>

@@ -41,36 +41,41 @@ export const getRawSlides = (locale: string): RawSlide[] => [
       },
     ],
   },
-
+  {
+    id: "breath",
+    particles: [
+      {
+        src: `/particles/breath/${locale}/1.png`,
+        width: 357,
+        height: 230,
+        position: "left-1/2 -translate-x-[480px] top-[35%] slide-in-from-right-40",
+      },
+      {
+        src: `/particles/breath/${locale}/2.png`,
+        width: 384,
+        height: 228,
+        position: "left-1/2 translate-x-[50px] bottom-[36%] slide-in-from-left-20",
+      },
+      {
+        src: `/particles/breath/ru/3.png`, // одинаковая картинка для всех локалей
+        width: 231,
+        height: 92,
+        position: "left-1/2 translate-x-[180px] bottom-[30%] slide-in-from-left-20",
+      },
+    ],
+  },
   {
     id: "meditation",
     particles: [
       {
-        src: `/particles/meditation-1.svg`,
+        src: `/particles/meditation/${locale}/1.png`,
         width: 414,
         height: 192,
         position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
       },
       {
-        src: `/particles/meditation-2.svg`,
+        src: `/particles/meditation/${locale}/2.png`,
         width: 411,
-        height: 228,
-        position: "left-1/2 -translate-x-1/2 bottom-0 translate-y-full",
-      },
-    ],
-  },
-  {
-    id: "breath",
-    particles: [
-      {
-        src: `/particles/breath-1.png`,
-        width: 357,
-        height: 230,
-        position: "left-1/4 top-0 -translate-y-full",
-      },
-      {
-        src: `/particles/breath-2.svg`,
-        width: 384,
         height: 228,
         position: "left-1/2 -translate-x-1/2 bottom-0 translate-y-full",
       },
@@ -80,7 +85,7 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "yoga",
     particles: [
       {
-        src: `/particles/yoga-1.svg`,
+        src: `/particles/yoga-1.png`,
         width: 307,
         height: 132,
         position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
