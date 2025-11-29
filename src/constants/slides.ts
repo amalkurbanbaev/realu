@@ -3,23 +3,34 @@ export const RAW_SLIDES = [
     id: "learn",
     particles: [
       {
-        src: "/particles/learn-1.svg",
-        width: 378,
-        height: 209,
+        src: "/particles/learn/1.png",
+        width: 322,
+        height: 184,
         position: "inset-20 slide-in-from-right-40",
       },
       {
-        src: "/particles/learn-2.svg",
+        src: "/particles/learn/2.png",
         width: 338,
-        height: 201,
-        // position: "top-1/2 inset-x-0 fade-in slide-in-from-right",
+        height: 226,
         position: "inset-x-0 top-1/2 slide-in-from-right",
       },
       {
-        src: "/particles/learn-3.svg",
-        width: 317,
-        height: 181,
+        src: "/particles/learn/3.png",
+        width: 389,
+        height: 227,
         position: "inset-x-0 bottom-0 translate-x-1/2 slide-in-from-right",
+      },
+      {
+        src: "/particles/learn/4.png",
+        width: 273,
+        height: 326,
+        position: "inset-x-0 bottom-0 -translate-x-1/2 slide-in-from-left",
+      },
+      {
+        src: "/particles/learn/5.png",
+        width: 322,
+        height: 184,
+        position: "inset-x-0 bottom-0 -translate-x-1/2 slide-in-from-left",
       },
     ],
   },
@@ -92,16 +103,16 @@ export const RAW_SLIDES = [
     ],
   },
   {
-    id: "watch",
+    id: "diary",
     particles: [
       {
-        src: "/particles/watch-1.png",
+        src: "/particles/diary-1.png",
         width: 402,
         height: 290,
         position: "top-0 -translate-y-full",
       },
       {
-        src: "/particles/watch-2.png",
+        src: "/particles/diary-2.png",
         width: 317,
         height: 192,
         position: "bottom-0 translate-y-full",
