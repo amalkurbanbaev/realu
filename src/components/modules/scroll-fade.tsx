@@ -195,61 +195,79 @@ export function ScrollFade() {
           <div
             key={slide.id}
             className={cn(
-              "absolute inset-0 ml-auto flex w-full flex-col items-center justify-center gap-8 overflow-visible px-8 transition-opacity duration-700 will-change-[opacity]",
+              "absolute inset-0 overflow-visible transition-opacity duration-700 will-change-[opacity]",
               i === activeIndex ? "opacity-100" : "opacity-0",
             )}
           >
-            <div className="relative flex w-full items-center justify-center">
-              <Image src={slide.image} alt={slide.title} width={279} height={606} className="pointer-events-none select-none rounded-xl shadow-xl" />
-
-              <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
-                {slide.particles.map((p, pi) => (
-                  <Particle
-                    key={`${p.src}-${i}-${pi}`}
-                    width={p.width}
-                    height={p.height}
-                    src={p.src}
-                    alt={p.src}
-                    className={cn(
-                      animEnabled ? "opacity-100" : "opacity-0",
-                      i === activeIndex && animEnabled && "fade-in animate-in duration-[1.5s] ease-in-out",
-                      i === 0 && "delay-100",
-                      pi === 0 && "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
-                      pi === 1 && "slide-in-from-right-60 -translate-y-1/2 inset-x-0 top-1/2",
-                      pi === 2 && "slide-in-from-right-60 slide-in-from-top-40 inset-x-0 bottom-0",
-                    )}
-                  />
-                ))}
-              </div>
-            </div>
-
+            {/* Фон градиент */}
             <div className="-z-10 pointer-events-none absolute inset-0">
               <Image src={`/gradients/${slide.id}.png`} alt="slide-background" fill className="object-cover" />
             </div>
 
-            <div className="flex max-w-md flex-col items-center p-4 text-center">
-              <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
-              <h5 className="z-10 font-medium text-base text-white/80">{slide.description}</h5>
+            {/* Частицы */}
+            <div className="-z-10 absolute inset-0 mx-auto size-full max-w-5xl">
+              {slide.particles.map((p, pi) => (
+                <Particle
+                  key={`${p.src}-${i}-${pi}`}
+                  width={p.width}
+                  height={p.height}
+                  src={p.src}
+                  alt={p.src}
+                  className={cn(
+                    animEnabled ? "opacity-100" : "opacity-0",
+                    i === activeIndex && animEnabled && "fade-in animate-in duration-[1.5s] ease-in-out",
+                    i === 0 && "delay-100",
+                    pi === 0 && "slide-in-from-right-60 slide-in-from-bottom-40 inset-x-0 top-0",
+                    pi === 1 && "slide-in-from-right-60 -translate-y-1/2 inset-x-0 top-1/2",
+                    pi === 2 && "slide-in-from-right-60 slide-in-from-top-40 inset-x-0 bottom-0",
+                  )}
+                />
+              ))}
             </div>
+
+            {/* Изображение по центру */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                width={227}
+                height={492}
+                className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
+              />
+            </div>
+
+            {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
+            {panelVisible && i === activeIndex && (
+              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-md flex-col items-center text-center">
+                <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
+                <h5 className="font-medium text-base text-white/80">{slide.description}</h5>
+              </div>
+            )}
           </div>
         ))}
       </div>
 
-      {/* Счётчик и кнопки — МОНТИМ только когда секция целиком во вью.
-          Пока их нет в DOM — по hero ничего не наложится. */}
+      {/* Статичная нижняя панель со счётчиком и кнопками (не анимируется) */}
       {panelVisible && (
-        <div className="-translate-x-1/2 container fixed bottom-10 left-1/2 z-50 flex w-full items-end justify-between">
+        <div className="-translate-x-1/2 container pointer-events-none fixed bottom-10 left-1/2 z-50 flex w-full items-center justify-between gap-4 px-8">
+          {/* Счётчик слева */}
           <SliderCounter activeIndex={activeIndex + 1} total={slides.length} enabled={panelVisible} />
 
-          <SliderNavButtons
-            enabled={panelVisible}
-            prevSlide={() => handleScroll("prev")}
-            nextSlide={() => handleScroll("next")}
-            disabled={{
-              prev: isAnimating,
-              next: isAnimating,
-            }}
-          />
+          {/* Заполнитель для центрирования подписей */}
+          <div className="flex-1" />
+
+          {/* Кнопки навигации справа */}
+          <div style={{ pointerEvents: "auto" }}>
+            <SliderNavButtons
+              enabled={panelVisible}
+              prevSlide={() => handleScroll("prev")}
+              nextSlide={() => handleScroll("next")}
+              disabled={{
+                prev: isAnimating,
+                next: isAnimating,
+              }}
+            />
+          </div>
         </div>
       )}
     </section>
