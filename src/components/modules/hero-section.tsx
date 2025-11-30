@@ -105,7 +105,7 @@ export function HeroSection() {
 
       <div
         className={cn(
-          "container flex w-full flex-col justify-center overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out md:flex-grow ",
+          "container flex w-full flex-col items-center justify-center overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out md:flex-grow ",
           shouldZoomOut && "scale-90",
         )}
       >
