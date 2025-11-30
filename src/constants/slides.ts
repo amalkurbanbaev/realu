@@ -88,6 +88,59 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     ],
   },
   {
+    id: "tests",
+    particles: [
+      {
+        src: `/particles/tests/${locale}/1.svg`,
+        width: 354,
+        height: 186,
+        position: "left-1/2 scale-125 -translate-x-[390px] top-[18%] slide-in-from-right-40",
+      },
+      {
+        src: `/particles/tests/${locale}/2.svg`,
+        width: 334,
+        height: 180,
+        position: "left-1/2 scale-125 -translate-x-[420px] top-[29%] slide-in-from-right-40",
+      },
+      {
+        src: `/particles/tests/${locale}/3.svg`,
+        width: 309,
+        height: 181,
+        position: "left-1/2 scale-125 -translate-x-[420px] top-[40%] slide-in-from-right-40",
+      },
+      {
+        src: `/particles/tests/${locale}/4.svg`,
+        width: 335,
+        height: 205,
+        position: "left-1/2 scale-125 -translate-x-[400px] top-[51%] slide-in-from-right-40",
+      },
+      {
+        src: `/particles/tests/${locale}/5.svg`,
+        width: 354,
+        height: 186,
+        position: "left-1/2 scale-125 translate-x-[190px] top-[12%] slide-in-from-left-40",
+      },
+      {
+        src: `/particles/tests/${locale}/6.svg`,
+        width: 334,
+        height: 180,
+        position: "left-1/2 scale-125 translate-x-[210px] top-[25%] slide-in-from-left-40",
+      },
+      {
+        src: `/particles/tests/${locale}/7.svg`,
+        width: 394,
+        height: 178,
+        position: "left-1/2 scale-125 translate-x-[190px] top-[40%] slide-in-from-left-40",
+      },
+      {
+        src: `/particles/tests/${locale}/8.svg`,
+        width: 335,
+        height: 205,
+        position: "left-1/2 scale-125 translate-x-[210px] top-[56%] slide-in-from-left-40",
+      },
+    ],
+  },
+  {
     id: "yoga",
     particles: [
       {
@@ -95,29 +148,6 @@ export const getRawSlides = (locale: string): RawSlide[] => [
         width: 307,
         height: 132,
         position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
-      },
-    ],
-  },
-  {
-    id: "tests",
-    particles: [
-      {
-        src: `/particles/tests-1.png`,
-        width: 362,
-        height: 231,
-        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-3/4",
-      },
-      {
-        src: `/particles/tests-2.png`,
-        width: 361,
-        height: 171,
-        position: "left-[10%] bottom-0 translate-y-10/12",
-      },
-      {
-        src: `/particles/tests-3.png`,
-        width: 375,
-        height: 197,
-        position: "left-[20%] -bottom-10 translate-y-full",
       },
     ],
   },

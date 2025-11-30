@@ -34,15 +34,16 @@
           "image": "meditation"
         },
         {
+          "title": "Practice what works for you",
+          "description": "Short tests help you find the meditation or breathing technique that best fits your current state. Tailor your path to your personal needs, right here, right now",
+          "image": "tests"
+        },
+        {
           "title": "Yoga Nidra",
           "description": "An ancient yogic practice for deep relaxation and energy restoration. Ideal for sleep issues.",
           "image": "yoga"
         },
-        {
-          "title": "Tests",
-          "description": "Answer questions to find the practice that best suits you — right here and now.",
-          "image": "tests"
-        },
+
         {
           "title": "Observe",
           "description": "All data is securely protected.",
