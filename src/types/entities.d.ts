@@ -32,10 +32,13 @@ export type SlideParticle = {
 export type RawSlide = {
   id: string
   particles: SlideParticle[]
+  useVideo?: boolean
 }
 
 export type Slide = RawSlide & {
   title: string
   description: string
-  image: string
+  image?: string
+  video?: string
+  withGradient?: boolean
 }

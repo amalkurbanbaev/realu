@@ -182,19 +182,7 @@ export const getRawSlides = (locale: string): RawSlide[] => [
   },
   {
     id: "warmup",
-    particles: [
-      {
-        src: `/particles/warmup-1.png`,
-        width: 395,
-        height: 183,
-        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
-      },
-      {
-        src: `/particles/warmup-2.png`,
-        width: 358,
-        height: 165,
-        position: "left-1/2 -translate-x-1/2 -bottom-20 translate-y-full",
-      },
-    ],
+    particles: [],
+    useVideo: true,
   },
 ]

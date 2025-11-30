@@ -200,9 +200,11 @@ export function ScrollFade() {
             )}
           >
             {/* Фон градиент */}
-            <div className="-z-10 pointer-events-none absolute inset-0">
-              <Image src={`/gradients/${slide.id}.svg`} alt="slide-background" fill className="object-cover" />
-            </div>
+            {slide.withGradient && (
+              <div className="-z-10 pointer-events-none absolute inset-0">
+                <Image src={`/gradients/${slide.id}.svg`} alt="slide-background" fill className="object-cover" />
+              </div>
+            )}
 
             {/* Частицы */}
             <div className="-z-10 absolute inset-0 hidden overflow-hidden md:block">
@@ -224,15 +226,30 @@ export function ScrollFade() {
               ))}
             </div>
 
-            {/* Изображение по центру */}
+            {/* Изображение или видео по центру */}
             <div className="absolute inset-0 mb-10 flex items-center justify-center">
-              <Image
-                src={slide.image}
-                alt={slide.title}
-                width={227}
-                height={492}
-                className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
-              />
+              {slide.image ? (
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  width={227}
+                  height={492}
+                  className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
+                />
+              ) : (
+                <video
+                  src={slide.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="pointer-events-none h-[492px] w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
+                  width={227}
+                  height={492}
+                >
+                  <source src={slide.video} type="video/mp4" />
+                </video>
+              )}
             </div>
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
