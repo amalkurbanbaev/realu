@@ -223,14 +223,14 @@ export function ScrollFade() {
         {slides.map((slide) => (
           <div key={slide.id} className="flex min-h-screen flex-col items-center justify-center px-4 py-16">
             {/* Изображение или видео по центру */}
-            <div className="mb-8 flex items-center justify-center">
+            <div className="mb-8 flex items-center justify-center px-4">
               {slide.image ? (
                 <Image
                   src={slide.image}
                   alt={slide.title}
                   width={227}
                   height={492}
-                  className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
+                  className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10"
                 />
               ) : slide.video ? (
                 <video
@@ -239,7 +239,7 @@ export function ScrollFade() {
                   muted
                   loop
                   playsInline
-                  className="pointer-events-none h-[492px] w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
+                  className="pointer-events-none h-auto max-h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
                   width={227}
                   height={492}
                 >
@@ -300,14 +300,14 @@ export function ScrollFade() {
             </div>
 
             {/* Изображение или видео по центру */}
-            <div className="absolute inset-0 mb-10 flex items-center justify-center">
+            <div className="absolute inset-0 mb-10 flex items-center justify-center px-4">
               {slide.image ? (
                 <Image
                   src={slide.image}
                   alt={slide.title}
                   width={227}
                   height={492}
-                  className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
+                  className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 md:max-w-[180px] lg:max-w-[227px]"
                 />
               ) : slide.video ? (
                 <video
@@ -316,7 +316,7 @@ export function ScrollFade() {
                   muted
                   loop
                   playsInline
-                  className="pointer-events-none h-[492px] w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
+                  className="pointer-events-none h-auto max-h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover md:max-h-[400px] md:max-w-[180px] lg:max-h-[492px] lg:max-w-[227px]"
                   width={227}
                   height={492}
                 >
@@ -327,7 +327,7 @@ export function ScrollFade() {
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
             {panelVisible && i === activeIndex && (
-              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-[520px] flex-col items-center text-center">
+              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-[520px] flex-col items-center px-4 text-center">
                 <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
                 <h5 className="font-medium text-base text-white/80">{slide.description}</h5>
               </div>
