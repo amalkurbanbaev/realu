@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { FOOTER_LINKS } from "@/constants/links"
 import { Link } from "@/i18n/navigation"
+import { cn } from "@/lib/utils"
 
 export const Footer = () => {
   const scrollToTop = () => {
@@ -28,8 +29,15 @@ export const Footer = () => {
 
 const FooterLinks = () => {
   const tFooter = useTranslations("footer.links")
+  const locale = useLocale()
+
   return (
-    <div className="mx-auto max-w-[480px] text-center text-white/60 text-xs lg:mx-0 lg:text-left">
+    <div
+      className={cn(
+        "mx-auto max-w-[320px] text-center text-white/60 text-xs lg:mx-0 lg:text-left",
+        locale === "ru" ? "max-w-[68ch]" : "max-w-[46ch]",
+      )}
+    >
       {FOOTER_LINKS.map((link) => (
         <span key={link.translationKey} className="mr-2 mb-2 inline-block whitespace-nowrap align-top">
           <Link href={link.href} className="hover:underline">
