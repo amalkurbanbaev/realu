@@ -144,10 +144,16 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "yoga",
     particles: [
       {
-        src: `/particles/yoga-1.png`,
-        width: 307,
-        height: 132,
-        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
+        src: `/particles/yoga/${locale}/1.svg`,
+        width: 343,
+        height: 341,
+        position: "left-1/2 scale-125 -translate-x-[470px] top-[31%] slide-in-from-right-40",
+      },
+      {
+        src: `/particles/yoga/${locale}/2.svg`,
+        width: 422,
+        height: 278,
+        position: "left-1/2 scale-125 translate-x-[190px] top-[35%] slide-in-from-left-40",
       },
     ],
   },
