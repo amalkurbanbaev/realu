@@ -96,7 +96,7 @@ export function HeroSection() {
   const videoSrc = isDev ? "/local/main-video.mp4" : videoUrlByLocale
 
   return (
-    <section className="sticky top-0 flex h-screen flex-col overflow-hidden pt-[var(--header-height)]">
+    <section className="flex flex-col overflow-hidden pt-[var(--header-height)] md:sticky md:top-0 md:h-screen">
       <canvas
         className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl duration-1000"
         ref={canvasRef}
@@ -105,7 +105,7 @@ export function HeroSection() {
 
       <div
         className={cn(
-          "container flex w-full flex-grow flex-col justify-center overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out ",
+          "container flex w-full flex-col justify-center overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out md:flex-grow ",
           shouldZoomOut && "scale-90",
         )}
       >
@@ -125,7 +125,7 @@ export function HeroSection() {
           aria-label="mute"
           tabIndex={0}
           variant="secondary"
-          className="flex size-10 cursor-pointer flex-col items-center justify-center rounded-full"
+          className="hidden size-10 cursor-pointer flex-col items-center justify-center rounded-full md:flex"
           onClick={toggleMute}
         >
           {isMuted ? <Volume2Icon /> : <MuteIcon />}

@@ -29,7 +29,7 @@ export const Header = () => {
     <header
       className={cn(
         "container inset-x-0 top-0 flex h-[var(--header-height)] items-center justify-between",
-        isHome ? "fixed z-[999]" : "relative z-50",
+        isHome ? "absolute z-[999] md:fixed" : "relative z-50",
       )}
     >
       <Link href="/">

@@ -12,6 +12,19 @@ import { Particle } from "./particle"
 
 export function ScrollFade() {
   const slides = useSlides()
+  const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Определяем мобильное устройство только после монтирования, чтобы избежать проблем с гидратацией
+  useEffect(() => {
+    setMounted(true)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 767)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -38,18 +51,28 @@ export function ScrollFade() {
     return rect.top <= 0 && rect.bottom >= vh
   }
 
-  // высота секции = кол-во слайдов * 100vh + дополнительное пространство для последнего слайда
+  // высота секции = кол-во слайдов * 100vh + дополнительное пространство для последнего слайда (только для desktop)
   useLayoutEffect(() => {
     const el = wrapperRef.current
     if (!el) return
+    if (isMobile) {
+      // на мобильных убираем фиксированную высоту, слайды идут друг за другом
+      el.style.height = "auto"
+      return
+    }
     const baseHeight = Math.max(1, slides.length) * 100
     const extraHeight = LAST_SLIDE_EXTRA_VH * 100
     el.style.height = `${baseHeight + extraHeight}vh`
-  }, [slides.length])
+  }, [slides.length, isMobile])
 
-  // флаги видимости/анимаций
+  // флаги видимости/анимаций (только для desktop)
   // biome-ignore lint/correctness/useExhaustiveDependencies: use only needed deps
   useEffect(() => {
+    if (isMobile) {
+      setPanelVisible(true)
+      setAnimEnabled(false)
+      return
+    }
     const updateFlags = () => {
       const fully = isFullyInView()
       setPanelVisible(fully)
@@ -65,11 +88,15 @@ export function ScrollFade() {
       window.removeEventListener("scroll", updateFlags)
       window.removeEventListener("resize", updateFlags)
     }
-  }, [activeIndex, slides.length])
+  }, [activeIndex, slides.length, isMobile])
 
-  // индекс по полу — без перепрыгиваний
+  // индекс по полу — без перепрыгиваний (только для desktop)
   // biome-ignore lint/correctness/useExhaustiveDependencies: use only needed deps
   useEffect(() => {
+    if (isMobile) {
+      // на мобильных не отслеживаем активный индекс
+      return
+    }
     const onScroll = () => {
       const top = getWrapperTop()
       const rel = window.scrollY - top
@@ -107,7 +134,7 @@ export function ScrollFade() {
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onScroll)
     }
-  }, [slides.length])
+  }, [slides.length, isMobile])
 
   // своя анимация скролла
   const animateScrollTo = (toY: number, duration = 500) => {
@@ -188,6 +215,52 @@ export function ScrollFade() {
     animateScrollTo(top + nextIndex * h)
   }
 
+  // Мобильная версия - простой вертикальный скролл
+  // Показываем мобильную версию только после монтирования, чтобы избежать проблем с гидратацией
+  if (mounted && isMobile) {
+    return (
+      <section ref={wrapperRef} className="relative z-20">
+        {slides.map((slide) => (
+          <div key={slide.id} className="flex min-h-screen flex-col items-center justify-center px-4 py-16">
+            {/* Изображение или видео по центру */}
+            <div className="mb-8 flex items-center justify-center">
+              {slide.image ? (
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  width={227}
+                  height={492}
+                  className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
+                />
+              ) : slide.video ? (
+                <video
+                  src={slide.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="pointer-events-none h-[492px] w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
+                  width={227}
+                  height={492}
+                >
+                  <source src={slide.video} type="video/mp4" />
+                </video>
+              ) : null}
+            </div>
+
+            {/* Текст по центру */}
+            <div className="flex max-w-[520px] flex-col items-center text-center">
+              <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
+              <h5 className="font-medium text-base text-white/80">{slide.description}</h5>
+            </div>
+          </div>
+        ))}
+      </section>
+    )
+  }
+
+  // Desktop версия - sticky скролл с анимациями
+  // На сервере и до монтирования всегда рендерим desktop версию
   return (
     <section ref={wrapperRef} className="relative z-20 [scroll-snap-type:none]">
       <div className="sticky top-0 h-screen w-full">
@@ -236,7 +309,7 @@ export function ScrollFade() {
                   height={492}
                   className="pointer-events-none select-none rounded-4xl border-4 border-white/10"
                 />
-              ) : (
+              ) : slide.video ? (
                 <video
                   src={slide.video}
                   autoPlay
@@ -249,7 +322,7 @@ export function ScrollFade() {
                 >
                   <source src={slide.video} type="video/mp4" />
                 </video>
-              )}
+              ) : null}
             </div>
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
