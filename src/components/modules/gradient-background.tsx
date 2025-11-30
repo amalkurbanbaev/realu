@@ -11,7 +11,7 @@ export function GradientBackgroundTop() {
 export function GradientBackgroundBottom() {
   return (
     <svg
-      className="-z-10 pointer-events-none absolute inset-x-0 bottom-0 w-full object-cover object-bottom"
+      className="-z-10 pointer-events-none absolute inset-x-0 bottom-0 w-full object-cover object-bottom [clip-path:polygon(0_50%,100%_50%,100%_100%,0_100%)]"
       width="1280"
       viewBox="0 0 1280 832"
       height="832"
