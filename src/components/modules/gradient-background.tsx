@@ -3,7 +3,7 @@ import Image from "next/image"
 export function GradientBackgroundTop() {
   return (
     <div className="pointer-events-none absolute inset-x-0 top-0 z-0 flex h-[calc(100vh/1.5)] w-full">
-      <Image src="/gradients/header-gradient.png" fill alt="gradient" />
+      <Image src="/gradients/header-gradient.svg" fill alt="gradient" />
     </div>
   )
 }
