@@ -201,7 +201,7 @@ export function ScrollFade() {
           >
             {/* Фон градиент */}
             <div className="-z-10 pointer-events-none absolute inset-0">
-              <Image src={`/gradients/${slide.id}.png`} alt="slide-background" fill className="object-cover" />
+              <Image src={`/gradients/${slide.id}.svg`} alt="slide-background" fill className="object-cover" />
             </div>
 
             {/* Частицы */}
@@ -217,7 +217,7 @@ export function ScrollFade() {
                     "absolute",
                     p.position,
                     animEnabled ? "opacity-100" : "opacity-0",
-                    i === activeIndex && animEnabled && "fade-in animate-in duration-[1.5s] ease-in-out",
+                    i === activeIndex && animEnabled && "fade-in zoom-in-90 animate-in duration-[1.5s] ease-in-out",
                     i === 0 && "delay-100",
                   )}
                 />

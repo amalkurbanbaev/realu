@@ -68,16 +68,22 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "meditation",
     particles: [
       {
-        src: `/particles/meditation/${locale}/1.png`,
-        width: 414,
-        height: 192,
-        position: "left-1/2 -translate-x-1/2 top-0 -translate-y-full",
+        src: `/particles/meditation/${locale}/1.svg`,
+        width: 308,
+        height: 507,
+        position: "left-1/2 scale-125 -translate-x-[480px] top-[30%] slide-in-from-right-40",
       },
       {
         src: `/particles/meditation/${locale}/2.png`,
+        width: 390,
+        height: 249,
+        position: "left-1/2 translate-x-[170px] top-[22%] slide-in-from-left-20",
+      },
+      {
+        src: `/particles/meditation/${locale}/3.svg`,
         width: 411,
         height: 228,
-        position: "left-1/2 -translate-x-1/2 bottom-0 translate-y-full",
+        position: "left-1/2 translate-x-[190px] bottom-[22%] slide-in-from-left-20",
       },
     ],
   },
