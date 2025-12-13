@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { type ComponentPropsWithoutRef, useRef } from "react"
 import { Accordion } from "@radix-ui/react-accordion"
 import { useTranslations } from "next-intl"
 
@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 import type { FAQSection } from "@/types/entities"
 
 import { AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
+import { Typography } from "../ui/typography"
 
 type FAQNavigationProps = { sections?: { id: string; title: string }[] }
 
@@ -69,15 +70,7 @@ export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
         ))}
       </div>
 
-      <div className="mt-auto text-muted-foreground">
-        {t.rich("contact", {
-          a: (chunks) => (
-            <Link href="mailto:support@meditolife.com" className="text-white">
-              {chunks}
-            </Link>
-          ),
-        })}
-      </div>
+      <FAQFeedback className="mt-auto" />
     </nav>
   )
 }
@@ -91,17 +84,38 @@ export const FAQ = ({ questions }: FAQProps) => {
     <Accordion type="multiple" className="ml-auto w-full max-w-7xl space-y-4">
       {questions?.map((q) => (
         <div key={q.id} className="space-y-4 pt-10 first:pt-0" id={q.id}>
-          <h4 className="font-semibold text-xl">{q.title}</h4>
+          <Typography variant="headline-2">{q.title}</Typography>
           {q.questions.map((q) => (
             <AccordionItem key={q.text} value={q.text}>
-              <AccordionTrigger className="">{q.text}</AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance text-white">
-                <p>{q.answer}</p>
+              <AccordionTrigger>
+                <Typography variant="headline-3">{q.text}</Typography>
+              </AccordionTrigger>
+
+              <AccordionContent className="flex flex-col gap-4">
+                <Typography variant="body-1" className="font-light md:font-medium">
+                  {q.answer}
+                </Typography>
               </AccordionContent>
             </AccordionItem>
           ))}
         </div>
       ))}
     </Accordion>
+  )
+}
+
+export const FAQFeedback = ({ className, ...props }: ComponentPropsWithoutRef<"div">) => {
+  const t = useTranslations("help-page.layout")
+
+  return (
+    <div className={cn("text-muted-foreground", className)} {...props}>
+      {t.rich("contact", {
+        a: (chunks) => (
+          <Link href="mailto:support@meditolife.com" className="text-white">
+            {chunks}
+          </Link>
+        ),
+      })}
+    </div>
   )
 }

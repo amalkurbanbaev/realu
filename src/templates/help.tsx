@@ -1,6 +1,6 @@
 import { getLocale } from "next-intl/server"
 
-import { FAQ, FAQNavigation } from "@/components/modules/faq"
+import { FAQ, FAQFeedback, FAQNavigation } from "@/components/modules/faq"
 import { SlidingTabBar } from "@/components/modules/faq-new"
 import { getLocalizedContent } from "@/lib/utils"
 import type { FAQSection } from "@/types/entities"
@@ -19,6 +19,8 @@ export async function HelpPageTemplate() {
         <FAQNavigation sections={sections?.map((el) => ({ id: el.id, title: el.title }))} />
         <FAQ questions={allQuestions} />
         <div id="end-of-faq" />
+
+        <FAQFeedback className="mx-auto mt-4 block max-w-xs text-center font-light text-sm lg:hidden" />
       </div>
     </section>
   )
