@@ -1,13 +1,19 @@
 "use client"
 import { type ComponentPropsWithRef, useEffect, useImperativeHandle, useRef, useState } from "react"
+import { Volume2Icon } from "lucide-react"
 import Image from "next/image"
+
+import { MuteIcon } from "../icons"
+import { Button } from "../ui/button"
 
 type Props = {
   src: string
   autoPlay?: boolean
+  isMuted?: boolean
+  toggleMute?: () => void
 } & ComponentPropsWithRef<"video">
 
-export function VideoPlayer({ src, autoPlay = false, ref: externalRef, ...props }: Props) {
+export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted = false, toggleMute, ...props }: Props) {
   const internalRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
 
@@ -63,8 +69,23 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, ...props 
   }
 
   return (
-    <div className="relative flex h-auto w-auto items-center justify-center overflow-hidden rounded-[48px]">
+    <div className="relative flex h-auto w-auto items-center justify-center overflow-hidden rounded-3xl xl:rounded-[48px]">
       <video ref={internalRef} src={src} className="max-h-full max-w-full object-contain" playsInline loop {...props} />
+
+      <Button
+        aria-label="mute"
+        tabIndex={0}
+        variant="secondary"
+        className="absolute right-4 bottom-4 z-50 size-10 cursor-pointer flex-col items-center justify-center rounded-full md:hidden"
+        onClick={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+
+          toggleMute?.()
+        }}
+      >
+        {isMuted ? <Volume2Icon /> : <MuteIcon />}
+      </Button>
 
       <button
         onClick={togglePlayback}

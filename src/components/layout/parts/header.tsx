@@ -57,7 +57,7 @@ export const Header = () => {
         )}
       >
         <nav className="flex h-full flex-col justify-center">
-          <Button variant="secondary" className="w-fit self-end" onClick={toggleMenu}>
+          <Button variant="secondary" className="size-10 w-fit self-end rounded-full" onClick={toggleMenu}>
             <XIcon />
           </Button>
           <HeaderLinks onClick={() => toggleMenu()} />

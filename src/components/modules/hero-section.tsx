@@ -106,7 +106,7 @@ export function HeroSection() {
 
       <div
         className={cn(
-          "container flex w-full flex-col items-center justify-center overflow-hidden rounded-[48px] transition-transform duration-1000 ease-in-out md:flex-grow ",
+          "container flex w-full flex-col items-center justify-center overflow-hidden transition-transform duration-1000 ease-in-out md:flex-grow ",
           shouldZoomOut && "scale-90",
         )}
       >
@@ -118,6 +118,8 @@ export function HeroSection() {
           onClick={handleTogglePlay}
           src={videoSrc}
           poster="/video/poster-main.png"
+          isMuted={isMuted}
+          toggleMute={toggleMute}
         />
       </div>
 
@@ -132,17 +134,17 @@ export function HeroSection() {
           {isMuted ? <Volume2Icon /> : <MuteIcon />}
         </Button>
 
-        <div className="flex flex-col items-center justify-center gap-2">
-          <Typography variant="headline-1" as="h1">
+        <div className="mt-6 flex flex-col items-center justify-center gap-2 text-center">
+          <Typography variant="headline-1" as="h1" className="max-md:px-8">
             {t("title")}
           </Typography>
 
-          <Typography variant="body-1" as="h2">
+          <Typography variant="body-1" as="p" className="max-md:px-4">
             {t("description")}
           </Typography>
         </div>
 
-        <ScrollScreenButton targetId="presentation" className="z-50" type="button" />
+        <ScrollScreenButton targetId="presentation" className="z-50 hidden md:block" type="button" />
       </div>
     </section>
   )

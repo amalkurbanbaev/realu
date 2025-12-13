@@ -19,7 +19,7 @@ const typographyVariants = cva("text-foreground", {
       // Button: 16/24
       button: "font-medium text-[16px] leading-[24px]",
       // Body 1: D 16/24, M 14/20
-      "body-1": "font-medium text-[14px] text-white/80 leading-[20px] md:text-[16px] md:leading-[24px]",
+      "body-1": "font-light text-[14px] text-white/80 leading-[20px] md:text-[16px] md:leading-[24px]",
       // Body 2: D 14/20, M 12/16
       "body-2": "font-light text-[12px] text-white/80 leading-[16px] md:text-[14px] md:leading-[20px]",
       // Caption: D 12/16, M 12/16

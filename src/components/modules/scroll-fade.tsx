@@ -222,7 +222,7 @@ export function ScrollFade() {
     return (
       <section ref={wrapperRef} className="relative z-20">
         {slides.map((slide) => (
-          <div key={slide.id} className="flex min-h-screen flex-col items-center justify-center px-4 py-16">
+          <div key={slide.id} className="flex flex-col items-center justify-center px-4 py-12">
             {/* Изображение или видео по центру */}
             <div className="mb-8 flex items-center justify-center px-4">
               {slide.image ? (
@@ -250,11 +250,11 @@ export function ScrollFade() {
             </div>
 
             {/* Текст по центру */}
-            <div className="flex max-w-[520px] flex-col items-center text-center">
+            <div className="flex max-w-[320px] flex-col items-center gap-y-2 text-center">
               <Typography variant="headline-1" as="h4">
                 {slide.title}
               </Typography>
-              <Typography variant="body-1" as="h5">
+              <Typography variant="body-1" as="p" className="font-light">
                 {slide.description}
               </Typography>
             </div>
@@ -332,9 +332,13 @@ export function ScrollFade() {
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
             {panelVisible && i === activeIndex && (
-              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-[520px] flex-col items-center px-4 text-center">
-                <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
-                <h5 className="font-medium text-base text-white/80">{slide.description}</h5>
+              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-[520px] flex-col items-center gap-y-2 px-4 text-center">
+                <Typography variant="headline-1" as="h4">
+                  {slide.title}
+                </Typography>
+                <Typography variant="body-1" as="p">
+                  {slide.description}
+                </Typography>
               </div>
             )}
           </div>
