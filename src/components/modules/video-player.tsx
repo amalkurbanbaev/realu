@@ -69,8 +69,8 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
   }
 
   return (
-    <div className="relative flex h-auto w-auto items-center justify-center overflow-hidden rounded-3xl xl:rounded-[48px]">
-      <video ref={internalRef} src={src} className="max-h-full max-w-full object-contain" playsInline loop {...props} />
+    <div className="relative flex h-auto w-full items-center justify-center overflow-hidden rounded-3xl xl:rounded-[48px]">
+      <video ref={internalRef} src={src} className="object-cover" playsInline loop {...props} />
 
       <Button
         aria-label="mute"

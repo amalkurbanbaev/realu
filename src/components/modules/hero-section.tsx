@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 import { MuteIcon } from "../icons"
 import { Button } from "../ui/button"
 import { Typography } from "../ui/typography"
+import { AppleButton } from "./apple-button"
 import { ScrollScreenButton } from "./scroll-screen-button"
 import { VideoPlayer } from "./video-player"
 
@@ -123,7 +124,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container flex items-end justify-between py-4 md:pt-8 md:pb-12">
+      <div className="container flex items-end justify-center py-4 md:justify-between md:pt-8 md:pb-12">
         <Button
           aria-label="mute"
           tabIndex={0}
@@ -145,6 +146,10 @@ export function HeroSection() {
         </div>
 
         <ScrollScreenButton targetId="presentation" className="z-50 hidden md:block" type="button" />
+      </div>
+
+      <div className="container">
+        <AppleButton className="mx-auto block w-fit md:hidden" />
       </div>
     </section>
   )

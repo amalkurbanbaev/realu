@@ -52,7 +52,7 @@ export const Header = () => {
       {/* Mobile drawer */}
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-40 w-3/4 max-w-xs bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out md:hidden",
+          "fixed inset-y-0 right-0 z-40 w-full bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out md:hidden",
           menuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -61,7 +61,7 @@ export const Header = () => {
             <XIcon />
           </Button>
           <HeaderLinks onClick={() => toggleMenu()} />
-          <AppleButton className="mx-auto grow-0 text-center" />
+          <AppleButton className="w-[20px]" />
         </nav>
       </div>
 

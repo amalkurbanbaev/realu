@@ -220,7 +220,7 @@ export function ScrollFade() {
   // Показываем мобильную версию только после монтирования, чтобы избежать проблем с гидратацией
   if (mounted && isMobile) {
     return (
-      <section ref={wrapperRef} className="relative z-20">
+      <section ref={wrapperRef} className="relative z-20 mt-14">
         {slides.map((slide) => (
           <div key={slide.id} className="flex flex-col items-center justify-center px-4 py-12">
             {/* Изображение или видео по центру */}
