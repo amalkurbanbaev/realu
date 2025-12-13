@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 
 import { cn } from "@/lib/utils"
 
+import { Typography } from "../ui/typography"
 import { AppleButton } from "./apple-button"
 
 export async function DownloadBanner() {
@@ -25,13 +26,17 @@ export async function DownloadBanner() {
           )}
         />
 
-        <div className="p-6 text-center md:p-12 md:text-left">
-          <div className="mx-auto flex w-full max-w-md flex-col gap-4 md:mx-0">
-            <h3 className="font-bold text-2xl">{t("title2")}</h3>
+        <div className="text-center md:p-12 md:text-left">
+          <div className="mx-auto flex w-full max-w-md flex-col gap-2 md:mx-0 md:gap-4">
+            <Typography variant="headline-1" as="h3">
+              {t("title2")}
+            </Typography>
 
             <div className="flex flex-col-reverse items-center gap-4 md:flex-row">
               <AppleButton className="shrink-0" />
-              <p className="max-w-[250px] text-white/80">{t("description2")}</p>
+              <Typography variant="body-1" as="p" className="max-w-[250px]">
+                {t("description2")}
+              </Typography>
             </div>
           </div>
         </div>

@@ -96,7 +96,7 @@
   --sidebar-accent-foreground: oklch(0.2435 0 0);
   --sidebar-border: oklch(0.9037 0 0);
   --sidebar-ring: oklch(0.8408 0.1005 198.5963);
-  --font-sans: Outfit, sans-serif;
+  --font-sans:  Montserrat, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: monospace;
   --radius: 0.5rem;
@@ -119,7 +119,6 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    letter-spacing: var(--tracking-normal);
   }
 
   button {

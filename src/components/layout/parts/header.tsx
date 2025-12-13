@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { MenuMinimalIcon } from "@/components/icons"
 import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
+import { Typography } from "@/components/ui/typography"
 import { HEADER_LINKS } from "@/constants/links"
 import { useNormalizedPathname, useScrollLockWhen } from "@/hooks"
 import { Link } from "@/i18n/navigation"
@@ -91,13 +92,19 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
   const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
 
   return (
-    <ul className="flex grow flex-col items-center justify-center gap-4 font-medium text-xl md:flex-row md:gap-x-8">
+    <ul className="flex grow flex-col items-center justify-center gap-4 md:flex-row md:gap-x-8">
       {HEADER_LINKS.map((link) => {
         const isActive = normalizedPath === link.href
         return (
-          <li key={link.translationKey} className={cn("py-2", isActive ? "text-white transition-colors" : "text-white/40 hover:text-white")}>
+          <li key={link.translationKey} className={cn("py-2")}>
             <Link href={link.href} onClick={onClick}>
-              {t(link.translationKey)}
+              <Typography
+                variant="menu"
+                className={cn("font-medium", isActive ? "text-white transition-colors" : "text-white/40 hover:text-white")}
+                as="span"
+              >
+                {t(link.translationKey)}
+              </Typography>
             </Link>
           </li>
         )

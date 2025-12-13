@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 
 import { ArrowDownIcon } from "../icons"
 import { Button } from "../ui/button"
+import { Typography } from "../ui/typography"
 import { Particle } from "./particle"
 
 export function ScrollFade() {
@@ -250,8 +251,12 @@ export function ScrollFade() {
 
             {/* Текст по центру */}
             <div className="flex max-w-[520px] flex-col items-center text-center">
-              <h4 className="mb-2 font-bold text-2xl">{slide.title}</h4>
-              <h5 className="font-medium text-base text-white/80">{slide.description}</h5>
+              <Typography variant="headline-1" as="h4">
+                {slide.title}
+              </Typography>
+              <Typography variant="body-1" as="h5">
+                {slide.description}
+              </Typography>
             </div>
           </div>
         ))}

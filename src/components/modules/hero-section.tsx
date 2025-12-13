@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 
 import { MuteIcon } from "../icons"
 import { Button } from "../ui/button"
+import { Typography } from "../ui/typography"
 import { ScrollScreenButton } from "./scroll-screen-button"
 import { VideoPlayer } from "./video-player"
 
@@ -132,8 +133,13 @@ export function HeroSection() {
         </Button>
 
         <div className="flex flex-col items-center justify-center gap-2">
-          <h1 className="font-bold text-2xl">{t("title")}</h1>
-          <h5 className="font-light">{t("description")}</h5>
+          <Typography variant="headline-1" as="h1">
+            {t("title")}
+          </Typography>
+
+          <Typography variant="body-1" as="h2">
+            {t("description")}
+          </Typography>
         </div>
 
         <ScrollScreenButton targetId="presentation" className="z-50" type="button" />

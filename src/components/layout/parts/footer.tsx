@@ -4,6 +4,7 @@ import { ArrowUpIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
+import { Typography } from "@/components/ui/typography"
 import { FOOTER_LINKS } from "@/constants/links"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
@@ -14,7 +15,7 @@ export const Footer = () => {
   }
 
   return (
-    <footer className="container z-50 flex flex-col justify-between gap-4 py-8 lg:flex-row lg:gap-0 lg:py-6">
+    <footer className="container z-50 flex flex-col justify-between gap-4 bg-background py-8 lg:flex-row lg:items-start lg:gap-0 lg:bg-transparent lg:py-6">
       <FooterLinks />
       <FooterContact />
       <FooterCopy />
@@ -34,16 +35,16 @@ const FooterLinks = () => {
   return (
     <div
       className={cn(
-        "mx-auto max-w-[320px] text-center text-white/60 text-xs lg:mx-0 lg:text-left",
+        "mx-auto max-w-[320px] text-center text-white/60 text-xs max-sm:flex max-sm:flex-col lg:mx-0 lg:text-left",
         locale === "ru" ? "max-w-[68ch]" : "max-w-[46ch]",
       )}
     >
       {FOOTER_LINKS.map((link) => (
-        <span key={link.translationKey} className="mr-2 mb-2 inline-block whitespace-nowrap align-top">
+        <Typography variant="caption" as="span" key={link.translationKey} className="mr-2 mb-2 inline-block whitespace-nowrap align-top font-normal">
           <Link href={link.href} className="hover:underline">
             {tFooter(link.translationKey)}
           </Link>
-        </span>
+        </Typography>
       ))}
     </div>
   )
@@ -51,10 +52,12 @@ const FooterLinks = () => {
 
 const FooterContact = () => {
   return (
-    <div className="order-2 text-center lg:order-3 lg:text-right">
-      <Link href="mailto:support@lotofus.co" className="font-medium text-foreground text-xs hover:underline lg:font-normal lg:text-white/60">
-        support@lotofus.co
-      </Link>
+    <div className="order-2 flex items-start justify-center text-center lg:order-3 lg:justify-end lg:text-right">
+      <Typography variant="caption" as="span" className="font-normal text-white/60">
+        <Link href="mailto:support@lotofus.co" className="hover:underline">
+          support@lotofus.co
+        </Link>
+      </Typography>
     </div>
   )
 }
@@ -63,11 +66,14 @@ const FooterCopy = () => {
   const locale = useLocale()
   const currentYear = new Date().getFullYear()
   return (
-    <div className="order-3 flex flex-col items-center gap-1 text-center text-white/80 text-xs lg:order-2">
-      <div>Dubai, UAE. LOTOFUS L.L.C — FZ.</div>
-      <div>
+    <div className="order-3 flex flex-col items-center gap-1 text-center text-xs lg:order-2 lg:items-start">
+      <Typography variant="caption" as="span" className="font-normal text-white/60">
+        Dubai, UAE. LOTOFUS L.L.C — FZ.
+      </Typography>
+
+      <Typography variant="caption" as="span" className="font-normal text-white/60">
         {locale === "ru" ? "Все права защищены" : "All rights reserved"} © {currentYear}
-      </div>
+      </Typography>
     </div>
   )
 }

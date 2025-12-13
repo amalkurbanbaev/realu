@@ -10,7 +10,7 @@ type GlowCardProps = {
 export function GlowCard({ children, className }: GlowCardProps) {
   return (
     <div className={cn("relative isolate h-full", className)}>
-      <div className="h-full border-gradient p-6 text-center">{children}</div>
+      <div className="h-full border-gradient px-3 py-8 text-center">{children}</div>
     </div>
   )
 }

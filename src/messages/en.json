@@ -54,7 +54,10 @@
           "description": "Prepare the body for seated postures used in meditation and breathwork. Or use the daily warm-up on its own to bring tone and vitality to your body",
           "image": "warmup"
         }
-      ]
+      ],
+      "features": {
+        "title": "What you’ll gain"
+      }
     }
   },
   "about-page": {
