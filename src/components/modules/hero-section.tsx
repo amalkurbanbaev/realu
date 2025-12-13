@@ -112,7 +112,7 @@ export function HeroSection() {
         )}
       >
         <VideoPlayer
-          preload="metadata"
+          preload="auto"
           ref={videoRef}
           muted={isMuted}
           autoPlay={true}

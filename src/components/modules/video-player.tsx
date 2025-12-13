@@ -35,37 +35,56 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
     }
   }, [])
 
-  // Автоплей как только есть минимальные данные для воспроизведения (YouTube-подобное поведение)
+  // Автоплей для мобильных устройств (iOS Safari требует нативный autoplay + playsInline + muted)
   useEffect(() => {
     const video = internalRef.current
     if (!video || !autoPlay) return
 
+    // Для мобильных устройств используем нативный autoplay атрибут
+    // Но также пытаемся программно запустить для десктопа
+    const attemptPlay = () => {
+      if (video.paused && autoPlay) {
+        const playPromise = video.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true)
+            })
+            .catch((error) => {
+              // Автоплей заблокирован (обычно на мобильных без взаимодействия)
+              // Это нормально, пользователь сможет запустить вручную
+              console.error("Autoplay prevented:", error)
+            })
+        }
+      }
+    }
+
     // Пытаемся запустить сразу, если уже есть данные
     if (video.readyState >= 1) {
-      video.play().catch(() => {})
-      setIsPlaying(true)
+      attemptPlay()
     }
 
     // Запускаем при первом доступном событии загрузки данных
     const handleLoadedData = () => {
-      if (video.paused && autoPlay) {
-        video.play().catch(() => {})
-        setIsPlaying(true)
-      }
+      attemptPlay()
     }
 
     // canplay срабатывает раньше, когда можно начать воспроизведение
     const handleCanPlay = () => {
-      if (video.paused && autoPlay) {
-        video.play().catch(() => {})
-        setIsPlaying(true)
-      }
+      attemptPlay()
     }
 
+    // loadedmetadata - самое раннее событие, когда можно попробовать запустить
+    const handleLoadedMetadata = () => {
+      attemptPlay()
+    }
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata)
     video.addEventListener("loadeddata", handleLoadedData)
     video.addEventListener("canplay", handleCanPlay)
 
     return () => {
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata)
       video.removeEventListener("loadeddata", handleLoadedData)
       video.removeEventListener("canplay", handleCanPlay)
     }
@@ -86,7 +105,7 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
 
   return (
     <div className="relative flex h-auto w-full items-center justify-center overflow-hidden rounded-3xl xl:rounded-[48px]">
-      <video ref={internalRef} src={src} className="object-cover" playsInline loop {...props} />
+      <video ref={internalRef} src={src} className="object-cover" playsInline loop autoPlay={autoPlay} muted={isMuted} {...props} />
 
       <Button
         aria-label="mute"
