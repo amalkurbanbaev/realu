@@ -239,7 +239,7 @@ export function ScrollFade() {
                   muted
                   loop
                   playsInline
-                  className="pointer-events-none h-auto max-h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
+                  className="pointer-events-none h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
                   width={227}
                   height={492}
                 >
@@ -316,7 +316,7 @@ export function ScrollFade() {
                   muted
                   loop
                   playsInline
-                  className="pointer-events-none h-auto max-h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover md:max-h-[400px] md:max-w-[180px] lg:max-h-[492px] lg:max-w-[227px]"
+                  className="pointer-events-none h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover md:h-[400px] md:max-w-[180px] lg:h-[492px] lg:max-w-[227px]"
                   width={227}
                   height={492}
                 >
