@@ -1,6 +1,8 @@
+import type { ComponentPropsWithoutRef } from "react"
 import Image from "next/image"
 import { useTranslations } from "next-intl"
 
+import { Typography } from "@/components/ui/typography"
 import { Link } from "@/i18n/navigation"
 import type { PostMeta } from "@/lib/blog"
 
@@ -15,24 +17,34 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
     return (
       <section className="container py-16">
         <div className="text-center">
-          <h1 className="mb-4 font-bold text-4xl">{t("title")}</h1>
-          <p className="text-lg text-muted-foreground">{t("noPosts")}</p>
+          <div className="flex flex-col justify-between">
+            <Typography variant="headline-1" className="mb-4">
+              {t("title")}
+            </Typography>
+
+            <BlogFeedback />
+          </div>
+          <Typography className="text-muted-foreground">{t("noPosts")}</Typography>
         </div>
       </section>
     )
   }
 
   return (
-    <section className="container flex flex-col gap-8 md:py-6 lg:flex-row lg:gap-10">
-      <div className="w-full lg:max-w-xs">
-        <h1 className="font-medium text-xl lg:font-bold lg:text-4xl">{t("title")}</h1>
+    <section className="container flex min-h-full flex-1 flex-col gap-8 md:py-6 lg:flex-row lg:gap-10">
+      <div className="flex flex-col justify-between">
+        <Typography variant="headline-1">{t("title")}</Typography>
+
+        <BlogFeedback className="hidden max-w-xs lg:block" />
       </div>
 
-      <div className="grid w-full grid-cols-1 items-start gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid w-full grid-cols-1 items-start gap-6 self-start sm:grid-cols-2 md:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
       </div>
+
+      <BlogFeedback className="mx-auto max-w-[250px] text-center lg:hidden" />
     </section>
   )
 }
@@ -48,11 +60,29 @@ function PostCard({ post }: { post: PostMeta }) {
             </div>
           )}
 
-          <h2 className="mb-3 text-balance text-center font-semibold text-xl leading-tight transition-colors group-hover:text-primary sm:line-clamp-2 sm:min-h-12">
+          <Typography
+            variant="headline-2"
+            className="mb-3 text-balance text-center font-bold leading-tight transition-colors group-hover:text-primary sm:line-clamp-2 sm:min-h-12 md:font-medium"
+          >
             {post.title}
-          </h2>
+          </Typography>
         </div>
       </Link>
     </article>
+  )
+}
+
+const BlogFeedback = (props: ComponentPropsWithoutRef<"div">) => {
+  const t = useTranslations("blog")
+
+  return (
+    <div {...props}>
+      <Typography variant="body-1" className="text-white/40">
+        {t("feedback")}{" "}
+        <a href="mailto:support@lotofus.co" className="text-white hover:underline">
+          support@lotofus.co
+        </a>
+      </Typography>
+    </div>
   )
 }

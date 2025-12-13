@@ -4,6 +4,7 @@ import type { Locale } from "next-intl"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 import { mdxComponents } from "@/components/modules/mdx"
+import { Typography } from "@/components/ui/typography"
 import { Link } from "@/i18n/navigation"
 import type { Post } from "@/lib/blog"
 import { formatDate } from "@/utils/format-date"
@@ -31,9 +32,11 @@ export function ArticleTemplate({ post, locale }: ArticleTemplateProps) {
             )}
 
             <div className="flex flex-1 flex-col justify-center space-y-4">
-              <h1 className="font-bold text-4xl leading-tight md:text-5xl">{post.title}</h1>
+              <Typography variant="headline-1">{post.title}</Typography>
 
-              <p className="text-muted-foreground text-xl leading-relaxed">{post.summary}</p>
+              <Typography variant="body-1" className="leading-relaxed">
+                {post.summary}
+              </Typography>
 
               <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm">
                 <div className="flex items-center gap-2">

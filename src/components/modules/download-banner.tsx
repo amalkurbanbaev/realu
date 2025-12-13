@@ -33,7 +33,7 @@ export async function DownloadBanner() {
             </Typography>
 
             <div className="flex flex-col-reverse items-center gap-4 md:flex-row">
-              <AppleButton className="shrink-0" />
+              <AppleButton className="hidden shrink-0 md:block" />
               <Typography variant="body-1" as="p" className="max-w-[250px]">
                 {t("description2")}
               </Typography>

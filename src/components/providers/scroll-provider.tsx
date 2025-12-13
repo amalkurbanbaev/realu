@@ -45,6 +45,7 @@ export function ScrollProvider({ children }: { children: ReactNode }) {
     <ReactLenis
       ref={lenisRef}
       root
+      className="h-full"
       options={{
         // Исключаем элементы с data-lenis-prevent из обработки
         prevent: (node) => {

@@ -61,7 +61,7 @@ export const Header = () => {
             <XIcon />
           </Button>
           <HeaderLinks onClick={() => toggleMenu()} />
-          <AppleButton className="w-[20px]" />
+          <AppleButton className="mx-auto" />
         </nav>
       </div>
 

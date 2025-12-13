@@ -2,6 +2,7 @@ import Image from "next/image"
 import type { Locale } from "next-intl"
 
 import { CloseButton } from "@/components/modules/close-button"
+import { Typography } from "@/components/ui/typography"
 import type { Post } from "@/lib/blog"
 
 interface ArticleModalDesktopProps {
@@ -26,12 +27,15 @@ export const ArticleModalDesktop = ({ post, locale, children, showCloseButton = 
 
         <article className="flex-1">
           <section>
-            <div className="mb-3 text-muted-foreground text-xs sm:mb-4 sm:text-sm">
+            <Typography variant="body-2" className="mb-2">
               {locale === "en" && "By "}
-              {post.author} {locale === "en" && "• "}
+              {post.author} • {locale === "en" && "• "}
               {post.readingTime} {locale === "ru" ? "мин читать" : "minutes to read"}
-            </div>
-            <h1 className="mb-6 font-bold text-xl leading-tight sm:mb-8 sm:text-2xl md:text-3xl">{post.title}</h1>
+            </Typography>
+
+            <Typography variant="headline-1" className="mb-6">
+              {post.title}
+            </Typography>
             <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">{children}</div>
           </section>
         </article>

@@ -21,7 +21,7 @@ export function PageLayout({ children, withGradient = true }: PageLayoutProps) {
 
       {withGradient ? <GradientBackgroundTop /> : null}
 
-      <main className="flex-1 rounded-b-[56px] bg-background">
+      <main className="flex flex-1 flex-col rounded-b-[56px] bg-background">
         <ScrollProvider>{children}</ScrollProvider>
       </main>
 

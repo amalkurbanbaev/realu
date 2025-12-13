@@ -1,6 +1,8 @@
 import type { ComponentProps } from "react"
 import Image from "next/image"
 
+import { Typography } from "../ui/typography"
+
 // Кастомные компоненты для MDX
 function CustomImage(props: ComponentProps<typeof Image>) {
   return (
@@ -27,6 +29,14 @@ function CustomTable({ children }: { children: React.ReactNode }) {
   )
 }
 
+function CustomParagraph({ children }: { children: React.ReactNode }) {
+  return (
+    <Typography variant="body-1" className="font-medium">
+      {children}
+    </Typography>
+  )
+}
+
 export const mdxComponents = {
   img: CustomImage,
   Image: CustomImage,
@@ -34,4 +44,5 @@ export const mdxComponents = {
   table: CustomTable,
   th: ({ children }: { children: React.ReactNode }) => <th className="border border-border bg-muted p-2 text-left font-semibold">{children}</th>,
   td: ({ children }: { children: React.ReactNode }) => <td className="border border-border p-2">{children}</td>,
+  p: CustomParagraph,
 }

@@ -3,6 +3,7 @@
 import { ArrowUpIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 
+import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { Typography } from "@/components/ui/typography"
 import { FOOTER_LINKS } from "@/constants/links"
@@ -16,6 +17,7 @@ export const Footer = () => {
 
   return (
     <footer className="container z-50 flex flex-col justify-between gap-4 bg-background py-8 lg:flex-row lg:items-start lg:gap-0 lg:bg-transparent lg:py-6">
+      <AppleButton className="mx-auto mb-4 md:hidden" />
       <FooterLinks />
       <FooterContact />
       <FooterCopy />
