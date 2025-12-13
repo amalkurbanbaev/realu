@@ -29,30 +29,46 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
     video.addEventListener("play", handlePlay)
     video.addEventListener("pause", handlePause)
 
-    // Автоплей при загрузке
-    if (autoPlay && video.readyState >= 2) {
-      video.play().catch(() => {})
-      setIsPlaying(true)
-    }
-
     return () => {
       video.removeEventListener("play", handlePlay)
       video.removeEventListener("pause", handlePause)
     }
-  }, [autoPlay])
+  }, [])
 
-  // Дополнительный эффект для автоплея когда видео загрузится
+  // Автоплей как только есть минимальные данные для воспроизведения (YouTube-подобное поведение)
   useEffect(() => {
     const video = internalRef.current
     if (!video || !autoPlay) return
 
-    const handleCanPlay = () => {
+    // Пытаемся запустить сразу, если уже есть данные
+    if (video.readyState >= 1) {
       video.play().catch(() => {})
       setIsPlaying(true)
     }
 
+    // Запускаем при первом доступном событии загрузки данных
+    const handleLoadedData = () => {
+      if (video.paused && autoPlay) {
+        video.play().catch(() => {})
+        setIsPlaying(true)
+      }
+    }
+
+    // canplay срабатывает раньше, когда можно начать воспроизведение
+    const handleCanPlay = () => {
+      if (video.paused && autoPlay) {
+        video.play().catch(() => {})
+        setIsPlaying(true)
+      }
+    }
+
+    video.addEventListener("loadeddata", handleLoadedData)
     video.addEventListener("canplay", handleCanPlay)
-    return () => video.removeEventListener("canplay", handleCanPlay)
+
+    return () => {
+      video.removeEventListener("loadeddata", handleLoadedData)
+      video.removeEventListener("canplay", handleCanPlay)
+    }
   }, [autoPlay])
 
   const togglePlayback = () => {
