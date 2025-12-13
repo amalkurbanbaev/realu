@@ -28,9 +28,9 @@ export const getRawSlides = (locale: string): RawSlide[] => [
       // Справа вверху (вылетает из центра вправо)
       {
         src: `/particles/learn/${locale}/4.png`,
-        width: 273,
-        height: 326,
-        position: "left-1/2 translate-x-[140px] top-[30%] slide-in-from-left-40",
+        width: 333,
+        height: 426,
+        position: "left-1/2 translate-x-[140px] top-[24%] slide-in-from-left-40",
       },
       // Справа внизу (вылетает из центра вправо)
       {
@@ -68,7 +68,7 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "meditation",
     particles: [
       {
-        src: `/particles/meditation/${locale}/1.svg`,
+        src: `/particles/meditation/${locale}/1.png`,
         width: 308,
         height: 507,
         position: "left-1/2 scale-125 -translate-x-[480px] top-[30%] slide-in-from-right-40",
@@ -80,7 +80,7 @@ export const getRawSlides = (locale: string): RawSlide[] => [
         position: "left-1/2 translate-x-[170px] top-[22%] slide-in-from-left-20",
       },
       {
-        src: `/particles/meditation/${locale}/3.svg`,
+        src: `/particles/meditation/${locale}/3.png`,
         width: 411,
         height: 228,
         position: "left-1/2 translate-x-[190px] bottom-[22%] slide-in-from-left-20",
@@ -127,7 +127,7 @@ export const getRawSlides = (locale: string): RawSlide[] => [
         position: "left-1/2 scale-125 translate-x-[210px] top-[25%] slide-in-from-left-40",
       },
       {
-        src: `/particles/tests/${locale}/7.svg`,
+        src: `/particles/tests/${locale}/7.png`,
         width: 394,
         height: 178,
         position: "left-1/2 scale-125 translate-x-[190px] top-[40%] slide-in-from-left-40",
@@ -144,13 +144,13 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "yoga",
     particles: [
       {
-        src: `/particles/yoga/${locale}/1.svg`,
+        src: `/particles/yoga/${locale}/1.png`,
         width: 343,
         height: 341,
-        position: "left-1/2 scale-125 -translate-x-[470px] top-[31%] slide-in-from-right-40",
+        position: "left-1/2 scale-100 -translate-x-[470px] top-[31%] slide-in-from-right-40",
       },
       {
-        src: `/particles/yoga/${locale}/2.svg`,
+        src: `/particles/yoga/${locale}/2.png`,
         width: 422,
         height: 278,
         position: "left-1/2 scale-125 translate-x-[190px] top-[35%] slide-in-from-left-40",
@@ -161,19 +161,19 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "diary",
     particles: [
       {
-        src: `/particles/diary/${locale}/1.svg`,
+        src: `/particles/diary/${locale}/1.png`,
         width: 340,
         height: 202,
         position: "left-1/2 scale-125 -translate-x-[450px] top-[31%] slide-in-from-right-40",
       },
       {
-        src: `/particles/diary/${locale}/2.svg`,
+        src: `/particles/diary/${locale}/2.png`,
         width: 376,
         height: 290,
         position: "left-1/2 scale-125 translate-x-[210px] top-[16%] slide-in-from-left-40",
       },
       {
-        src: `/particles/diary/${locale}/3.svg`,
+        src: `/particles/diary/${locale}/3.png`,
         width: 266,
         height: 176,
         position: "left-1/2 scale-125 translate-x-[210px] top-[49%] slide-in-from-left-40",

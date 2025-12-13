@@ -19,6 +19,8 @@ export function Particle({ src, className, width = 32, height = 32, alt = "parti
       height={height}
       className={cn("pointer-events-none absolute scale-125 select-none", className)}
       draggable={false}
+      unoptimized
+      priority={false}
     />
   )
 }
