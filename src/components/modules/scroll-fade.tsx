@@ -336,7 +336,7 @@ export function ScrollFade() {
                 <Typography variant="headline-1" as="h4">
                   {slide.title}
                 </Typography>
-                <Typography variant="body-1" as="p">
+                <Typography variant="body-1" as="p" className="max-w-[444px] font-medium">
                   {slide.description}
                 </Typography>
               </div>

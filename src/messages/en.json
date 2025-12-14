@@ -47,7 +47,7 @@
 
         {
           "title": "Observe your state",
-          "description": "Watch your emotional and mental states shift as you practice meditation. Recognizing emotions encourages emotional regulation as you move through them.",
+          "description": "Watch your emotional and mental states shift as you practice meditation. Recognizing emotions encourages emotional regulation as you move through them",
           "image": "diary"
         },
         {
@@ -73,11 +73,11 @@
   },
   "help-page": {
     "meta": {
-      "title": "Answers and\u00A0questions",
+      "title": "FAQ",
       "description": "Feel\u00A0life — meditations\u00A0and\u00A0breathwork\u00A0from\u00A0yogic\u00A0sources"
     },
     "layout": {
-      "title": "Answers and\u00A0questions",
+      "title": "FAQ",
       "contact": "If there is no answer to your question here, send an email <a>support@meditolife.com</a>"
     }
   },
