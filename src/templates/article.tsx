@@ -1,9 +1,9 @@
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
-import Image from "next/image"
 import type { Locale } from "next-intl"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 import { mdxComponents } from "@/components/modules/mdx"
+import { ProgressiveImage } from "@/components/ui/progressive-image"
 import { Typography } from "@/components/ui/typography"
 import { Link } from "@/i18n/navigation"
 import type { Post } from "@/lib/blog"
@@ -27,7 +27,7 @@ export function ArticleTemplate({ post, locale }: ArticleTemplateProps) {
           <div className="flex flex-col gap-8 md:flex-row">
             {post.cover && (
               <div className="relative h-[264px] w-[264px] shrink-0 overflow-hidden rounded-2xl">
-                <Image src={post.cover} alt={post.title} fill className="object-cover" priority sizes="264px" />
+                <ProgressiveImage src={post.cover} alt={post.title} fill className="object-cover" priority sizes="264px" />
               </div>
             )}
 

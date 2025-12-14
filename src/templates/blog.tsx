@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react"
-import Image from "next/image"
 import { useTranslations } from "next-intl"
 
+import { ProgressiveImage } from "@/components/ui/progressive-image"
 import { Typography } from "@/components/ui/typography"
 import { Link } from "@/i18n/navigation"
 import type { PostMeta } from "@/lib/blog"
@@ -55,9 +55,14 @@ function PostCard({ post }: { post: PostMeta }) {
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="flex size-full flex-col gap-3">
           {post.cover && (
-            <div className="relative aspect-square size-full overflow-clip rounded-4xl">
-              <Image src={post.cover} alt={post.title} fill className="object-cover" />
-            </div>
+            <ProgressiveImage
+              src={post.cover}
+              alt={post.title}
+              fill
+              containerClassName="relative aspect-square size-full overflow-clip rounded-4xl"
+              skeletonClassName="rounded-4xl"
+              className="object-cover"
+            />
           )}
 
           <Typography
