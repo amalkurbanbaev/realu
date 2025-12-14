@@ -10,7 +10,7 @@ export type LinkType<T extends keyof Messages, U extends keyof Messages[T]> = {
 export const HEADER_LINKS: LinkType<"header", "links">[] = [
   { translationKey: "app", href: "/" },
   { translationKey: "blog", href: "/blog" },
-  { translationKey: "about", href: "/about" },
+  // { translationKey: "about", href: "/about" },
   { translationKey: "help", href: "/help" },
 ]
 
