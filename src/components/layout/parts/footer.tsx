@@ -37,7 +37,7 @@ const FooterLinks = () => {
   return (
     <div
       className={cn(
-        "mx-auto max-w-[320px] text-center max-sm:flex max-sm:flex-col max-sm:gap-y-4 md:text-left lg:mx-0 lg:text-xs",
+        "mx-auto max-w-[320px] text-center max-sm:flex max-sm:flex-col max-sm:gap-y-4 md:text-xs lg:mx-0 lg:text-left",
         locale === "ru" ? "max-w-[68ch]" : "max-w-[46ch]",
       )}
     >
@@ -46,7 +46,7 @@ const FooterLinks = () => {
           variant="caption"
           as="span"
           key={link.translationKey}
-          className="mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 lg:font-normal lg:text-[12px] lg:text-white"
+          className="mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 md:font-normal lg:text-[12px] lg:text-white"
         >
           <Link href={link.href} className="hover:underline">
             {tFooter(link.translationKey)}

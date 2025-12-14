@@ -1,8 +1,10 @@
+import { ArrowLeft } from "lucide-react"
 import type { Locale } from "next-intl"
 
 import { CloseButton } from "@/components/modules/close-button"
 import { ProgressiveImage } from "@/components/ui/progressive-image"
 import { Typography } from "@/components/ui/typography"
+import { Link } from "@/i18n/navigation"
 import type { Post } from "@/lib/blog"
 
 interface ArticleModalDesktopProps {
@@ -15,8 +17,15 @@ interface ArticleModalDesktopProps {
 export const ArticleModalDesktop = ({ post, locale, children, showCloseButton = true }: ArticleModalDesktopProps) => {
   // data-lenis-prevent - отключает scroll на этом элементе, чтобы не было конфликта с Lenis
   return (
-    <section className="relative mx-auto max-w-4xl flex-1 select-text overflow-y-auto px-4 pb-6 sm:px-6 sm:py-8 md:px-10 md:py-16">
-      {showCloseButton && <CloseButton useHistory fallbackHref="/blog" />}
+    <section className="relative mx-auto max-w-4xl flex-1 select-text overflow-y-auto px-4 pb-6 sm:px-6 sm:py-8 md:px-10 md:py-12">
+      {showCloseButton ? (
+        <CloseButton useHistory fallbackHref="/blog" />
+      ) : (
+        <Link href="/blog" className="mb-4 inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" />
+          {locale === "ru" ? "Назад к блогу" : "Back to blog"}
+        </Link>
+      )}
 
       <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:gap-16">
         {post.cover && (
@@ -29,8 +38,7 @@ export const ArticleModalDesktop = ({ post, locale, children, showCloseButton = 
           <section>
             <Typography variant="body-2" className="mb-2">
               {locale === "en" && "By "}
-              {post.author} • {locale === "en" && "• "}
-              {post.readingTime} {locale === "ru" ? "мин читать" : "minutes to read"}
+              {post.author} • {post.readingTime} {locale === "ru" ? "мин читать" : "minutes to read"}
             </Typography>
 
             <Typography variant="headline-1" className="mb-6">
