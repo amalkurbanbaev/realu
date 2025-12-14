@@ -9,7 +9,7 @@ export function AppleButton({ className, ...props }: ComponentPropsWithoutRef<"a
   return (
     <a className={cn(className)} href="https://www.apple.com" target="_blank" rel="noreferrer" {...props}>
       <AppleBadgeIcon className="hidden md:block" />
-      <AppleBadgeMobileIcon className="block md:hidden" />
+      <AppleBadgeMobileIcon className="block max-w-full md:hidden" />
     </a>
   )
 }
