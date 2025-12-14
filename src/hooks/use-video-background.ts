@@ -1,10 +1,21 @@
 import { type RefObject, useEffect, useRef } from "react"
 
-export const useVideoBackground = (videoRef: RefObject<HTMLVideoElement | null>) => {
+export const useVideoBackground = (videoRefOrElement: RefObject<HTMLVideoElement | null> | HTMLVideoElement | null) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const video = videoRef.current
+    // Поддерживаем как RefObject, так и прямой элемент
+    let video: HTMLVideoElement | null = null
+    if (videoRefOrElement) {
+      if (typeof videoRefOrElement === "object" && "current" in videoRefOrElement) {
+        // Это RefObject
+        video = (videoRefOrElement as RefObject<HTMLVideoElement | null>).current
+      } else {
+        // Это прямой элемент
+        video = videoRefOrElement as HTMLVideoElement
+      }
+    }
+
     const canvas = canvasRef.current
     if (!video || !canvas) return
 
@@ -120,7 +131,7 @@ export const useVideoBackground = (videoRef: RefObject<HTMLVideoElement | null>)
       video.removeEventListener("ended", onPause)
       window.removeEventListener("resize", onResize)
     }
-  }, [videoRef])
+  }, [videoRefOrElement])
 
   return { canvasRef }
 }

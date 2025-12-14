@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import Image from "next/image"
 
+import { useVideoBackground } from "@/hooks"
 import { useSlides } from "@/hooks/use-slides"
 import { cn } from "@/lib/utils"
 
@@ -28,12 +29,48 @@ export function ScrollFade() {
   }, [])
 
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null)
+  const { canvasRef } = useVideoBackground(videoEl)
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [panelVisible, setPanelVisible] = useState(false) // рендерим UI только когда секция целиком во вью
   const [animEnabled, setAnimEnabled] = useState(false) // партиклы живут на 1-м экране и когда секция во вью
   const [isAnimating, setIsAnimating] = useState(false)
   const animFallbackRef = useRef<number | null>(null)
+
+  // Callback ref для видео элементов
+  const setVideoRefCallback = (element: HTMLVideoElement | null, slideIndex: number) => {
+    if (isMobile) return
+    if (element && slideIndex === activeIndex) {
+      setVideoEl(element)
+    }
+    if (!element && slideIndex === activeIndex) {
+      setVideoEl(null)
+    }
+  }
+
+  // Обновляем videoEl при изменении activeIndex (на случай если callback ref не сработал)
+  useEffect(() => {
+    if (isMobile) {
+      setVideoEl(null)
+      return
+    }
+    const activeSlide = slides[activeIndex]
+    if (activeSlide?.video) {
+      // Ищем видео элемент активного слайда
+      requestAnimationFrame(() => {
+        const slideContainer = document.querySelector(`[data-slide-index="${activeIndex}"]`)
+        if (slideContainer) {
+          const videoElement = slideContainer.querySelector("video") as HTMLVideoElement | null
+          if (videoElement) {
+            setVideoEl(videoElement)
+          }
+        }
+      })
+    } else {
+      setVideoEl(null)
+    }
+  }, [activeIndex, slides, isMobile])
 
   const H = () => window.innerHeight
   // дополнительное пространство для последнего слайда (в vh)
@@ -266,12 +303,24 @@ export function ScrollFade() {
 
   // Desktop версия - sticky скролл с анимациями
   // На сервере и до монтирования всегда рендерим desktop версию
+  const activeSlide = slides[activeIndex]
+  const isVideoSlide = activeSlide?.video !== undefined
+
   return (
     <section ref={wrapperRef} className="relative z-20 [scroll-snap-type:none]">
       <div className="sticky top-0 h-screen w-full">
+        {/* Фоновая подсветка для видео-слайдов */}
+        {isVideoSlide && (
+          <canvas
+            className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl duration-1000"
+            ref={canvasRef}
+            style={{ opacity: 0.5 }}
+          />
+        )}
         {slides.map((slide, i) => (
           <div
             key={slide.id}
+            data-slide-index={i}
             className={cn(
               "absolute inset-0 overflow-visible transition-opacity duration-700 will-change-[opacity]",
               i === activeIndex ? "opacity-100" : "opacity-0",
@@ -316,6 +365,7 @@ export function ScrollFade() {
                 />
               ) : slide.video ? (
                 <video
+                  ref={(el) => setVideoRefCallback(el, i)}
                   src={slide.video}
                   autoPlay
                   muted
