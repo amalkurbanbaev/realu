@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Volume2Icon } from "lucide-react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
 import { useVideoBackground } from "@/hooks"
 import { cn } from "@/lib/utils"
@@ -14,13 +14,13 @@ import { AppleButton } from "./apple-button"
 import { ScrollScreenButton } from "./scroll-screen-button"
 import { VideoPlayer } from "./video-player"
 
-const isDev = process.env.NODE_ENV === "development"
-const MAIN_VIDEO_RU = "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main-ru.mp4"
-const MAIN_VIDEO_EN = "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main_compressed-Zz2XLGcCQAUh1ZgGtoFHx0BioJXXIP.mp4"
+// const isDev = process.env.NODE_ENV === "development"
+// const MAIN_VIDEO_RU = "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main-ru.mp4"
+// const MAIN_VIDEO_EN = "https://yoe5uv0pyxq0fpip.public.blob.vercel-storage.com/main_compressed-Zz2XLGcCQAUh1ZgGtoFHx0BioJXXIP.mp4"
 const SCROLL_TO_VIDEO_ZOOM_OUT = 100
 
 export function HeroSection() {
-  const locale = useLocale()
+  // const locale = useLocale()
   const t = useTranslations("home-page.layout")
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -88,14 +88,15 @@ export function HeroSection() {
     setIsMuted((prev) => !prev)
   }
 
-  const videoUrlByLocale = useMemo(() => {
-    if (locale === "ru") {
-      return MAIN_VIDEO_RU
-    }
-    return MAIN_VIDEO_EN
-  }, [locale])
+  // const videoUrlByLocale = useMemo(() => {
+  //   if (locale === "ru") {
+  //     return MAIN_VIDEO_RU
+  //   }
+  //   return MAIN_VIDEO_EN
+  // }, [locale])
 
-  const videoSrc = isDev ? "/local/main-video.mp4" : videoUrlByLocale
+  // // Biome ignore: unused-local-variable
+  // const videoSrc = isDev ? "/main-video-compressed.mp4" : videoUrlByLocale
 
   return (
     <section className="flex flex-col overflow-hidden pt-[var(--header-height)] md:sticky md:top-0 md:h-screen">
@@ -117,7 +118,7 @@ export function HeroSection() {
           muted={isMuted}
           autoPlay={true}
           onClick={handleTogglePlay}
-          src={videoSrc}
+          src="main-video-compressed.mp4"
           poster="/video/poster-main.png"
           isMuted={isMuted}
           toggleMute={toggleMute}

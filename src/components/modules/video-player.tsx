@@ -3,6 +3,8 @@ import { type ComponentPropsWithRef, useEffect, useImperativeHandle, useRef, use
 import { Volume2Icon } from "lucide-react"
 import Image from "next/image"
 
+import { cn } from "@/lib/utils"
+
 import { MuteIcon } from "../icons"
 import { Button } from "../ui/button"
 
@@ -11,9 +13,10 @@ type Props = {
   autoPlay?: boolean
   isMuted?: boolean
   toggleMute?: () => void
+  bg?: boolean
 } & ComponentPropsWithRef<"video">
 
-export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted = false, toggleMute, ...props }: Props) {
+export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted = false, toggleMute, bg = true, ...props }: Props) {
   const internalRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
 
@@ -124,7 +127,7 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
 
       <button
         onClick={togglePlayback}
-        className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50"
+        className={cn("absolute inset-0 flex cursor-pointer items-center justify-center", bg ? "bg-black/50" : "")}
         type="button"
         aria-label="play-video-button"
       >
