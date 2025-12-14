@@ -10,7 +10,7 @@ export async function DownloadBanner() {
   const t = await getTranslations("home-page.layout")
 
   return (
-    <div className="container relative w-full text-center md:text-left">
+    <div className="container relative z-50 w-full text-center md:text-left">
       <div className="relative overflow-hidden rounded-3xl">
         <DownloadBannerBackground className="-z-10 absolute inset-0 hidden h-full w-full rounded-3xl md:block" />
 
