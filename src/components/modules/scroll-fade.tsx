@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
 import Image from "next/image"
 
 import { useVideoBackground } from "@/hooks"
@@ -216,42 +216,82 @@ export function ScrollFade() {
     }, duration + 400)
   }
 
-  const handleScroll = (dir: "prev" | "next") => {
-    const top = getWrapperTop()
-    const h = H()
+  // biome-ignore lint/correctness/useExhaustiveDependencies: H, getWrapperTop, animateScrollTo стабильны
+  const handleScroll = useCallback(
+    (dir: "prev" | "next") => {
+      const top = getWrapperTop()
+      const h = H()
 
-    const isLast = activeIndex >= slides.length - 1
-    const isFirst = activeIndex <= 0
+      const isLast = activeIndex >= slides.length - 1
+      const isFirst = activeIndex <= 0
 
-    if (dir === "next" && isLast) {
-      // проверяем, находимся ли мы в дополнительном пространстве последнего слайда
-      const rel = window.scrollY - top
-      const lastSlideStart = (slides.length - 1) * h
-      const lastSlideExtra = LAST_SLIDE_EXTRA_VH * h
+      if (dir === "next" && isLast) {
+        // проверяем, находимся ли мы в дополнительном пространстве последнего слайда
+        const rel = window.scrollY - top
+        const lastSlideStart = (slides.length - 1) * h
+        const lastSlideExtra = LAST_SLIDE_EXTRA_VH * h
 
-      if (rel < lastSlideStart + lastSlideExtra) {
-        // если ещё не проскроллили дополнительное пространство, скроллим до конца секции
-        animateScrollTo(top + lastSlideStart + lastSlideExtra)
-      } else {
-        // после секции (ровно за слайдер)
-        const el = wrapperRef.current
-        if (el) {
-          const rect = el.getBoundingClientRect()
-          const wrapperBottom = window.scrollY + rect.bottom
-          animateScrollTo(wrapperBottom)
+        if (rel < lastSlideStart + lastSlideExtra) {
+          // если ещё не проскроллили дополнительное пространство, скроллим до конца секции
+          animateScrollTo(top + lastSlideStart + lastSlideExtra)
+        } else {
+          // после секции (ровно за слайдер)
+          const el = wrapperRef.current
+          if (el) {
+            const rect = el.getBoundingClientRect()
+            const wrapperBottom = window.scrollY + rect.bottom
+            animateScrollTo(wrapperBottom)
+          }
         }
+        return
       }
-      return
+
+      if (dir === "prev" && isFirst) {
+        animateScrollTo(0)
+        return
+      }
+
+      const nextIndex = dir === "next" ? activeIndex + 1 : activeIndex - 1
+      animateScrollTo(top + nextIndex * h)
+    },
+    [activeIndex, slides.length],
+  )
+
+  // Обработка клавиатурных событий для навигации по слайдам
+  useEffect(() => {
+    if (isMobile) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Игнорируем, если пользователь в поле ввода
+      const target = e.target as HTMLElement
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
+        return
+      }
+
+      // Стрелки вверх/влево - предыдущий слайд
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault()
+        if (!isAnimating) {
+          handleScroll("prev")
+        }
+        return
+      }
+
+      // Стрелки вниз/вправо - следующий слайд
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        e.preventDefault()
+        if (!isAnimating) {
+          handleScroll("next")
+        }
+        return
+      }
     }
 
-    if (dir === "prev" && isFirst) {
-      animateScrollTo(0)
-      return
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
     }
-
-    const nextIndex = dir === "next" ? activeIndex + 1 : activeIndex - 1
-    animateScrollTo(top + nextIndex * h)
-  }
+  }, [isMobile, isAnimating, handleScroll])
 
   // Мобильная версия - простой вертикальный скролл
   // Показываем мобильную версию только после монтирования, чтобы избежать проблем с гидратацией
