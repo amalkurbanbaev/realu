@@ -37,12 +37,17 @@ const FooterLinks = () => {
   return (
     <div
       className={cn(
-        "mx-auto max-w-[320px] text-center text-white/60 text-xs max-sm:flex max-sm:flex-col lg:mx-0 lg:text-left",
+        "mx-auto max-w-[320px] text-center max-sm:flex max-sm:flex-col max-sm:gap-y-4 md:text-left lg:mx-0 lg:text-xs",
         locale === "ru" ? "max-w-[68ch]" : "max-w-[46ch]",
       )}
     >
       {FOOTER_LINKS.map((link) => (
-        <Typography variant="caption" as="span" key={link.translationKey} className="mr-2 mb-2 inline-block whitespace-nowrap align-top font-normal">
+        <Typography
+          variant="caption"
+          as="span"
+          key={link.translationKey}
+          className="mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 lg:font-normal lg:text-[12px] lg:text-white"
+        >
           <Link href={link.href} className="hover:underline">
             {tFooter(link.translationKey)}
           </Link>
@@ -55,7 +60,7 @@ const FooterLinks = () => {
 const FooterContact = () => {
   return (
     <div className="order-2 flex items-start justify-center text-center lg:order-3 lg:justify-end lg:text-right">
-      <Typography variant="caption" as="span" className="font-normal text-white/60">
+      <Typography variant="caption" as="span" className="font-semibold text-base md:font-normal md:text-white/60 md:text-xs">
         <Link href="mailto:support@lotofus.co" className="hover:underline">
           support@lotofus.co
         </Link>
@@ -68,7 +73,7 @@ const FooterCopy = () => {
   const locale = useLocale()
   const currentYear = new Date().getFullYear()
   return (
-    <div className="order-3 flex flex-col items-center gap-1 text-center text-xs lg:order-2 lg:items-start">
+    <div className="order-3 flex flex-col items-center gap-1 text-center text-xs max-md:mt-2 lg:order-2 lg:items-start">
       <Typography variant="caption" as="span" className="font-normal text-white/60">
         Dubai, UAE. LOTOFUS L.L.C — FZ.
       </Typography>
