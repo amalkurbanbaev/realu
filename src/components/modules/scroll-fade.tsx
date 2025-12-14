@@ -377,12 +377,14 @@ type SliderCounterProps = {
   total: number
   enabled: boolean
 }
+
+// тут добавляем кол-во секций всей страницы сверху и снизу
 const SliderCounter = ({ activeIndex, total }: SliderCounterProps) => {
   return (
     <div className={cn("pointer-events-none flex items-center gap-2.5", "fade-in animate-in opacity-100")} aria-hidden>
-      <span className="font-medium text-[32px]">{activeIndex}</span>
+      <span className="font-medium text-[32px]">{activeIndex + 1}</span>
       <span className="text-muted-foreground">/</span>
-      <span className="text-muted-foreground">{total}</span>
+      <span className="text-muted-foreground">{total + 2}</span>
     </div>
   )
 }
