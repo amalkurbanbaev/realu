@@ -111,7 +111,7 @@ export const FAQFeedback = ({ className, ...props }: ComponentPropsWithoutRef<"d
     <div className={cn("text-muted-foreground", className)} {...props}>
       {t.rich("contact", {
         a: (chunks) => (
-          <Link href="mailto:support@meditolife.com" className="text-white">
+          <Link href="mailto:support@lotofus.co" className="text-white">
             {chunks}
           </Link>
         ),
