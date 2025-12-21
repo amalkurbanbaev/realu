@@ -1,8 +1,5 @@
 {
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
+  "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"], ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]+)(?:'|\"|`)"]],
   "files.associations": { "*.css": "postcss" },
   "editor.quickSuggestions": {
     "strings": true
