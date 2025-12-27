@@ -311,18 +311,19 @@ export function ScrollFade() {
                   className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10"
                 />
               ) : slide.video ? (
-                <video
-                  src={slide.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="pointer-events-none h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover"
-                  width={227}
-                  height={492}
-                >
-                  <source src={slide.video} type="video/mp4" />
-                </video>
+                <div className="relative h-[492px] w-[227px] overflow-hidden rounded-4xl border-4 border-white/10">
+                  <video
+                    src={slide.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="pointer-events-none size-full select-none object-cover object-center"
+                    style={{ transform: "scale(1.01)" }}
+                  >
+                    <source src={slide.video} type="video/mp4" />
+                  </video>
+                </div>
               ) : null}
             </div>
 
@@ -404,19 +405,20 @@ export function ScrollFade() {
                   className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 md:max-w-[180px] lg:max-w-[227px]"
                 />
               ) : slide.video ? (
-                <video
-                  ref={(el) => setVideoRefCallback(el, i)}
-                  src={slide.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="pointer-events-none h-[492px] w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 object-cover md:h-[400px] md:max-w-[180px] lg:h-[492px] lg:max-w-[227px]"
-                  width={227}
-                  height={492}
-                >
-                  <source src={slide.video} type="video/mp4" />
-                </video>
+                <div className="relative h-[492px] w-[227px] overflow-hidden rounded-4xl border-4 border-white/10 md:h-[400px] md:w-[180px] lg:h-[492px] lg:w-[227px]">
+                  <video
+                    ref={(el) => setVideoRefCallback(el, i)}
+                    src={slide.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="pointer-events-none size-full select-none object-cover object-center"
+                    style={{ transform: "scale(1.01)" }}
+                  >
+                    <source src={slide.video} type="video/mp4" />
+                  </video>
+                </div>
               ) : null}
             </div>
 
