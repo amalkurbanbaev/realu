@@ -226,22 +226,12 @@ export function ScrollFade() {
       const isFirst = activeIndex <= 0
 
       if (dir === "next" && isLast) {
-        // проверяем, находимся ли мы в дополнительном пространстве последнего слайда
-        const rel = window.scrollY - top
-        const lastSlideStart = (slides.length - 1) * h
-        const lastSlideExtra = LAST_SLIDE_EXTRA_VH * h
-
-        if (rel < lastSlideStart + lastSlideExtra) {
-          // если ещё не проскроллили дополнительное пространство, скроллим до конца секции
-          animateScrollTo(top + lastSlideStart + lastSlideExtra)
-        } else {
-          // после секции (ровно за слайдер)
-          const el = wrapperRef.current
-          if (el) {
-            const rect = el.getBoundingClientRect()
-            const wrapperBottom = window.scrollY + rect.bottom
-            animateScrollTo(wrapperBottom)
-          }
+        // скроллим до конца секции (за слайдер)
+        const el = wrapperRef.current
+        if (el) {
+          // используем offsetHeight для получения реальной высоты элемента
+          const wrapperBottom = top + el.offsetHeight
+          animateScrollTo(wrapperBottom)
         }
         return
       }
