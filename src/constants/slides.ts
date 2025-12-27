@@ -185,4 +185,10 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     particles: [],
     useVideo: true,
   },
+  {
+    id: "teachers",
+    particles: [],
+    useVideo: false,
+    type: "teachers",
+  },
 ]

@@ -29,10 +29,13 @@ export type SlideParticle = {
   position: string
 }
 
+export type SlideType = "image" | "video" | "teachers"
+
 export type RawSlide = {
   id: string
   particles: SlideParticle[]
   useVideo?: boolean
+  type?: SlideType
 }
 
 export type Slide = RawSlide & {
@@ -41,4 +44,5 @@ export type Slide = RawSlide & {
   image?: string
   video?: string
   withGradient?: boolean
+  type?: SlideType
 }

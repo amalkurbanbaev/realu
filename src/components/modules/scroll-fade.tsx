@@ -6,11 +6,13 @@ import Image from "next/image"
 import { useVideoBackground } from "@/hooks"
 import { useSlides } from "@/hooks/use-slides"
 import { cn } from "@/lib/utils"
+import type { Slide } from "@/types/entities"
 
 import { ArrowDownIcon } from "../icons"
 import { Button } from "../ui/button"
 import { Typography } from "../ui/typography"
 import { Particle } from "./particle"
+import { Teachers } from "./teachers"
 
 export function ScrollFade() {
   const slides = useSlides()
@@ -283,6 +285,85 @@ export function ScrollFade() {
     }
   }, [isMobile, isAnimating, handleScroll])
 
+  // Рендеринг контента слайда для мобильной версии
+  const renderMobileSlideContent = (slide: Slide) => {
+    const slideType = slide.type || (slide.video ? "video" : slide.image ? "image" : "teachers")
+
+    switch (slideType) {
+      case "image":
+        if (!slide.image) return null
+        return (
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            width={227}
+            height={492}
+            className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10"
+          />
+        )
+      case "video":
+        return (
+          <div className="relative h-[492px] w-[227px] overflow-hidden rounded-4xl border-4 border-white/10">
+            <video
+              src={slide.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="pointer-events-none size-full select-none object-cover object-center"
+              style={{ transform: "scale(1.01)" }}
+            >
+              <source src={slide.video} type="video/mp4" />
+            </video>
+          </div>
+        )
+      case "teachers":
+        return <Teachers isActive={true} animEnabled={true} />
+      default:
+        return null
+    }
+  }
+
+  // Рендеринг контента слайда для desktop версии
+  const renderDesktopSlideContent = (slide: Slide, slideIndex: number) => {
+    const slideType = slide.type || (slide.video ? "video" : slide.image ? "image" : "teachers")
+
+    switch (slideType) {
+      case "image":
+        if (!slide.image) return null
+        return (
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            width={227}
+            height={492}
+            className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 md:max-w-[180px] lg:max-w-[227px]"
+          />
+        )
+      case "video":
+        return (
+          <div className="relative h-[492px] w-[227px] overflow-hidden rounded-4xl border-4 border-white/10 md:h-[400px] md:w-[180px] lg:h-[492px] lg:w-[227px]">
+            <video
+              ref={(el) => setVideoRefCallback(el, slideIndex)}
+              src={slide.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="pointer-events-none size-full select-none object-cover object-center"
+              style={{ transform: "scale(1.01)" }}
+            >
+              <source src={slide.video} type="video/mp4" />
+            </video>
+          </div>
+        )
+      case "teachers":
+        return <Teachers isActive={slideIndex === activeIndex} animEnabled={animEnabled} />
+      default:
+        return null
+    }
+  }
+
   // Мобильная версия - простой вертикальный скролл
   // Показываем мобильную версию только после монтирования, чтобы избежать проблем с гидратацией
   if (mounted && isMobile) {
@@ -291,31 +372,7 @@ export function ScrollFade() {
         {slides.map((slide) => (
           <div key={slide.id} className="flex flex-col items-center justify-center px-4 py-12">
             {/* Изображение или видео по центру */}
-            <div className="mb-8 flex items-center justify-center px-4">
-              {slide.image ? (
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  width={227}
-                  height={492}
-                  className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10"
-                />
-              ) : slide.video ? (
-                <div className="relative h-[492px] w-[227px] overflow-hidden rounded-4xl border-4 border-white/10">
-                  <video
-                    src={slide.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="pointer-events-none size-full select-none object-cover object-center"
-                    style={{ transform: "scale(1.01)" }}
-                  >
-                    <source src={slide.video} type="video/mp4" />
-                  </video>
-                </div>
-              ) : null}
-            </div>
+            <div className="mb-8 flex items-center justify-center px-4">{renderMobileSlideContent(slide)}</div>
 
             {/* Текст по центру */}
             <div className="flex max-w-[320px] flex-col items-center gap-y-2 text-center">
@@ -335,7 +392,8 @@ export function ScrollFade() {
   // Desktop версия - sticky скролл с анимациями
   // На сервере и до монтирования всегда рендерим desktop версию
   const activeSlide = slides[activeIndex]
-  const isVideoSlide = activeSlide?.video !== undefined
+  const activeSlideType = activeSlide?.type || (activeSlide?.video ? "video" : activeSlide?.image ? "image" : "teachers")
+  const isVideoSlide = activeSlideType === "video"
 
   return (
     <section ref={wrapperRef} className="relative z-20 [scroll-snap-type:none]">
@@ -385,32 +443,7 @@ export function ScrollFade() {
             </div>
 
             {/* Изображение или видео по центру */}
-            <div className="absolute inset-0 mb-10 flex items-center justify-center px-4">
-              {slide.image ? (
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  width={227}
-                  height={492}
-                  className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10 md:max-w-[180px] lg:max-w-[227px]"
-                />
-              ) : slide.video ? (
-                <div className="relative h-[492px] w-[227px] overflow-hidden rounded-4xl border-4 border-white/10 md:h-[400px] md:w-[180px] lg:h-[492px] lg:w-[227px]">
-                  <video
-                    ref={(el) => setVideoRefCallback(el, i)}
-                    src={slide.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="pointer-events-none size-full select-none object-cover object-center"
-                    style={{ transform: "scale(1.01)" }}
-                  >
-                    <source src={slide.video} type="video/mp4" />
-                  </video>
-                </div>
-              ) : null}
-            </div>
+            <div className="absolute inset-0 mb-10 flex items-center justify-center px-4">{renderDesktopSlideContent(slide, i)}</div>
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
             {panelVisible && i === activeIndex && (
