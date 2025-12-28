@@ -370,12 +370,12 @@ export function ScrollFade() {
     return (
       <section ref={wrapperRef} className="relative z-20 mt-14">
         {slides.map((slide) => (
-          <div key={slide.id} className="flex flex-col items-center justify-center px-4 py-12">
+          <div key={slide.id} className="flex flex-col items-center justify-center px-5 py-12">
             {/* Изображение или видео по центру */}
-            <div className="mb-8 flex items-center justify-center px-4">{renderMobileSlideContent(slide)}</div>
+            <div className="mb-8 flex items-center justify-center">{renderMobileSlideContent(slide)}</div>
 
             {/* Текст по центру */}
-            <div className="flex max-w-[320px] flex-col items-center gap-y-2 text-center">
+            <div className={cn("flex max-w-[320px] flex-col items-center gap-y-2 text-center", slide.id === "teachers" && "order-first mb-8")}>
               <Typography variant="headline-1" as="h4">
                 {slide.title}
               </Typography>
@@ -462,7 +462,7 @@ export function ScrollFade() {
 
       {/* Статичная нижняя панель со счётчиком и кнопками (не анимируется) */}
       {panelVisible && (
-        <div className="-translate-x-1/2 container pointer-events-none fixed bottom-10 left-1/2 z-50 flex w-full items-center justify-between gap-4 px-8">
+        <div className="-translate-x-1/2 container pointer-events-none fixed bottom-10 left-1/2 z-50 flex w-full items-end justify-between gap-4 px-8">
           {/* Счётчик слева */}
           <SliderCounter activeIndex={activeIndex + 1} total={slides.length} enabled={panelVisible} />
 
