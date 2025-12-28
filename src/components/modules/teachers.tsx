@@ -38,14 +38,6 @@ export function Teachers({ isActive = true, animEnabled = true }: TeachersProps)
       </div>
     )
   }
-  return (
-    <TeacherCard
-      imageSrc="/teachers/tati-frost.png"
-      alt="Tati Frost"
-      text={t("teachers.teacher1")}
-      variant="ru"
-      isActive={isActive}
-      animEnabled={animEnabled}
-    />
-  )
+
+  return <TeacherCard alt="Tati Frost" text={t("teachers.teacher1")} variant="ru" isActive={isActive} animEnabled={animEnabled} />
 }

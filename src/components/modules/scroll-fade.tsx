@@ -382,7 +382,7 @@ export function ScrollFade() {
         {slides.map((slide) => (
           <div key={slide.id} className="flex flex-col items-center justify-center px-5 py-12">
             {/* Изображение или видео по центру */}
-            <div className="mb-8 flex items-center justify-center">{renderMobileSlideContent(slide)}</div>
+            <div className="mb-8 flex w-full items-center justify-center">{renderMobileSlideContent(slide)}</div>
 
             {/* Текст по центру */}
             <div className={cn("flex max-w-[320px] flex-col items-center gap-y-2 text-center", slide.id === "teachers" && "order-first mb-8")}>
