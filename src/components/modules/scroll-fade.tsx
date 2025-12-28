@@ -57,6 +57,9 @@ export function ScrollFade() {
       setVideoEl(null)
       return
     }
+
+    let timeoutId: NodeJS.Timeout
+
     const activeSlide = slides[activeIndex]
     if (activeSlide?.video) {
       // Ищем видео элемент активного слайда
@@ -70,7 +73,14 @@ export function ScrollFade() {
         }
       })
     } else {
-      setVideoEl(null)
+      // Задержка очистки videoEl, чтобы канвас успел плавно исчезнуть
+      timeoutId = setTimeout(() => {
+        setVideoEl(null)
+      }, 1000)
+    }
+
+    return () => {
+      clearTimeout(timeoutId)
     }
   }, [activeIndex, slides, isMobile])
 
@@ -399,13 +409,13 @@ export function ScrollFade() {
     <section ref={wrapperRef} className="relative z-20 [scroll-snap-type:none]">
       <div className="sticky top-0 h-screen w-full">
         {/* Фоновая подсветка для видео-слайдов */}
-        {isVideoSlide && (
-          <canvas
-            className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl duration-1000"
-            ref={canvasRef}
-            style={{ opacity: 0.5 }}
-          />
-        )}
+        <canvas
+          className={cn(
+            "fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl transition-opacity duration-1000",
+            isVideoSlide ? "opacity-50" : "opacity-0",
+          )}
+          ref={canvasRef}
+        />
         {slides.map((slide, i) => (
           <div
             key={slide.id}
