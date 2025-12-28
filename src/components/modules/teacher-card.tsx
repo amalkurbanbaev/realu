@@ -24,7 +24,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           isActive && animEnabled && "fade-in zoom-in-95 animate-in duration-[1.5s] ease-in-out",
           side === "left" && "md:-rotate-[1.5deg] slide-in-from-left-10",
           side === "right" && "slide-in-from-right-10 md:rotate-[1.5deg]",
-          "min-h-[470px] w-full lg:h-[531px] lg:w-[596px]",
+          "h-full min-h-[470px] w-full lg:h-[531px] lg:w-[596px]",
         )}
       >
         <Image
