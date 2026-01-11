@@ -59,7 +59,7 @@ function PostCard({ post }: { post: PostMeta }) {
               src={post.cover}
               alt={post.title}
               fill
-              containerClassName="relative aspect-square size-full overflow-clip rounded-4xl"
+              containerClassName="relative group aspect-square size-full overflow-clip rounded-4xl"
               skeletonClassName="rounded-4xl"
               className="object-cover"
             />
