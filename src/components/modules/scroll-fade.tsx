@@ -233,9 +233,21 @@ export function ScrollFade() {
     (dir: "prev" | "next") => {
       const top = getWrapperTop()
       const h = H()
+      const currentScrollY = window.scrollY
 
       const isLast = activeIndex >= slides.length - 1
       const isFirst = activeIndex <= 0
+
+      // Если мы находимся выше начала ScrollFade (на HeroSection)
+      if (currentScrollY < top) {
+        if (dir === "next") {
+          // Переходим к первому слайду (индекс 0)
+          animateScrollTo(top)
+          return
+        }
+        // Если dir === "prev", мы уже вверху, ничего не делаем
+        return
+      }
 
       if (dir === "next" && isLast) {
         // скроллим до конца секции (за слайдер)

@@ -23,7 +23,7 @@ export function ProgressiveImage({ containerClassName, className, skeletonClassN
       {<Skeleton className={`absolute inset-0 size-full ${skeletonClassName ?? ""}`} />}
       <Image
         {...props}
-        className={`transition-transform duration-300 group-hover:scale-105 ${isLoading ? "opacity-0" : "opacity-100"} ${className ?? ""}`}
+        className={`transition-all duration-300 group-hover:scale-105 ${isLoading ? "opacity-0" : "opacity-100"} ${className ?? ""}`}
         onLoad={handleLoad}
       />
     </div>
