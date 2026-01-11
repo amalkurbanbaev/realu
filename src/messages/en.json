@@ -5,8 +5,8 @@
     "feedback": "Notice\u00A0an\u00A0inaccuracy? Let\u00A0us\u00A0know",
     "noPosts": "No published articles yet",
     "postNotFound": "Post not found",
-    "postNotFoundDescription": "The post may have been removed or moved",
-    "backToBlog": "Back to blog"
+    "postNotFoundDescription": "Perhaps the article was removed or moved",
+    "backToBlog": "To all articles"
   },
   "home-page": {
     "meta": {

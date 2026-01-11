@@ -23,7 +23,7 @@ export const ArticleModalDesktop = ({ post, locale, children, showCloseButton = 
       ) : (
         <Link href="/blog" className="mb-4 inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground">
           <ArrowLeft className="h-4 w-4" />
-          {locale === "ru" ? "Назад к блогу" : "Back to blog"}
+          {locale === "ru" ? "Ко всем статьям" : "To all articles"}
         </Link>
       )}
 
