@@ -136,7 +136,7 @@ export function HeroSection() {
           {!isMuted ? <Volume2Icon /> : <MuteIcon />}
         </Button>
 
-        <div className="mt-6 flex flex-col items-center justify-center gap-2 text-center">
+        <div className="mt-6 flex flex-col items-center justify-center gap-2 text-center lg:mt-0">
           <Typography variant="headline-1" as="h1" className="max-md:px-8">
             {t("title")}
           </Typography>
