@@ -91,16 +91,23 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
 
   const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
 
+  const isLinkActive = (href: string, currentPath: string): boolean => {
+    if (href === "/blog") {
+      return currentPath === "/blog" || currentPath.startsWith("/blog/")
+    }
+    return currentPath === href
+  }
+
   return (
     <ul className="flex grow flex-col items-center justify-center gap-4 md:flex-row md:gap-x-8">
       {HEADER_LINKS.map((link) => {
-        const isActive = normalizedPath === link.href
+        const isActive = isLinkActive(link.href, normalizedPath)
         return (
           <li key={link.translationKey} className={cn("py-2")}>
             <Link href={link.href} onClick={onClick}>
               <Typography
                 variant="menu"
-                className={cn("font-medium", isActive ? "text-white transition-colors" : "text-white/40 hover:text-white")}
+                className={cn("font-medium transition-colors", isActive ? "text-white " : "text-white/40 hover:text-white")}
                 as="span"
               >
                 {t(link.translationKey)}
