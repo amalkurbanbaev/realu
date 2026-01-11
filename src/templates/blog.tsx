@@ -5,6 +5,7 @@ import { ProgressiveImage } from "@/components/ui/progressive-image"
 import { Typography } from "@/components/ui/typography"
 import { Link } from "@/i18n/navigation"
 import type { PostMeta } from "@/lib/blog"
+import { cn } from "@/lib/utils"
 
 interface BlogTemplateProps {
   posts: PostMeta[]
@@ -15,7 +16,7 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
 
   if (posts.length === 0) {
     return (
-      <section className="container py-16">
+      <section className="container py-6">
         <div className="text-center">
           <div className="flex flex-col justify-between">
             <Typography variant="headline-1" className="mb-4">
@@ -31,7 +32,7 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
   }
 
   return (
-    <section className="container flex min-h-full flex-1 flex-col gap-8 md:py-6 lg:flex-row lg:gap-10">
+    <section className="container flex min-h-full flex-1 flex-col gap-4 py-6 lg:flex-row lg:gap-10">
       <div className="flex flex-col justify-between">
         <Typography variant="headline-1">{t("title")}</Typography>
 
@@ -77,17 +78,18 @@ function PostCard({ post }: { post: PostMeta }) {
   )
 }
 
-const BlogFeedback = (props: ComponentPropsWithoutRef<"div">) => {
+const BlogFeedback = ({ className, ...props }: ComponentPropsWithoutRef<"div">) => {
   const t = useTranslations("blog")
 
   return (
-    <div {...props}>
-      <Typography variant="body-1" className="text-white/40">
-        {t("feedback")}{" "}
-        <a href="mailto:support@lotofus.co" className="text-white hover:underline">
-          support@lotofus.co
-        </a>
-      </Typography>
-    </div>
+    <Typography variant="body-1" className={cn("text-muted-foreground", className)} {...props}>
+      {t.rich("feedback", {
+        a: (chunks) => (
+          <Link href="mailto:support@lotofus.co" className="text-white hover:underline">
+            {chunks}
+          </Link>
+        ),
+      })}
+    </Typography>
   )
 }

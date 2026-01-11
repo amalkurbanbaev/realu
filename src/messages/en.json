@@ -2,7 +2,7 @@
   "blog": {
     "title": "Blog",
     "description": "Articles about meditation, breathwork and mindfulness",
-    "feedback": "Notice\u00A0an\u00A0inaccuracy? Let\u00A0us\u00A0know",
+    "feedback": "Notice\u00A0an\u00A0inaccuracy? Let\u00A0us\u00A0know <a>support@lotofus.co</a>",
     "noPosts": "No published articles yet",
     "postNotFound": "Post not found",
     "postNotFoundDescription": "Perhaps the article was removed or moved",
@@ -86,7 +86,7 @@
     },
     "layout": {
       "title": "FAQ",
-      "contact": "If there is no answer to your question here, send an email <a>support@lotofus.co</a>"
+      "contact": "If your question is not answered here, please email us at <a>support@lotofus.co</a>"
     }
   },
   "header": {

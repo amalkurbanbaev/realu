@@ -13,7 +13,7 @@ export async function HelpPageTemplate() {
   const sections = allQuestions?.map((el) => ({ id: el.id, title: el.title })) || []
 
   return (
-    <section className="container relative z-10 py-10 text-white">
+    <section className="container relative z-10 py-6 text-white">
       <div className="lg:grid lg:grid-cols-[320px_1fr] lg:gap-16">
         <SlidingTabBar sections={sections} />
         <FAQNavigation sections={sections?.map((el) => ({ id: el.id, title: el.title }))} />

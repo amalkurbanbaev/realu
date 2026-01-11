@@ -39,8 +39,10 @@ export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
   }
 
   return (
-    <nav className="sticky top-[calc(var(--header-height)+2.5rem)] hidden h-[calc(100vh-var(--header-height)-4.5rem)] flex-col pb-[2.5rem] lg:flex">
-      <h3 className="mb-6 font-bold text-2xl">{t("title")}</h3>
+    <nav className="sticky top-[calc(var(--header-height)+1.5rem)] hidden h-[calc(100vh-var(--header-height)-4.5rem)] flex-col pb-[2.5rem] lg:flex">
+      <Typography variant="headline-1" className="mb-6">
+        {t("title")}
+      </Typography>
 
       <div className="relative flex px-4 lg:flex-col" ref={barRef}>
         <div className="absolute top-0 left-0 h-full w-0.5">
@@ -108,14 +110,14 @@ export const FAQFeedback = ({ className, ...props }: ComponentPropsWithoutRef<"d
   const t = useTranslations("help-page.layout")
 
   return (
-    <div className={cn("text-muted-foreground", className)} {...props}>
+    <Typography variant="body-1" className={cn("max-w-5/6 text-muted-foreground", className)} {...props}>
       {t.rich("contact", {
         a: (chunks) => (
-          <Link href="mailto:support@lotofus.co" className="text-white">
+          <Link href="mailto:support@lotofus.co" className="text-white hover:underline">
             {chunks}
           </Link>
         ),
       })}
-    </div>
+    </Typography>
   )
 }
