@@ -46,8 +46,8 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           as="p"
           className={cn(
             "absolute bottom-8 max-w-[280px] text-center text-sm text-white max-md:inset-x-0 max-md:mx-auto md:bottom-14",
-            side === "left" && "right-8 md:max-w-[291px]",
-            side === "right" && "left-8 md:max-w-[259px]",
+            side === "left" && "right-8 md:max-w-[291px] md:rotate-[1.5deg]",
+            side === "right" && "md:-rotate-[1.5deg] left-8 md:max-w-[259px]",
           )}
         >
           {text}
@@ -89,7 +89,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           variant="body-2"
           as="p"
           className={cn(
-            "absolute text-sm text-white",
+            "absolute text-sm text-white md:rotate-3",
             "md:right-[5%] md:bottom-30 md:max-w-[480px] md:text-left",
             "max-md:inset-x-0 max-md:bottom-8 max-md:mx-auto max-md:w-[280px] max-md:text-center",
           )}

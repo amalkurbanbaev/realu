@@ -16,7 +16,7 @@ export function Teachers({ isActive = true, animEnabled = true }: TeachersProps)
 
   if (locale === "en") {
     return (
-      <div className={cn("flex flex-col gap-y-8 md:flex-row md:gap-x-8")}>
+      <div className={cn("flex max-w-full flex-col gap-y-8 md:flex-row md:gap-x-8")}>
         <TeacherCard
           imageSrc="/teachers/tati-frost.png"
           alt="Tati Frost"

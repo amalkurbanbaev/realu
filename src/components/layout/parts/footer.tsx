@@ -1,8 +1,8 @@
 "use client"
 
-import { ArrowUpIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 
+import { ArrowDownIcon } from "@/components/icons"
 import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { Typography } from "@/components/ui/typography"
@@ -16,14 +16,21 @@ export const Footer = () => {
   }
 
   return (
-    <footer className="container z-50 flex flex-col justify-between gap-4 bg-background py-8 lg:flex-row lg:items-start lg:gap-0 lg:bg-transparent lg:py-6">
+    <footer className="container z-40 flex flex-col justify-between gap-4 bg-background py-8 lg:flex-row lg:items-start lg:gap-0 lg:bg-transparent lg:py-6">
       <AppleButton className="mx-auto mb-4 md:hidden" />
       <FooterLinks />
       <FooterContact />
       <FooterCopy />
 
-      <Button variant="secondary" className="order-4 size-10 self-end rounded-full" onClick={scrollToTop}>
-        <ArrowUpIcon className="size-4" />
+      <Button
+        type="button"
+        variant="secondary"
+        size="icon"
+        className="z-40 order-4 rotate-180 self-end"
+        onClick={scrollToTop}
+        aria-label="scroll-to-top"
+      >
+        <ArrowDownIcon className="shrink-0" />
       </Button>
     </footer>
   )
@@ -41,12 +48,16 @@ const FooterLinks = () => {
         locale === "ru" ? "max-w-[68ch]" : "max-w-[46ch]",
       )}
     >
-      {FOOTER_LINKS.map((link) => (
+      {FOOTER_LINKS.map((link, index) => (
         <Typography
           variant="caption"
           as="span"
           key={link.translationKey}
-          className="mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 md:font-normal lg:text-[12px] lg:text-white"
+          className={cn(
+            "mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 leading-[16px] md:font-normal lg:text-[12px] lg:text-white [nth-child(n+4)]:mb-0",
+            index === 2 && "lg:mb-0",
+            index === 3 && "lg:mb-0",
+          )}
         >
           <Link href={link.href} className="hover:underline">
             {tFooter(link.translationKey)}
@@ -75,7 +86,7 @@ const FooterCopy = () => {
   return (
     <div className="order-3 flex flex-col items-center gap-1 text-center text-xs max-md:mt-2 lg:order-2 lg:items-start">
       <Typography variant="caption" as="span" className="font-normal text-white/60">
-        Dubai, UAE. LOTOFUS L.L.C — FZ.
+        Dubai, UAE. LOTofUS L.L.C — FZ.
       </Typography>
 
       <Typography variant="caption" as="span" className="font-normal text-white/60">

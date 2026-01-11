@@ -531,24 +531,10 @@ const SliderNavButtons = ({ prevSlide, nextSlide, disabled }: SliderNavButtonsPr
       // гарантируем, что клики проходят только по видимым кнопкам
       style={{ pointerEvents: "auto" }}
     >
-      <Button
-        type="button"
-        variant="secondary"
-        disabled={disabled.prev}
-        className="z-40 flex size-10 flex-col items-center justify-center rounded-full"
-        onClick={prevSlide}
-        aria-label="prev-slide"
-      >
+      <Button type="button" variant="secondary" disabled={disabled.prev} size="icon" className="z-40" onClick={prevSlide} aria-label="prev-slide">
         <ArrowDownIcon className="rotate-180" />
       </Button>
-      <Button
-        type="button"
-        variant="secondary"
-        disabled={disabled.next}
-        className="z-40 size-10 rounded-full"
-        onClick={nextSlide}
-        aria-label="next-slide"
-      >
+      <Button type="button" variant="secondary" disabled={disabled.next} size="icon" className="z-40" onClick={nextSlide} aria-label="next-slide">
         <ArrowDownIcon />
       </Button>
     </div>
