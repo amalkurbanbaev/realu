@@ -133,7 +133,7 @@ export function HeroSection() {
           className="hidden size-10 cursor-pointer flex-col items-center justify-center rounded-full md:flex"
           onClick={toggleMute}
         >
-          {isMuted ? <Volume2Icon /> : <MuteIcon />}
+          {!isMuted ? <Volume2Icon /> : <MuteIcon />}
         </Button>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-2 text-center">
