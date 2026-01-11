@@ -29,14 +29,44 @@ export const useVideoBackground = (videoRefOrElement: RefObject<HTMLVideoElement
 
     const draw = () => {
       try {
+        const videoWidth = video.videoWidth
+        const videoHeight = video.videoHeight
+
+        if (!videoWidth || !videoHeight) {
+          return
+        }
+
         ctx.filter = "blur(3px)"
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+
+        // Вычисляем пропорции для cover-эффекта (заполнение с сохранением пропорций)
+        const canvasAspect = canvas.width / canvas.height
+        const videoAspect = videoWidth / videoHeight
+
+        let drawWidth = canvas.width
+        let drawHeight = canvas.height
+        let offsetX = 0
+        let offsetY = 0
+
+        if (videoAspect > canvasAspect) {
+          // Видео шире - масштабируем по высоте и обрезаем по ширине
+          drawHeight = canvas.height
+          drawWidth = drawHeight * videoAspect
+          offsetX = (canvas.width - drawWidth) / 2
+        } else {
+          // Видео выше - масштабируем по ширине и обрезаем по высоте
+          drawWidth = canvas.width
+          drawHeight = drawWidth / videoAspect
+          offsetY = (canvas.height - drawHeight) / 2
+        }
+
+        ctx.drawImage(video, offsetX, offsetY, drawWidth, drawHeight)
       } catch {}
     }
 
     const syncSize = () => {
-      const w = video.videoWidth || canvas.clientWidth || 640
-      const h = video.videoHeight || canvas.clientHeight || 360
+      // Устанавливаем canvas в размеры экрана (clientWidth/clientHeight)
+      const w = canvas.clientWidth || window.innerWidth
+      const h = canvas.clientHeight || window.innerHeight
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w
         canvas.height = h
@@ -104,6 +134,10 @@ export const useVideoBackground = (videoRefOrElement: RefObject<HTMLVideoElement
     const onLoadedData = () => {
       syncSize()
       draw()
+      // После загрузки данных проверяем, играет ли видео
+      if (!video.paused && video.readyState >= 2) {
+        onPlay()
+      }
     }
     const onResize = () => {
       syncSize()
@@ -113,12 +147,19 @@ export const useVideoBackground = (videoRefOrElement: RefObject<HTMLVideoElement
     video.addEventListener("loadedmetadata", onLoadedMeta)
     video.addEventListener("loadeddata", onLoadedData)
     video.addEventListener("play", onPlay)
+    video.addEventListener("playing", onPlay) // Обрабатываем событие playing для надежности
     video.addEventListener("pause", onPause)
     video.addEventListener("ended", onPause)
     window.addEventListener("resize", onResize)
 
     // первичная инициализация
     onLoadedMeta()
+
+    // Проверяем, играет ли видео уже (например, из-за autoPlay)
+    // и запускаем анимацию, если оно играет
+    if (!video.paused && video.readyState >= 2) {
+      onPlay()
+    }
 
     return () => {
       stopKeepAlive()
@@ -127,6 +168,7 @@ export const useVideoBackground = (videoRefOrElement: RefObject<HTMLVideoElement
       video.removeEventListener("loadedmetadata", onLoadedMeta)
       video.removeEventListener("loadeddata", onLoadedData)
       video.removeEventListener("play", onPlay)
+      video.removeEventListener("playing", onPlay)
       video.removeEventListener("pause", onPause)
       video.removeEventListener("ended", onPause)
       window.removeEventListener("resize", onResize)

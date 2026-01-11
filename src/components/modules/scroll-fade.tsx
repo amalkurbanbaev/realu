@@ -69,6 +69,12 @@ export function ScrollFade() {
           const videoElement = slideContainer.querySelector("video") as HTMLVideoElement | null
           if (videoElement) {
             setVideoEl(videoElement)
+            // Убеждаемся, что видео играет, когда слайд становится активным
+            if (videoElement.paused && videoElement.readyState >= 2) {
+              videoElement.play().catch(() => {
+                // Игнорируем ошибки автоплея (например, политика браузера)
+              })
+            }
           }
         }
       })
