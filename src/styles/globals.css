@@ -177,6 +177,16 @@
       display: none; /* Safari and Chrome */
     }
   }
+
+  .justify-center-short-screen {
+    justify-content: center;
+  }
+
+  @media (max-height: 840px) {
+    .justify-center-short-screen {
+      justify-content: flex-end;
+    }
+  }
 }
 
 /* Предотвращение конфликтов с Lenis для модальных окон */

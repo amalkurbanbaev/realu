@@ -21,7 +21,7 @@ export async function HomePageTemplate() {
 
       <section
         id="features"
-        className="relative z-30 flex flex-col items-center justify-center space-y-7 overflow-clip bg-background pt-10 md:min-h-[calc(100vh-var(--header-height))] lg:rounded-b-[56px] lg:py-10"
+        className="justify-center-short-screen relative z-30 flex flex-col items-center space-y-7 overflow-clip bg-background pt-10 md:min-h-[calc(100vh-var(--header-height))] lg:rounded-b-[56px] lg:py-10"
       >
         <GradientBackgroundTop className="hidden lg:block" />
         <AppFeatures features={features} locale={locale} />
