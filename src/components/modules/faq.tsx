@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentPropsWithoutRef, useRef } from "react"
+import { type ComponentPropsWithoutRef, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Accordion } from "@radix-ui/react-accordion"
 import { useTranslations } from "next-intl"
 
@@ -17,26 +17,45 @@ type FAQNavigationProps = { sections?: { id: string; title: string }[] }
 export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
   const t = useTranslations("help-page.layout")
 
-  const sectionIds = sections?.map((s) => s.id) || []
+  const sectionIds = useMemo(() => sections?.map((s) => s.id) || [], [sections])
   const { activeSection } = useActiveSection(sectionIds)
 
-  const scrollTo = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+  const scrollTo = useCallback((id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+  }, [])
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const linkRefs = useRef<Map<string, HTMLAnchorElement>>(new Map())
+  const [indicatorStyle, setIndicatorStyle] = useState<{ top: number; height: number } | null>(null)
+
+  useEffect(() => {
+    if (!activeSection || !containerRef.current) {
+      setIndicatorStyle(null)
+      return
     }
-  }
 
-  const barRef = useRef<HTMLDivElement>(null)
+    const activeLink = linkRefs.current.get(activeSection)
+    if (!activeLink) {
+      setIndicatorStyle(null)
+      return
+    }
 
-  const getIndicatorPosition = (id: string) => {
-    const totalMenuItems = sections?.length || 0
-    const activeIndex = sections?.findIndex((s) => s.id === id) || 0
+    const containerRect = containerRef.current.getBoundingClientRect()
+    const linkRect = activeLink.getBoundingClientRect()
 
-    const barHeight = barRef.current?.clientHeight || 0
+    setIndicatorStyle({
+      top: linkRect.top - containerRect.top,
+      height: linkRect.height,
+    })
+  }, [activeSection])
 
-    return (activeIndex * barHeight) / totalMenuItems + 2
-  }
+  const setLinkRef = useCallback((id: string, element: HTMLAnchorElement | null) => {
+    if (element) {
+      linkRefs.current.set(id, element)
+    } else {
+      linkRefs.current.delete(id)
+    }
+  }, [])
 
   return (
     <nav className="sticky top-[calc(var(--header-height)+1.5rem)] hidden h-[calc(100vh-var(--header-height)-4.5rem)] flex-col pb-[2.5rem] lg:flex">
@@ -44,28 +63,28 @@ export const FAQNavigation = ({ sections }: FAQNavigationProps) => {
         {t("title")}
       </Typography>
 
-      <div className="relative flex px-4 lg:flex-col" ref={barRef}>
+      <div className="relative flex pr-4 lg:flex-col" ref={containerRef}>
         <div className="absolute top-0 left-0 h-full w-0.5">
           <div className="absolute h-full w-0.5 rounded-sm bg-white/10" />
-
-          {activeSection && (
+          {indicatorStyle && (
             <div
-              className="absolute top-0 left-0 z-10 h-6 w-0.5 rounded-sm bg-white transition-all duration-500 ease-out"
+              className="absolute left-0 z-10 w-0.5 rounded-sm bg-white transition-all duration-500 ease-out"
               style={{
-                transform: `translateY(${getIndicatorPosition(activeSection)}px)`,
+                top: `${indicatorStyle.top}px`,
+                height: `${indicatorStyle.height}px`,
               }}
             />
           )}
         </div>
 
-        {/* Навигационные ссылки */}
         {sections?.map((s) => (
           <Link
             key={s.id}
+            ref={(el) => setLinkRef(s.id, el)}
             href={`#${s.id}`}
             scroll={false}
             onClick={() => scrollTo(s.id)}
-            className={cn("font-semibold text-base text-muted-foreground leading-8 transition-colors", activeSection === s.id && "text-white")}
+            className={cn("pl-4 font-semibold text-base text-muted-foreground leading-8 transition-colors", activeSection === s.id && "text-white")}
           >
             {s.title}
           </Link>
