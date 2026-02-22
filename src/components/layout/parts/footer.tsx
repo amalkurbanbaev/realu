@@ -16,7 +16,7 @@ export const Footer = () => {
   }
 
   return (
-    <footer className="container z-40 flex flex-col justify-between gap-4 bg-background py-8 lg:flex-row lg:items-start lg:gap-0 lg:bg-transparent lg:py-6">
+    <footer className="container relative z-40 flex flex-col justify-between gap-4 bg-background py-8 lg:flex-row lg:items-start lg:gap-0 lg:bg-transparent lg:py-6">
       <AppleButton className="mx-auto mb-4 md:hidden" />
       <FooterLinks />
       <FooterContact />
@@ -26,7 +26,7 @@ export const Footer = () => {
         type="button"
         variant="secondary"
         size="icon"
-        className="z-40 order-4 rotate-180 self-end"
+        className="absolute right-4 bottom-4 z-40 order-4 rotate-180 self-end lg:static"
         onClick={scrollToTop}
         aria-label="scroll-to-top"
       >
@@ -44,7 +44,7 @@ const FooterLinks = () => {
   return (
     <div
       className={cn(
-        "mx-auto max-w-[320px] text-center max-sm:flex max-sm:flex-col max-sm:gap-y-4 md:text-xs lg:mx-0 lg:text-left",
+        "mx-auto max-w-[320px] text-center max-sm:flex max-sm:flex-col max-sm:gap-y-6 md:text-xs lg:mx-0 lg:text-left",
         locale === "ru" ? "max-w-[68ch]" : "max-w-[46ch]",
       )}
     >
@@ -54,7 +54,7 @@ const FooterLinks = () => {
           as="span"
           key={link.translationKey}
           className={cn(
-            "mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 leading-[16px] md:font-normal lg:text-[12px] lg:text-white [nth-child(n+4)]:mb-0",
+            "mr-2 mb-2 inline-block whitespace-nowrap align-top font-semibold text-base text-white/60 leading-[16px] md:font-normal md:text-[12px] lg:text-white [nth-child(n+4)]:mb-0",
             index === 2 && "lg:mb-0",
             index === 3 && "lg:mb-0",
           )}
@@ -83,8 +83,9 @@ const FooterContact = () => {
 const FooterCopy = () => {
   const locale = useLocale()
   const currentYear = new Date().getFullYear()
+
   return (
-    <div className="order-3 flex flex-col items-center gap-1 text-center text-xs max-md:mt-2 lg:order-2 lg:items-start">
+    <div className="order-3 flex flex-col items-center gap-1 text-center text-xs max-md:mt-4 lg:order-2 lg:items-start">
       <Typography variant="caption" as="span" className="font-normal text-white/60">
         Dubai, UAE. LOTofUS L.L.C — FZ.
       </Typography>
@@ -95,25 +96,3 @@ const FooterCopy = () => {
     </div>
   )
 }
-
-// const FooterNavLinks = () => {
-//   const pathname = usePathname()
-//   const locale = useLocale()
-//   const tNav = useTranslations("header.links")
-//   const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
-
-//   return (
-//     <nav className="flex items-center gap-4 sm:justify-end">
-//       {HEADER_LINKS.filter((link) => link.href !== "/" && normalizedPath !== link.href).map((link) => {
-//         return (
-//           <Button key={link.href} asChild variant="secondary" className="min-w-fit max-w-36">
-//             <Link href={link.href}>
-//               {tNav(link.translationKey)}
-//               <ArrowRightIcon className="ml-1 size-4" />
-//             </Link>
-//           </Button>
-//         )
-//       })}
-//     </nav>
-//   )
-// }
