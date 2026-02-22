@@ -33,14 +33,15 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
             alt={alt}
             width={596}
             height={531}
+            style={{ width: "100%", height: "100%" }}
             className={cn(
-              "pointer-events-none h-full w-full select-none object-cover max-md:scale-125",
+              "pointer-events-none select-none object-cover max-md:scale-125",
               side === "left" && "origin-top-left",
               side === "right" && "origin-top-right",
             )}
           />
         )}
-        <Image src="/teachers/noise.png" alt="Noise" fill className="pointer-events-none select-none" />
+        <Image src="/teachers/noise.png" alt="Noise" fill sizes="100vw" className="pointer-events-none select-none" />
         <Typography
           variant="body-2"
           as="p"
@@ -70,6 +71,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           src="/teachers/tati-frost-image-mobile.png"
           alt={alt}
           className={cn("pointer-events-none block select-none md:hidden")}
+          sizes="100vw"
           unoptimized
           fill
         />
@@ -79,12 +81,13 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           src="/teachers/tati-frost-image-desktop.png"
           alt={alt}
           className={cn("pointer-events-none hidden select-none object-contain object-top-left md:block")}
+          sizes="(max-width: 768px) 0vw, 100vw"
           unoptimized
           fill
         />
 
         {/* Noise */}
-        <Image src="/teachers/noise.png" alt="Noise" fill className="pointer-events-none size-full select-none" />
+        <Image src="/teachers/noise.png" alt="Noise" fill sizes="100vw" className="pointer-events-none size-full select-none" />
         <Typography
           variant="body-2"
           as="p"

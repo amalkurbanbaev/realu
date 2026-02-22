@@ -61,6 +61,7 @@ function PostCard({ post }: { post: PostMeta }) {
               src={post.cover}
               alt={post.title}
               fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               containerClassName="relative aspect-square size-full overflow-clip rounded-4xl"
               skeletonClassName="rounded-4xl"
               className="object-cover"

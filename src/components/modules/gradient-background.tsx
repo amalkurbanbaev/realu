@@ -8,7 +8,7 @@ type GradientBackgroundTopProps = {
 export function GradientBackgroundTop({ className }: GradientBackgroundTopProps) {
   return (
     <div className={cn("pointer-events-none absolute inset-x-0 top-0 z-0 flex h-[calc(100vh/1.5)] w-full", className)}>
-      <Image src="/gradients/header-gradient.svg" fill alt="gradient" />
+      <Image src="/gradients/header-gradient.svg" fill sizes="100vw" alt="gradient" />
     </div>
   )
 }

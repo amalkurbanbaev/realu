@@ -440,7 +440,7 @@ export function ScrollFade() {
             {/* Фон градиент */}
             {slide.withGradient && (
               <div className="-z-10 pointer-events-none absolute inset-0">
-                <Image src={`/gradients/${slide.id}.svg`} alt="slide-background" fill className="object-cover" />
+                <Image src={`/gradients/${slide.id}.svg`} alt="slide-background" fill sizes="100vw" className="object-cover" />
               </div>
             )}
 

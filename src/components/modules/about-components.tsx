@@ -153,6 +153,7 @@ const ExpertCard = ({
       <div className="absolute inset-y-0 h-[400px] w-full lg:h-full">
         <Image
           fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
           src={expert.image}
           alt={expert.name}
           className={cn("object-cover lg:object-contain", index % 2 === 0 ? "object-left-top" : "object-top-right")}

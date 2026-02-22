@@ -18,6 +18,7 @@ export async function DownloadBanner() {
           src="/yog.png"
           fill
           alt="yoga"
+          sizes="(max-width: 768px) 0vw, (max-width: 1024px) 370px, (max-width: 1280px) 500px, 600px"
           className={cn(
             "-z-10 absolute top-0 right-0 hidden object-cover md:block",
             "md:max-w-[370px] md:object-[0px_0px]",
