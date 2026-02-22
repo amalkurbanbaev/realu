@@ -131,9 +131,11 @@ export const getAllTags = cache(async (locale: Locale): Promise<string[]> => {
   const posts = await getAllPosts(locale)
   const tags = new Set<string>()
 
-  posts.forEach((post) => {
-    post.tags?.forEach((tag) => tags.add(tag))
-  })
+  for (const post of posts) {
+    for (const tag of post.tags ?? []) {
+      tags.add(tag)
+    }
+  }
 
   return Array.from(tags).sort()
 })

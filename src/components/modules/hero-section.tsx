@@ -101,14 +101,14 @@ export function HeroSection() {
   return (
     <section className="flex flex-col overflow-hidden pt-[var(--header-height)] md:sticky md:top-0 md:h-screen">
       <canvas
-        className="fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl duration-1000"
+        className="fade-in pointer-events-none absolute inset-0 -z-10 m-auto size-[95%] animate-in blur-3xl duration-1000"
         ref={canvasRef}
         style={{ opacity: shouldZoomOut ? 0.4 : 0.5 }}
       />
 
       <div
         className={cn(
-          "container flex w-full flex-col items-center justify-center overflow-hidden transition-transform duration-1000 ease-in-out md:flex-grow ",
+          "container flex w-full flex-col items-center justify-center overflow-hidden transition-transform duration-1000 ease-in-out md:flex-grow",
           shouldZoomOut && "scale-90",
         )}
       >

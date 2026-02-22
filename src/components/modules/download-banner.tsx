@@ -12,7 +12,7 @@ export async function DownloadBanner() {
   return (
     <div className="container relative z-50 w-full text-center md:text-left">
       <div className="relative overflow-hidden md:rounded-3xl">
-        <DownloadBannerBackground className="-z-10 absolute inset-0 hidden h-full w-full rounded-3xl md:block" />
+        <DownloadBannerBackground className="absolute inset-0 -z-10 hidden h-full w-full rounded-3xl md:block" />
 
         <Image
           src="/yog.png"
@@ -20,7 +20,7 @@ export async function DownloadBanner() {
           alt="yoga"
           sizes="(max-width: 768px) 0vw, (max-width: 1024px) 370px, (max-width: 1280px) 500px, 600px"
           className={cn(
-            "-z-10 absolute top-0 right-0 hidden object-cover md:block",
+            "absolute top-0 right-0 -z-10 hidden object-cover md:block",
             "md:max-w-[370px] md:object-[0px_0px]",
             "lg:max-w-[500px] lg:object-[0%_15%]",
             "ml-auto xl:max-w-[600px] xl:object-[0%_35%]",

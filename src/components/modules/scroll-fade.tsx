@@ -423,7 +423,7 @@ export function ScrollFade() {
         {/* Фоновая подсветка для видео-слайдов */}
         <canvas
           className={cn(
-            "fade-in -z-10 pointer-events-none absolute inset-0 m-auto size-[95%] animate-in blur-3xl transition-opacity duration-1000",
+            "fade-in pointer-events-none absolute inset-0 -z-10 m-auto size-[95%] animate-in blur-3xl transition-opacity duration-1000",
             isVideoSlide ? "opacity-50" : "opacity-0",
           )}
           ref={canvasRef}
@@ -439,13 +439,13 @@ export function ScrollFade() {
           >
             {/* Фон градиент */}
             {slide.withGradient && (
-              <div className="-z-10 pointer-events-none absolute inset-0">
+              <div className="pointer-events-none absolute inset-0 -z-10">
                 <Image src={`/gradients/${slide.id}.svg`} alt="slide-background" fill sizes="100vw" className="object-cover" />
               </div>
             )}
 
             {/* Частицы */}
-            <div className="-z-10 absolute inset-0 hidden overflow-hidden md:block">
+            <div className="absolute inset-0 -z-10 hidden overflow-hidden md:block">
               {slide.particles.map((p, pi) => (
                 <Particle
                   key={`${p.src}-${i}-${pi}`}
@@ -469,7 +469,7 @@ export function ScrollFade() {
 
             {/* Подписи слайда по центру (анимируются вместе со слайдом) */}
             {panelVisible && i === activeIndex && (
-              <div className="-translate-x-1/2 absolute bottom-10 left-1/2 z-40 flex max-w-[520px] flex-col items-center gap-y-2 px-4 text-center">
+              <div className="absolute bottom-10 left-1/2 z-40 flex max-w-[520px] -translate-x-1/2 flex-col items-center gap-y-2 px-4 text-center">
                 <Typography variant="headline-1" as="h4">
                   {slide.title}
                 </Typography>
@@ -484,7 +484,7 @@ export function ScrollFade() {
 
       {/* Статичная нижняя панель со счётчиком и кнопками (не анимируется) */}
       {panelVisible && (
-        <div className="-translate-x-1/2 container pointer-events-none fixed bottom-10 left-1/2 z-50 flex w-full items-end justify-between gap-4 px-8">
+        <div className="container pointer-events-none fixed bottom-10 left-1/2 z-50 flex w-full -translate-x-1/2 items-end justify-between gap-4 px-8">
           {/* Счётчик слева */}
           <SliderCounter activeIndex={activeIndex + 1} total={slides.length} enabled={panelVisible} />
 

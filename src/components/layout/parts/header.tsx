@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/a11y/useSemanticElements: ok */
 "use client"
 
 import { useState } from "react"
@@ -107,7 +108,7 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
             <Link href={link.href} onClick={onClick}>
               <Typography
                 variant="menu"
-                className={cn("font-medium transition-colors", isActive ? "text-white " : "text-white/40 hover:text-white")}
+                className={cn("font-medium transition-colors", isActive ? "text-white" : "text-white/40 hover:text-white")}
                 as="span"
               >
                 {t(link.translationKey)}

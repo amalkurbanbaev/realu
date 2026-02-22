@@ -19,10 +19,10 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
     return (
       <div
         className={cn(
-          "md:-rotate-[1.5deg] relative flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[320px]",
+          "relative flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[320px] md:-rotate-[1.5deg]",
           animEnabled ? "opacity-100" : "opacity-0",
           isActive && animEnabled && "fade-in zoom-in-95 animate-in duration-[1.5s] ease-in-out",
-          side === "left" && "md:-rotate-[1.5deg] slide-in-from-left-10",
+          side === "left" && "slide-in-from-left-10 md:-rotate-[1.5deg]",
           side === "right" && "slide-in-from-right-10 md:rotate-[1.5deg]",
           "h-full min-h-[470px] w-full lg:h-[531px] lg:w-[596px]",
         )}
@@ -48,7 +48,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           className={cn(
             "absolute bottom-8 max-w-[280px] text-center text-sm text-white max-md:inset-x-0 max-md:mx-auto md:bottom-14",
             side === "left" && "right-8 md:max-w-[291px] md:rotate-[1.5deg]",
-            side === "right" && "md:-rotate-[1.5deg] left-8 md:max-w-[259px]",
+            side === "right" && "left-8 md:max-w-[259px] md:-rotate-[1.5deg]",
           )}
         >
           {text}
@@ -61,7 +61,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
     <div className="container h-[507px] max-md:max-w-[320px] max-md:px-0">
       <div
         className={cn(
-          "md:-rotate-3 slide-in-from-bottom-10 relative size-full overflow-clip rounded-4xl bg-primary/20 md:rounded-[48px]",
+          "slide-in-from-bottom-10 relative size-full overflow-clip rounded-4xl bg-primary/20 md:-rotate-3 md:rounded-[48px]",
           animEnabled ? "opacity-100" : "opacity-0",
           isActive && animEnabled && "fade-in zoom-in-95 animate-in duration-[1.5s] ease-in-out",
         )}

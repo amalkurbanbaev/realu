@@ -29,6 +29,8 @@ export const AboutContent = ({ sections }: AboutContentProps) => {
         if (section.id === "experts") {
           return <ExpertsContent key={section.id} section={section} />
         }
+
+        return null
       })}
     </div>
   )
@@ -37,7 +39,7 @@ export const AboutContent = ({ sections }: AboutContentProps) => {
 const ApproachContent = ({ section }: { section: AboutSection[0] }) => {
   return (
     <div className="[&_p]:text-white" id="approach">
-      <Typography variant="headline-2" className="mb-6 max-lg:text-sm lg:mb-8 lg:font-medium">
+      <Typography variant="headline-2" className="mb-6 max-lg:text-sm lg:mb-8">
         {section.title}
       </Typography>
 
@@ -113,7 +115,7 @@ const ExpertsContent = ({ section }: { section: AboutSection[1] }) => {
           <div key={expert.name} className="space-y-6">
             <ExpertCard expert={expert} index={index} className="mb-6" />
 
-            <Typography variant="body-1" className=" lg:font-medium">
+            <Typography variant="body-1" className="lg:font-medium">
               {expert["text-1"]}
             </Typography>
 

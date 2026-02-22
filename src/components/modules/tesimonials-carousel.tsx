@@ -14,7 +14,7 @@ type TestimonialCarouselProps = {
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
   return (
     <Carousel opts={{ align: "start" }} plugins={[Autoplay({ delay: 6000 })]} className="w-full">
-      <CarouselContent className="-ml-6 ">
+      <CarouselContent className="-ml-6">
         {testimonials.map((f) => (
           <CarouselItem key={f.author} className="pl-6 md:basis-1/2 lg:basis-1/3">
             <div
@@ -38,7 +38,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
                 </div>
 
                 <div className="flex items-center gap-1.5 text-sm">
-                  <h4 className="mt-auto font-semibold ">{f.author},</h4>
+                  <h4 className="mt-auto font-semibold">{f.author},</h4>
                   <span>{f.role}</span>
                 </div>
               </div>

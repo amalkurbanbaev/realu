@@ -126,7 +126,7 @@ export const SlidingTabBar = ({ sections }: { sections: { id: string; title: str
         >
           <div className="relative flex h-11 min-w-max items-center gap-x-1">
             <span
-              className="-translate-y-1/2 pointer-events-none absolute top-1/2 rounded-full bg-white/15 transition-all duration-300"
+              className="pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full bg-white/15 transition-all duration-300"
               style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: "calc(100% - 8px)" }}
             />
 

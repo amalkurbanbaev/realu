@@ -9,7 +9,7 @@ const typographyVariants = cva("text-foreground", {
       // Headline 1: D 24/32, M 20/24
       "headline-1": "font-medium text-[20px] leading-[24px] md:font-bold md:text-[24px] md:leading-[32px]",
       // Headline 2: D 20/24, M 16/24
-      "headline-2": "font-bold text-[16px] leading-[24px] md:text-[20px] md:leading-[24px]",
+      "headline-2": "font-bold text-[16px] leading-[24px] md:font-medium md:text-[20px] md:leading-[24px]",
       // Headline 3: D 16/24, M 14/20
       "headline-3": "font-bold text-[14px] leading-[20px] md:text-[16px] md:leading-[24px]",
       // Menu: 20/24

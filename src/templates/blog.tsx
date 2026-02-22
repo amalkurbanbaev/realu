@@ -70,7 +70,7 @@ function PostCard({ post }: { post: PostMeta }) {
 
           <Typography
             variant="headline-2"
-            className="mb-3 text-balance text-center font-bold leading-tight transition-colors group-hover:text-primary sm:line-clamp-2 sm:min-h-12 md:font-medium"
+            className="mb-3 text-balance text-center leading-tight transition-colors group-hover:text-primary sm:line-clamp-2 sm:min-h-12"
           >
             {post.title}
           </Typography>

@@ -19,7 +19,15 @@ export const AboutNavigation = ({ sections }: AboutNavigationProps) => {
   const { activeSection } = useActiveSection(sectionIds)
 
   const scrollTo = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    const el = document.getElementById(id)
+
+    if (!el) {
+      return
+    }
+
+    const TOP_OFFSET = 24
+    const top = el.getBoundingClientRect().top + window.scrollY - TOP_OFFSET
+    window.scrollTo({ top, behavior: "smooth" })
   }, [])
 
   const containerRef = useRef<HTMLDivElement>(null)

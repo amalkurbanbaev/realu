@@ -96,7 +96,7 @@
   --sidebar-accent-foreground: oklch(0.2435 0 0);
   --sidebar-border: oklch(0.9037 0 0);
   --sidebar-ring: oklch(0.8408 0.1005 198.5963);
-  --font-sans:  Montserrat, sans-serif;
+  --font-sans: Montserrat, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: monospace;
   --radius: 0.5rem;
@@ -191,7 +191,7 @@
 
 /* Предотвращение конфликтов с Lenis для модальных окон */
 [data-lenis-prevent] {
-  overscroll-behavior: contain !important;
+  overscroll-behavior: contain !important; /** biome-ignore lint/complexity/noImportantStyles: ok */
 }
 
 [data-lenis-prevent] * {
