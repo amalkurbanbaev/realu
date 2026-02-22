@@ -145,7 +145,7 @@ const ExpertCard = ({
   return (
     <div
       className={cn(
-        "relative h-[var(--card-height)] w-[320px] overflow-hidden rounded-4xl bg-primary/20",
+        "relative h-[var(--card-height)] max-w-[420px] overflow-hidden rounded-4xl bg-primary/20",
         "lg:h-[408px] lg:w-auto lg:bg-white/5",
         className,
       )}
