@@ -22,6 +22,40 @@ export type FAQSection = Array<{
   questions: Array<Question>
 }>
 
+// About
+interface AboutSectionCard {
+  title: string
+  icon: string
+}
+
+interface AboutExpert {
+  name: string
+  cardHeight: number
+  description: string
+  image: string
+  "text-1"?: string
+  "text-2"?: string
+  "text-3"?: string
+}
+export type AboutSection = [
+  {
+    id: "approach"
+    title: string
+    "text-1": string
+    "cards-1": Array<AboutSectionCard>
+    "text-2": string
+    "text-3": string
+    "cards-2": Array<AboutSectionCard>
+    points: Array<string>
+    "cards-3": Array<AboutSectionCard>
+  },
+  {
+    id: "experts"
+    title: string
+    experts: Array<AboutExpert>
+  },
+]
+
 export type SlideParticle = {
   src: string
   width: number
