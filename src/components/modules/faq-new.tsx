@@ -95,8 +95,12 @@ export const SlidingTabBar = ({ sections }: { sections: { id: string; title: str
     freezeObserver(700)
     // 2) вручную выставляем активную секцию (и URL)
     setActiveSectionManually(id)
-    // 3) инициируем плавный скролл к секции
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+    // 3) скроллим с отступом сверху, чтобы заголовок не прилипал к краю экрана
+    const el = document.getElementById(id)
+    if (!el) return
+    const TOP_OFFSET = 24
+    const top = el.getBoundingClientRect().top + window.scrollY - TOP_OFFSET
+    window.scrollTo({ top, behavior: "smooth" })
   }
 
   return (
