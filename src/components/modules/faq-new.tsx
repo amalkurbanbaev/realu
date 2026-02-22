@@ -101,51 +101,51 @@ export const SlidingTabBar = ({ sections }: { sections: { id: string; title: str
 
   return (
     <>
-      {/* Градиентная подложка - всегда видна */}
+      {/* Градиент снизу */}
       <div
         className={cn(
-          "pointer-events-none fixed inset-x-0 bottom-0 z-40 h-28 bg-gradient-to-t from-background via-background to-transparent transition-opacity duration-500 lg:hidden",
+          "pointer-events-none fixed inset-x-0 bottom-0 z-40 h-28 bg-gradient-to-t from-background to-transparent transition-opacity duration-500 lg:hidden",
           isHidden ? "opacity-0" : "opacity-100",
         )}
       />
 
-      {/* Основная панель с табами */}
+      {/* Pill-панель */}
       <div
-        ref={scrollRef}
         className={cn(
-          "scrollbar-hidden fixed inset-x-0 bottom-0 z-50 h-14 w-full overflow-x-auto border-b transition-transform duration-500 ease-in-out lg:hidden",
-          isHidden ? "translate-y-full" : "translate-y-0",
+          "fixed inset-x-0 bottom-5 z-50 flex justify-center transition-transform duration-500 ease-in-out lg:hidden",
+          isHidden ? "translate-y-[calc(100%+20px)]" : "translate-y-0",
         )}
       >
-        <div className="relative mx-4 flex h-full min-w-max items-center gap-x-4">
-          <div className="pointer-events-none absolute right-0 bottom-2 left-0 h-0.5 rounded-3xl bg-white/10" />
+        <div
+          ref={scrollRef}
+          className="scrollbar-hidden max-w-[90vw] overflow-x-auto rounded-full border border-white/10 bg-white/10 px-1 shadow-lg backdrop-blur-xl backdrop-saturate-150"
+        >
+          <div className="relative flex h-11 min-w-max items-center gap-x-1">
+            <span
+              className="-translate-y-1/2 pointer-events-none absolute top-1/2 rounded-full bg-white/15 transition-all duration-300"
+              style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: "calc(100% - 8px)" }}
+            />
 
-          <span
-            className="pointer-events-none absolute bottom-2 rounded-3xl transition-all duration-300"
-            style={{ left: tabUnderlineLeft, width: tabUnderlineWidth, height: 2 }}
-          >
-            <span className="block h-full w-full rounded-3xl bg-white" />
-          </span>
-
-          {sections.map((tab, index) => (
-            <button
-              type="button"
-              key={tab.id}
-              ref={(el) => {
-                tabsRef.current[index] = el
-              }}
-              className={cn(
-                "shrink-0 text-nowrap px-3 py-1.5 font-semibold text-base leading-8 transition-colors",
-                index === activeTabIndex ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-              )}
-              onClick={() => {
-                setActiveTabIndex(index) // локально сразу подсветим
-                scrollTo(tab.id) // и запустим управляемый скролл
-              }}
-            >
-              {tab.title}
-            </button>
-          ))}
+            {sections.map((tab, index) => (
+              <button
+                type="button"
+                key={tab.id}
+                ref={(el) => {
+                  tabsRef.current[index] = el
+                }}
+                className={cn(
+                  "relative shrink-0 text-nowrap rounded-full px-4 py-1.5 font-semibold text-sm transition-colors duration-200",
+                  index === activeTabIndex ? "text-foreground" : "text-muted-foreground",
+                )}
+                onClick={() => {
+                  setActiveTabIndex(index)
+                  scrollTo(tab.id)
+                }}
+              >
+                {tab.title}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </>
