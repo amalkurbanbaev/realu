@@ -4,6 +4,7 @@ import { type ComponentPropsWithoutRef, useCallback, useEffect, useMemo, useRef,
 import { Accordion } from "@radix-ui/react-accordion"
 import { useTranslations } from "next-intl"
 
+import { EMAIL_SUPPORT_LINK } from "@/constants/links"
 import { useActiveSection } from "@/hooks"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
@@ -129,10 +130,11 @@ export const FAQFeedback = ({ className, ...props }: ComponentPropsWithoutRef<"d
   const t = useTranslations("help-page.layout")
 
   return (
-    <Typography variant="body-1" className={cn("max-w-5/6 text-muted-foreground", className)} {...props}>
+    <Typography variant="body-1" className={cn("max-w-5/6 whitespace-pre-line text-muted-foreground", className)} {...props}>
       {t.rich("contact", {
+        EMAIL_SUPPORT_LINK,
         a: (chunks) => (
-          <Link href="mailto:support@lotofus.co" className="text-white hover:underline">
+          <Link href={`mailto:${EMAIL_SUPPORT_LINK}`} className="text-white hover:underline">
             {chunks}
           </Link>
         ),

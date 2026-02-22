@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl"
 
 import { ProgressiveImage } from "@/components/ui/progressive-image"
 import { Typography } from "@/components/ui/typography"
+import { EMAIL_SUPPORT_LINK } from "@/constants/links"
 import { Link } from "@/i18n/navigation"
 import type { PostMeta } from "@/lib/blog"
 import { cn } from "@/lib/utils"
@@ -84,8 +85,9 @@ const BlogFeedback = ({ className, ...props }: ComponentPropsWithoutRef<"div">) 
   return (
     <Typography variant="body-1" className={cn("text-muted-foreground", className)} {...props}>
       {t.rich("feedback", {
+        EMAIL_SUPPORT_LINK,
         a: (chunks) => (
-          <Link href="mailto:support@lotofus.co" className="text-white hover:underline">
+          <Link href={`mailto:${EMAIL_SUPPORT_LINK}`} className="text-white hover:underline">
             {chunks}
           </Link>
         ),

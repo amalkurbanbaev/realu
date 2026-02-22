@@ -6,7 +6,7 @@ import { ArrowDownIcon } from "@/components/icons"
 import { AppleButton } from "@/components/modules/apple-button"
 import { Button } from "@/components/ui/button"
 import { Typography } from "@/components/ui/typography"
-import { FOOTER_LINKS } from "@/constants/links"
+import { EMAIL_SUPPORT_LINK, FOOTER_LINKS } from "@/constants/links"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
@@ -72,8 +72,8 @@ const FooterContact = () => {
   return (
     <div className="order-2 flex items-start justify-center text-center lg:order-3 lg:justify-end lg:text-right">
       <Typography variant="caption" as="span" className="font-semibold text-base md:font-normal md:text-white/60 md:text-xs">
-        <Link href="mailto:support@lotofus.co" className="hover:underline">
-          support@lotofus.co
+        <Link href={`mailto:${EMAIL_SUPPORT_LINK}`} className="hover:underline">
+          {EMAIL_SUPPORT_LINK}
         </Link>
       </Typography>
     </div>
