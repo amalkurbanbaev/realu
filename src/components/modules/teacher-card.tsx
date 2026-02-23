@@ -19,7 +19,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
     return (
       <div
         className={cn(
-          "relative flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[420px] md:-rotate-[1.5deg]",
+          "relative h-[500px] flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[420px] md:-rotate-[1.5deg] lg:h-[507px]",
           animEnabled ? "opacity-100" : "opacity-0",
           isActive && animEnabled && "fade-in zoom-in-95 animate-in duration-[1.5s] ease-in-out",
           side === "left" && "slide-in-from-left-10 md:-rotate-[1.5deg]",
@@ -58,7 +58,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
   }
 
   return (
-    <div className="container h-[507px] max-md:max-w-[420px] max-md:px-0">
+    <div className="container h-[500px] max-md:max-w-[420px] max-md:px-0 lg:h-[507px]">
       <div
         className={cn(
           "slide-in-from-bottom-10 relative size-full overflow-clip rounded-4xl bg-primary/20 md:-rotate-3 md:rounded-[48px]",
@@ -70,9 +70,8 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
         <Image
           src="/teachers/tati-frost-image-mobile.png"
           alt={alt}
-          className={cn("pointer-events-none block select-none md:hidden")}
+          className={cn("pointer-events-none block select-none object-cover object-top md:hidden")}
           sizes="100vw"
-          unoptimized
           fill
         />
 
@@ -82,7 +81,6 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
           alt={alt}
           className={cn("pointer-events-none hidden select-none object-contain object-top-left md:block")}
           sizes="(max-width: 768px) 0vw, 100vw"
-          unoptimized
           fill
         />
 
