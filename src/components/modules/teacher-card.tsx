@@ -58,7 +58,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
   }
 
   return (
-    <div className="container h-[507px] max-md:max-w-[320px] max-md:px-0">
+    <div className="container h-[507px] max-md:max-w-[420px] max-md:px-0">
       <div
         className={cn(
           "slide-in-from-bottom-10 relative size-full overflow-clip rounded-4xl bg-primary/20 md:-rotate-3 md:rounded-[48px]",

@@ -15,7 +15,7 @@ export async function AppFeatures({ features, locale }: FeatureCarouselProps) {
   const t = await getTranslations({ locale, namespace: "home-page" })
 
   return (
-    <div className="container">
+    <div className="container max-md:mb-24">
       <Typography variant="headline-1" as="div" className="relative z-10 mb-8 text-center">
         {t("layout.features.title")}
       </Typography>
