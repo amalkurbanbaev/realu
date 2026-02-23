@@ -56,7 +56,7 @@ const sections: AboutSection = [
     experts: [
       {
         name: "Татьяна Морозова",
-        cardHeight: 560,
+        cardHeight: 500,
         description:
           "Сооснователь и ведущий преподаватель школы Patanjali International Yoga Foundation в\u00a0Ришикеше, аккредитованной Yoga Alliance USA. Более 20 лет она обучалась йоге, медитации, аюрведе и джйотиш в Индии.",
         image: "/teachers/tati-frost.png",

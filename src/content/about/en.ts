@@ -56,7 +56,7 @@ const sections: AboutSection = [
     experts: [
       {
         name: "Tati Frost",
-        cardHeight: 560,
+        cardHeight: 520,
         description:
           "Tati is the co-founder and lead teacher at Patanjali International Yoga Foundation in Rishikesh, India (an accredited school with Yoga Alliance USA). She has spent over 20 years studying yoga, meditation, Ayurveda, and Jyotish in India, gaining direct experience under the guidance of traditional Indian teachers. She lives and works primarily in India.",
         image: "/teachers/tati-frost.png",
