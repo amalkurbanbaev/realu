@@ -10,6 +10,7 @@ import type { Slide } from "@/types/entities"
 
 import { ArrowDownIcon } from "../icons"
 import { Button } from "../ui/button"
+import { ProgressiveImage } from "../ui/progressive-image"
 import { Typography } from "../ui/typography"
 import { Particle } from "./particle"
 import { Teachers } from "./teachers"
@@ -314,12 +315,13 @@ export function ScrollFade() {
       case "image":
         if (!slide.image) return null
         return (
-          <Image
+          <ProgressiveImage
             src={slide.image}
             alt={slide.title}
             width={227}
             height={492}
             className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10"
+            skeletonClassName="rounded-4xl"
           />
         )
       case "video":
