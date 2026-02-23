@@ -19,7 +19,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
     return (
       <div
         className={cn(
-          "relative h-[500px] flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[420px] md:-rotate-[1.5deg] lg:h-[507px]",
+          "relative h-[550px] flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[420px] md:-rotate-[1.5deg] lg:h-[507px]",
           animEnabled ? "opacity-100" : "opacity-0",
           isActive && animEnabled && "fade-in zoom-in-95 animate-in duration-[1.5s] ease-in-out",
           side === "left" && "slide-in-from-left-10 md:-rotate-[1.5deg]",
@@ -58,7 +58,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
   }
 
   return (
-    <div className="container h-[500px] max-md:max-w-[420px] max-md:px-0 lg:h-[507px]">
+    <div className="container h-[550px] max-md:max-w-[420px] max-md:px-0 lg:h-[507px]">
       <div
         className={cn(
           "slide-in-from-bottom-10 relative size-full overflow-clip rounded-4xl bg-primary/20 md:-rotate-3 md:rounded-[48px]",
