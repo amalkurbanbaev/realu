@@ -59,7 +59,7 @@ const FooterLinks = () => {
             index === 3 && "lg:mb-0",
           )}
         >
-          <Link href={link.href} className="hover:underline">
+          <Link href={link.href} className="hover:underline" download>
             {tFooter(link.translationKey)}
           </Link>
         </Typography>
