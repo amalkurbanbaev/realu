@@ -110,7 +110,7 @@ const ExpertsContent = ({ section }: { section: AboutSection[1] }) => {
         {section.title}
       </Typography>
 
-      <div>
+      <div className="space-y-6">
         {section.experts.map((expert, index) => (
           <div key={expert.name} className="space-y-6">
             <ExpertCard expert={expert} index={index} className="mb-6" />
@@ -125,7 +125,7 @@ const ExpertsContent = ({ section }: { section: AboutSection[1] }) => {
               </Typography>
             )}
             {expert["text-3"] && (
-              <Typography variant="body-1" className="mb-6 lg:font-medium">
+              <Typography variant="body-1" className="lg:font-medium">
                 {expert["text-3"]}
               </Typography>
             )}
@@ -146,7 +146,7 @@ const ExpertCard = ({
     <div
       className={cn(
         "relative h-[var(--card-height)] max-w-[420px] overflow-hidden rounded-4xl bg-primary/20",
-        "lg:h-[408px] lg:w-auto lg:bg-white/5",
+        "lg:h-[408px] lg:max-w-full lg:bg-white/5",
         className,
       )}
       style={{ "--card-height": `${expert.cardHeight}px` } as CSSProperties}
