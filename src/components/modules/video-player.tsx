@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 
 import { MuteIcon } from "../icons"
 import { Button } from "../ui/button"
+import { Skeleton } from "../ui/skeleton"
 
 type Props = {
   src: string
@@ -23,6 +24,7 @@ const RESOLVED_VIDEO_SRC = "/main-video-mobile.mp4"
 export function VideoPlayer({ src: _src, autoPlay = false, ref: externalRef, isMuted = false, toggleMute, bg = true, ...props }: Props) {
   const internalRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
+  const [isReady, setIsReady] = useState(false)
 
   useImperativeHandle(externalRef, () => internalRef.current as HTMLVideoElement)
 
@@ -32,13 +34,19 @@ export function VideoPlayer({ src: _src, autoPlay = false, ref: externalRef, isM
 
     const handlePlay = () => setIsPlaying(true)
     const handlePause = () => setIsPlaying(false)
+    const handleMetadata = () => setIsReady(true)
 
     video.addEventListener("play", handlePlay)
     video.addEventListener("pause", handlePause)
+    video.addEventListener("loadedmetadata", handleMetadata)
+
+    // видео уже загружено (кэш браузера)
+    if (video.readyState >= 1) setIsReady(true)
 
     return () => {
       video.removeEventListener("play", handlePlay)
       video.removeEventListener("pause", handlePause)
+      video.removeEventListener("loadedmetadata", handleMetadata)
     }
   }, [])
 
@@ -74,8 +82,19 @@ export function VideoPlayer({ src: _src, autoPlay = false, ref: externalRef, isM
   }
 
   return (
-    <div className="relative flex h-auto w-full items-center justify-center overflow-hidden rounded-3xl xl:rounded-[48px]">
-      <video ref={internalRef} src={RESOLVED_VIDEO_SRC} className="object-cover" playsInline loop autoPlay={autoPlay} muted={isMuted} {...props} />
+    <div className="relative w-full overflow-hidden rounded-3xl xl:rounded-[48px]" style={{ aspectRatio: "16/9" }}>
+      {!isReady && <Skeleton className="absolute inset-0 size-full rounded-none bg-primary/35" />}
+
+      <video
+        ref={internalRef}
+        src={RESOLVED_VIDEO_SRC}
+        className={cn("absolute inset-0 size-full object-cover transition-opacity duration-500", isReady ? "opacity-100" : "opacity-0")}
+        playsInline
+        loop
+        autoPlay={autoPlay}
+        muted={isMuted}
+        {...props}
+      />
 
       <Button
         aria-label="mute"
@@ -85,7 +104,6 @@ export function VideoPlayer({ src: _src, autoPlay = false, ref: externalRef, isM
         onClick={(e) => {
           e.stopPropagation()
           e.preventDefault()
-
           toggleMute?.()
         }}
       >
