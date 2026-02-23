@@ -70,6 +70,7 @@ export type RawSlide = {
   particles: SlideParticle[]
   useVideo?: boolean
   type?: SlideType
+  videoSrc?: string
 }
 
 export type Slide = RawSlide & {

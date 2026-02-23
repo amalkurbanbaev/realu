@@ -184,6 +184,7 @@ export const getRawSlides = (locale: string): RawSlide[] => [
     id: "warmup",
     particles: [],
     useVideo: true,
+    videoSrc: "/video/warmup-compressed.mp4",
   },
   {
     id: "teachers",

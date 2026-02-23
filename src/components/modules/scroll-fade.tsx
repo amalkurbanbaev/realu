@@ -386,9 +386,15 @@ export function ScrollFade() {
     }
   }
 
+  // TODO - тут какой то лютый рендер для мобильных устройств идет
+  // надо переделать это
+  // До монтирования не рендерим ничего — избегаем загрузки тяжёлого desktop layout на мобильных
+  if (!mounted) {
+    return <section ref={wrapperRef} className="relative z-20" />
+  }
+
   // Мобильная версия - простой вертикальный скролл
-  // Показываем мобильную версию только после монтирования, чтобы избежать проблем с гидратацией
-  if (mounted && isMobile) {
+  if (isMobile) {
     return (
       <section ref={wrapperRef} className="relative z-20 mt-14">
         {slides.map((slide) => (

@@ -16,7 +16,7 @@ export const useSlides = (): Slide[] => {
       title: t(`slides.${i}.title`),
       description: t(`slides.${i}.description`),
       image: slideType === "image" ? `/screenshots/${locale}/${el.id}.png` : undefined,
-      video: slideType === "video" ? `/video/${el.id}.mp4` : undefined,
+      video: slideType === "video" ? (el.videoSrc ?? `/video/${el.id}.mp4`) : undefined,
       withGradient: slideType !== "video",
     }
   })

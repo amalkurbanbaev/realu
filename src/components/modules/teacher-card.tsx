@@ -19,7 +19,7 @@ export function TeacherCard({ imageSrc, alt, text, variant, side = "left", isAct
     return (
       <div
         className={cn(
-          "relative flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[320px] md:-rotate-[1.5deg]",
+          "relative flex-1 overflow-clip rounded-4xl bg-primary/20 max-md:max-w-[420px] md:-rotate-[1.5deg]",
           animEnabled ? "opacity-100" : "opacity-0",
           isActive && animEnabled && "fade-in zoom-in-95 animate-in duration-[1.5s] ease-in-out",
           side === "left" && "slide-in-from-left-10 md:-rotate-[1.5deg]",

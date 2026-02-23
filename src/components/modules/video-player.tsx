@@ -16,7 +16,11 @@ type Props = {
   bg?: boolean
 } & ComponentPropsWithRef<"video">
 
-export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted = false, toggleMute, bg = true, ...props }: Props) {
+// Оригинальное тяжёлое видео удалено, используем сжатую версию
+// В будущем src будет подтягиваться из бакета
+const RESOLVED_VIDEO_SRC = "/main-video-mobile.mp4"
+
+export function VideoPlayer({ src: _src, autoPlay = false, ref: externalRef, isMuted = false, toggleMute, bg = true, ...props }: Props) {
   const internalRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(autoPlay)
 
@@ -38,59 +42,22 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
     }
   }, [])
 
-  // Автоплей для мобильных устройств (iOS Safari требует нативный autoplay + playsInline + muted)
   useEffect(() => {
     const video = internalRef.current
     if (!video || !autoPlay) return
 
-    // Для мобильных устройств используем нативный autoplay атрибут
-    // Но также пытаемся программно запустить для десктопа
     const attemptPlay = () => {
       if (video.paused && autoPlay) {
-        const playPromise = video.play()
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true)
-            })
-            .catch((error) => {
-              // Автоплей заблокирован (обычно на мобильных без взаимодействия)
-              // Это нормально, пользователь сможет запустить вручную
-              console.error("Autoplay prevented:", error)
-            })
-        }
+        video.play().catch(() => {})
       }
     }
 
-    // Пытаемся запустить сразу, если уже есть данные
     if (video.readyState >= 1) {
       attemptPlay()
     }
 
-    // Запускаем при первом доступном событии загрузки данных
-    const handleLoadedData = () => {
-      attemptPlay()
-    }
-
-    // canplay срабатывает раньше, когда можно начать воспроизведение
-    const handleCanPlay = () => {
-      attemptPlay()
-    }
-
-    // loadedmetadata - самое раннее событие, когда можно попробовать запустить
-    const handleLoadedMetadata = () => {
-      attemptPlay()
-    }
-
-    video.addEventListener("loadedmetadata", handleLoadedMetadata)
-    video.addEventListener("loadeddata", handleLoadedData)
-    video.addEventListener("canplay", handleCanPlay)
-
-    return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata)
-      video.removeEventListener("loadeddata", handleLoadedData)
-      video.removeEventListener("canplay", handleCanPlay)
-    }
+    video.addEventListener("canplay", attemptPlay)
+    return () => video.removeEventListener("canplay", attemptPlay)
   }, [autoPlay])
 
   const togglePlayback = () => {
@@ -108,7 +75,7 @@ export function VideoPlayer({ src, autoPlay = false, ref: externalRef, isMuted =
 
   return (
     <div className="relative flex h-auto w-full items-center justify-center overflow-hidden rounded-3xl xl:rounded-[48px]">
-      <video ref={internalRef} src={src} className="object-cover" playsInline loop autoPlay={autoPlay} muted={isMuted} {...props} />
+      <video ref={internalRef} src={RESOLVED_VIDEO_SRC} className="object-cover" playsInline loop autoPlay={autoPlay} muted={isMuted} {...props} />
 
       <Button
         aria-label="mute"
