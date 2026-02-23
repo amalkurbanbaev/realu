@@ -16,12 +16,11 @@ import { Teachers } from "./teachers"
 
 export function ScrollFade() {
   const slides = useSlides()
-  const [isMobile, setIsMobile] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  // Начинаем с true — SSR и первый клиентский рендер используют лёгкий мобильный layout,
+  // избегая гидратационного мисматча и Out Of Memory на мобилках
+  const [isMobile, setIsMobile] = useState(true)
 
-  // Определяем мобильное устройство только после монтирования, чтобы избежать проблем с гидратацией
   useEffect(() => {
-    setMounted(true)
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 767)
     }
@@ -384,13 +383,6 @@ export function ScrollFade() {
       default:
         return null
     }
-  }
-
-  // TODO - тут какой то лютый рендер для мобильных устройств идет
-  // надо переделать это
-  // До монтирования не рендерим ничего — избегаем загрузки тяжёлого desktop layout на мобильных
-  if (!mounted) {
-    return <section ref={wrapperRef} className="relative z-20" />
   }
 
   // Мобильная версия - простой вертикальный скролл
