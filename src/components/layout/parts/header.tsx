@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/a11y/useSemanticElements: ok */
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { XIcon } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -20,6 +20,11 @@ export const Header = () => {
   const pathname = useNormalizedPathname()
   const isHome = pathname === "/"
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname — намеренная зависимость для закрытия меню при навигации
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev)
@@ -61,7 +66,7 @@ export const Header = () => {
           <Button variant="secondary" className="size-10 w-fit self-end rounded-full" onClick={toggleMenu}>
             <XIcon />
           </Button>
-          <HeaderLinks onClick={() => toggleMenu()} />
+          <HeaderLinks />
           <AppleButton className="mx-auto" />
         </nav>
       </div>
