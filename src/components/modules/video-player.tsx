@@ -107,7 +107,7 @@ export function VideoPlayer({ src: _src, autoPlay = false, ref: externalRef, isM
           toggleMute?.()
         }}
       >
-        {isMuted ? <Volume2Icon /> : <MuteIcon />}
+        {!isMuted ? <Volume2Icon /> : <MuteIcon />}
       </Button>
 
       <button
