@@ -1,10 +1,9 @@
 "use client"
 
 import { XIcon } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { useLocale } from "next-intl"
 
-import { Link } from "@/i18n/navigation"
+import { Link, useRouter } from "@/i18n/navigation"
 
 type CloseButtonProps = {
   className?: string

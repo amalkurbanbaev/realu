@@ -4,8 +4,7 @@
 import { useEffect, useState } from "react"
 import { XIcon } from "lucide-react"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
 import { MenuMinimalIcon } from "@/components/icons"
 import { AppleButton } from "@/components/modules/apple-button"
@@ -13,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Typography } from "@/components/ui/typography"
 import { HEADER_LINKS } from "@/constants/links"
 import { useNormalizedPathname, useScrollLockWhen } from "@/hooks"
-import { Link } from "@/i18n/navigation"
+import { Link, usePathname, useRouter } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
 export const Header = () => {
@@ -90,12 +89,12 @@ export const Header = () => {
   )
 }
 
-const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
+const HeaderLinks = () => {
   const pathname = usePathname()
-  const locale = useLocale()
-  const t = useTranslations("header.links")
+  const router = useRouter()
 
-  const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
+  const t = useTranslations("header.links")
+  const [pressedLink, setPressedLink] = useState<string | null>(null)
 
   const isLinkActive = (href: string, currentPath: string): boolean => {
     if (href === "/blog") {
@@ -107,13 +106,31 @@ const HeaderLinks = ({ onClick }: { onClick?: () => void } = {}) => {
   return (
     <ul className="flex grow flex-col items-center justify-center gap-4 md:flex-row md:gap-x-8">
       {HEADER_LINKS.map((link) => {
-        const isActive = isLinkActive(link.href, normalizedPath)
+        const isActive = isLinkActive(link.href, pathname)
+        const isPressed = pressedLink === link.href
+
         return (
-          <li key={link.translationKey} className={cn("py-2")}>
-            <Link href={link.href} onClick={onClick}>
+          <li key={link.translationKey} className="w-full py-2 text-center">
+            <Link
+              href={link.href}
+              onClick={(e) => {
+                e.preventDefault()
+                setPressedLink(link.href)
+                setTimeout(() => {
+                  setPressedLink(null)
+                  router.push(link.href) // навигация после анимации
+                }, 150)
+              }}
+              style={{
+                transform: isPressed ? "scale(0.93)" : "scale(1)",
+                opacity: isPressed ? 0.5 : 1,
+                transition: "transform 200ms ease, opacity 200ms ease",
+                display: "block",
+              }}
+            >
               <Typography
                 variant="menu"
-                className={cn("font-medium transition-colors", isActive ? "text-white" : "text-white/40 hover:text-white")}
+                className={cn("select-none font-medium", isActive ? "text-white" : "text-white/40 hover:text-white")}
                 as="span"
               >
                 {t(link.translationKey)}
