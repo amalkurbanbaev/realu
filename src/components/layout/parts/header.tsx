@@ -110,7 +110,7 @@ const HeaderLinks = () => {
         const isPressed = pressedLink === link.href
 
         return (
-          <li key={link.translationKey} className="w-full py-2 text-center">
+          <li key={link.translationKey} className="py-2 text-center">
             <Link
               href={link.href}
               onClick={(e) => {
