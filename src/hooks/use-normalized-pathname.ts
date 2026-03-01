@@ -5,6 +5,7 @@ export function useNormalizedPathname() {
   const pathname = usePathname()
   const locale = useLocale()
 
-  const normalizedPath = pathname.replace(`/${locale}`, "") || "/"
+  const normalizedPath = pathname.startsWith(`/${locale}`) ? pathname.slice(`/${locale}`.length) || "/" : pathname
+
   return normalizedPath
 }

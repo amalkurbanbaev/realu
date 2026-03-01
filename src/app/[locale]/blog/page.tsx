@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import type { Locale } from "next-intl"
 import { getTranslations } from "next-intl/server"
 
-import { PageLayout } from "@/components/layout"
 import { getAllPosts } from "@/lib/blog"
 import { BlogTemplate } from "@/templates/blog"
 
@@ -25,9 +24,5 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: L
   const { locale } = await params
   const posts = await getAllPosts(locale)
 
-  return (
-    <PageLayout>
-      <BlogTemplate posts={posts} />
-    </PageLayout>
-  )
+  return <BlogTemplate posts={posts} />
 }

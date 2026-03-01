@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 
+import { PageLayout } from "@/components/layout"
 import { routing } from "@/i18n/routing"
 import { montserrat } from "@/styles/fonts"
 
@@ -45,7 +46,7 @@ export default async function RootLayout({ children, params }: Props) {
     <html lang={locale}>
       <body className={`${montserrat.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <PageLayout>{children}</PageLayout>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server"
 
-import { PageLayout } from "@/components/layout"
 import { HomePageTemplate } from "@/templates/home"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: "ru" | "en" }> }) {
@@ -14,9 +13,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: "
 }
 
 export default async function Home() {
-  return (
-    <PageLayout withGradient={false}>
-      <HomePageTemplate />
-    </PageLayout>
-  )
+  return <HomePageTemplate />
 }

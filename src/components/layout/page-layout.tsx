@@ -1,19 +1,19 @@
 "use client"
 
+import type { PropsWithChildren } from "react"
 import { useMediaQuery } from "usehooks-ts"
+
+import { useNormalizedPathname } from "@/hooks"
 
 import { GradientBackgroundBottom, GradientBackgroundTop } from "../modules/gradient-background"
 import { ScrollProvider } from "../providers"
 import { ClientOnly } from "../ui/client-only"
 import { Footer, Header } from "./parts"
 
-type PageLayoutProps = {
-  children: React.ReactNode
-  withGradient?: boolean
-}
-
-export function PageLayout({ children, withGradient = true }: PageLayoutProps) {
+export function PageLayout({ children }: PropsWithChildren) {
   const isDesktop = useMediaQuery("(min-width: 1024px)")
+  const pathname = useNormalizedPathname()
+  const withGradient = pathname !== "/"
 
   return (
     <div className="relative flex min-h-screen flex-col">
