@@ -17,7 +17,7 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
 
   if (posts.length === 0) {
     return (
-      <section className="container py-6">
+      <section className="container pb-6">
         <div className="text-center">
           <div className="flex flex-col justify-between">
             <Typography variant="headline-1" className="mb-4">
@@ -33,7 +33,7 @@ export function BlogTemplate({ posts }: BlogTemplateProps) {
   }
 
   return (
-    <section className="container flex min-h-full flex-1 flex-col gap-4 py-6 lg:flex-row lg:gap-10">
+    <section className="container flex min-h-full flex-1 flex-col gap-4 pb-6 lg:flex-row lg:gap-10">
       <div className="flex flex-col justify-between">
         <Typography variant="headline-1">{t("title")}</Typography>
 
