@@ -119,7 +119,7 @@ const HeaderLinks = () => {
                 setTimeout(() => {
                   setPressedLink(null)
                   router.push(link.href) // навигация после анимации
-                }, 150)
+                }, 50)
               }}
               style={{
                 transform: isPressed ? "scale(0.93)" : "scale(1)",
