@@ -30,7 +30,14 @@ export const ArticleModalDesktop = ({ post, locale, children, showCloseButton = 
       <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:gap-16">
         {post.cover && (
           <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-4xl sm:rounded-3xl md:sticky md:top-0 md:mx-0 md:h-[264px] md:w-[264px] md:shrink-0 md:rounded-4xl">
-            <ProgressiveImage src={post.cover} alt={post.title} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 264px" />
+            <ProgressiveImage
+              src={post.cover}
+              alt={post.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 264px"
+              blurDataURL={post.blurDataURL}
+            />
           </div>
         )}
 

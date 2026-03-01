@@ -321,7 +321,6 @@ export function ScrollFade() {
             width={227}
             height={492}
             className="pointer-events-none h-auto w-auto max-w-[227px] select-none rounded-4xl border-4 border-white/10"
-            skeletonClassName="rounded-4xl"
           />
         )
       case "video":

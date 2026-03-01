@@ -4,6 +4,8 @@ import { cache } from "react"
 import matter from "gray-matter"
 import type { Locale } from "next-intl"
 
+import { getBlurDataURL } from "./blur"
+
 export const SUPPORTED_LOCALES = ["en", "ru"] as const
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
 
@@ -24,6 +26,7 @@ export interface PostMeta extends PostFrontmatter {
   slug: string
   locale: SupportedLocale
   readingTime: number
+  blurDataURL?: string
 }
 
 export interface Post extends PostMeta {
@@ -87,11 +90,13 @@ export const getPostBySlug = cache(async (slug: string, locale: Locale): Promise
     }
 
     const readingTime = calculateReadingTime(content)
+    const blurDataURL = data.cover ? await getBlurDataURL(data.cover) : undefined
 
     return {
       slug,
       locale: normalizedLocale,
       readingTime,
+      blurDataURL,
       content,
       ...data,
     }
